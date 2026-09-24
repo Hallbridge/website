@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hallbridge Talent Partners | Construction Executive Search &amp; Recruiting</title>
+  <meta name="description" content="Hallbridge is a construction-focused executive search firm placing project managers, superintendents, estimators, and executives with general contractors, developers, and engineering firms nationwide.">
+  <link rel="canonical" href="https://hallbridge.co/">
+  <meta name="theme-color" content="#F9F6F1">
+
+  <!-- Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Hallbridge Talent Partners">
+  <meta property="og:title" content="Hallbridge | Construction Executive Search &amp; Recruiting">
+  <meta property="og:description" content="Connecting the people who build America. Specialized recruiting for general contractors, developers, and engineering firms nationwide.">
+  <meta property="og:url" content="https://hallbridge.co/">
+  <meta property="og:image" content="https://hallbridge.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hallbridge | Construction Executive Search &amp; Recruiting">
+  <meta name="twitter:description" content="Connecting the people who build America. Specialized recruiting for the construction industry.">
+  <meta name="twitter:image" content="https://hallbridge.co/assets/og-image.png">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Hallbridge Talent Partners",
+    "legalName": "Hallbridge LLC",
+    "url": "https://hallbridge.co/",
+    "logo": "https://hallbridge.co/assets/icon-192.png",
+    "image": "https://hallbridge.co/assets/og-image.png",
+    "email": "info@hallbridge.co",
+    "sameAs": ["https://www.linkedin.com/company/hallbridgetalentpartners"],
+    "description": "Executive search and recruiting firm focused exclusively on the construction industry. Placing project managers, superintendents, estimators, preconstruction leaders, and executives with general contractors, multifamily developers, and engineering firms nationwide.",
+    "areaServed": "United States",
+    "knowsAbout": ["Construction recruiting", "Executive search", "Project Manager placement", "Superintendent placement", "Estimator placement", "Preconstruction", "AEC talent"]
+  }
+  </script>
+
+  <style>
+    :root {
+      --taupe: #8C7B6B;
+      --taupe-light: #B5A898;
+      --taupe-pale: #E2D9CF;
+      --cream: #F9F6F1;
+      --cream-dark: #F0EAE1;
+      --black: #1E1712;
+      --charcoal: #2D2420;
+      --gold: #B87333;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* copper hairline signature */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, rgba(184,115,51,0) 0%, var(--gold) 50%, rgba(184,115,51,0) 100%);
+      z-index: 300;
+      pointer-events: none;
+    }
+
+    ::selection { background: var(--gold); color: var(--cream); }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    /* scroll reveal */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.9s cubic-bezier(.2,.6,.2,1), transform 0.9s cubic-bezier(.2,.6,.2,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ── NAV — blends into cream background ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 12px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--cream);
+      transition: box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(249,246,241,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 var(--taupe-pale), 0 12px 30px -22px rgba(45,36,32,0.35);
+    }
+
+    .nav-mono img {
+      height: 58px;
+      width: auto;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .nav-mono:hover img { opacity: 0.75; }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a:hover::after { width: 100%; }
+
+    section[id] { scroll-margin-top: 90px; }
+
+    .nav-cta {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--taupe);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .nav-cta:hover { color: var(--taupe); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 0 120px;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 62% 46% at 50% 36%, rgba(184,115,51,0.07), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-logo {
+      margin-bottom: 32px;
+      margin-top: -60px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.1s;
+      width: 100%;
+      padding: 0 40px;
+    }
+
+    .hero-logo img {
+      width: 100%;
+      max-width: 680px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--black);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.5s;
+      position: relative;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--taupe);
+      max-width: 520px;
+      margin: 0 auto 52px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.7s;
+    }
+
+    .btn-primary {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--black);
+      padding: 16px 40px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn-primary:hover {
+      background: var(--charcoal);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -14px rgba(30,23,18,0.45);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 112px 60px; }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--taupe-light);
+      margin-bottom: 16px;
+    }
+
+    .rule {
+      width: 36px;
+      height: 1px;
+      background: var(--taupe);
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    .section-body {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--taupe);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about .section-label { color: var(--taupe-light); }
+    .about .section-title { color: var(--cream); }
+    .about .section-title em { color: var(--gold); }
+    .about .section-body { color: var(--taupe-light); max-width: 100%; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .stat {
+      background: var(--charcoal);
+      padding: 40px 32px;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--taupe-light);
+      line-height: 1.5;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--cream); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .service-card {
+      background: var(--cream);
+      padding: 48px 40px;
+      border: 1px solid var(--taupe-pale);
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .service-card:hover {
+      border-top-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: 0 22px 44px -24px rgba(45,36,32,0.22);
+    }
+
+    .service-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 14px;
+    }
+
+    .service-body {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--taupe);
+    }
+
+    /* ── SPECIALTIES ── */
+    .specialties { background: var(--cream-dark); }
+
+    .specialties-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .roles-list {
+      list-style: none;
+      margin-top: 8px;
+      columns: 2;
+      column-gap: 48px;
+    }
+
+    .roles-list li { break-inside: avoid; }
+
+    .roles-list li {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--charcoal);
+      padding: 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: color 0.2s, padding-left 0.2s;
+      cursor: default;
+    }
+
+    .roles-list li::before {
+      content: '—';
+      color: var(--taupe-light);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .roles-list li:hover {
+      color: var(--black);
+      padding-left: 6px;
+    }
+
+    .roles-list li:last-child {
+      border-bottom: none;
+      font-style: italic;
+      color: var(--taupe-light);
+      font-size: 18px;
+    }
+
+    /* ── PROCESS ── */
+    .process { background: var(--cream); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+
+    .step {
+      padding: 40px 32px;
+      background: var(--cream);
+    }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .step-title {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .step-body {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--taupe);
+    }
+
+    /* ── CANDIDATES ── */
+    .candidates {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .candidates .section-label { color: var(--taupe-light); }
+    .candidates .section-title { color: var(--cream); }
+    .candidates .section-title em { color: var(--gold); }
+    .candidates .section-body { color: var(--taupe-light); }
+    .candidates .rule { background: var(--taupe); }
+
+    .candidates-card {
+      background: var(--charcoal);
+      padding: 52px 48px;
+      border-top: 2px solid var(--taupe);
+    }
+
+    .candidates-card-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--taupe-light);
+      margin-bottom: 16px;
+    }
+
+    .candidates-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .candidates-card-body {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--taupe-light);
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--black);
+      text-align: center;
+      padding: 140px 60px;
+      border-top: 1px solid rgba(192,179,157,0.18);
+    }
+
+    .contact .section-label { color: var(--taupe-light); }
+
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .contact-title em { font-style: italic; color: var(--gold); }
+
+    .contact-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--taupe-light);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .contact-detail {
+      font-size: 13px;
+      color: var(--taupe);
+      margin-bottom: 48px;
+      line-height: 1.9;
+    }
+
+    .contact-detail a {
+      color: var(--taupe-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-detail a:hover { color: var(--cream); }
+
+    .contact-actions {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-light {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--cream);
+      border: 1px solid var(--cream);
+      padding: 16px 40px;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-light:hover { background: transparent; color: var(--cream); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 56px 24px 44px;
+      text-align: center;
+      border-top: 1px solid rgba(192,179,157,0.12);
+    }
+
+    .footer-mono {
+      height: 52px;
+      width: auto;
+      display: inline-block;
+      margin-bottom: 18px;
+    }
+
+    .footer-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--taupe-light);
+      margin-bottom: 20px;
+    }
+
+    .footer-contact {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+
+    .footer-contact a {
+      color: var(--taupe-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--cream); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: #7A7568;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero-logo, .hero-headline, .hero-sub { animation: none; opacity: 1; }
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+      position: relative;
+    }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--charcoal); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      body::before { position: absolute; }
+      nav { position: static; padding: 12px 20px; }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--cream);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        z-index: 150;
+        transform: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 14px; letter-spacing: 3px; }
+      .nav-cta { display: none; }
+      section { padding: 72px 24px; }
+      .hero { padding: 0 0 60px; }
+      .hero-logo { padding: 0 20px; margin-top: 0; }
+      .about { grid-template-columns: 1fr; gap: 48px; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .roles-list { columns: 1; }
+      .specialties-inner { grid-template-columns: 1fr; gap: 40px; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .candidates { grid-template-columns: 1fr; gap: 40px; }
+      .contact { padding: 100px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav" aria-label="Main navigation">
+    <a href="#" class="nav-mono" aria-label="Hallbridge home">
+      <img src="assets/monogram.svg" alt="Hallbridge bridge monogram" width="400" height="400">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#specialties" onclick="closeMenu()">Specialties</a></li>
+      <li><a href="#candidates" onclick="closeMenu()">Candidates</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Start a Search</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-logo">
+      <img src="assets/wordmark.svg" alt="Hallbridge Talent Partners" width="1240" height="270" fetchpriority="high">
+    </div>
+    <div style="padding:60px 60px 0;display:flex;flex-direction:column;align-items:center;width:100%;">
+      <h1 class="hero-headline">Connecting the people<br><em>who build America.</em></h1>
+      <p class="hero-sub">For more than a decade, Hallbridge has placed top construction professionals with the nation's leading general contractors, developers, and engineering firms.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:36px;">Work With Us</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div>
+      <p class="section-label">Who We Are</p>
+      <div class="rule" style="background:#7A7568;"></div>
+      <h2 class="section-title">Recruiting built on<br><em>relationships.</em></h2>
+      <p class="section-body">Hallbridge is a specialized executive search firm focused exclusively on the AEC industry. With over 10 years of experience recruiting top talent across the country, we understand the nuances of this space: the timelines, the culture, and the caliber of people who thrive in it.<br><br>We work with mid-size general contractors, multifamily developers, and engineering firms typically working on projects from $20M to $100M+. We find the leaders with the exact experience to drive your projects forward.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-number">10+ <span style="font-size:48px;font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--gold);">years</span></div>
+        <div class="stat-label">Partnering with ENR firms and NMHC developers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">95%</div>
+        <div class="stat-label">Employee retention rate across all placements</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Candidates placed nationwide</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">AEC industry focused</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <p class="section-label">What We Offer</p>
+    <div class="rule"></div>
+    <h2 class="section-title">Search solutions built<br><em>for your needs.</em></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3 class="service-title">Contingency Search</h3>
+        <p class="service-body">No upfront cost — you pay only when we place. Full access to our network, with zero financial risk.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3 class="service-title">Retained Search</h3>
+        <p class="service-body">For critical leadership hires that demand dedicated focus. A retained engagement secures exclusivity, priority access, and our full commitment until the seat is filled.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3 class="service-title">Market Intelligence</h3>
+        <p class="service-body">Compensation benchmarking, talent mapping, and candidate availability analysis for the construction market — so you know exactly where you stand before you move.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIALTIES -->
+  <section class="specialties" id="specialties">
+    <div class="specialties-inner">
+      <div>
+        <p class="section-label">Specialties</p>
+        <div class="rule"></div>
+        <h2 class="section-title">The roles we<br><em>place best.</em></h2>
+        <p class="section-body">We specialize in placing experienced professionals across all phases of construction — from field leadership to the executive suite. Our network spans commercial, industrial, civil, and residential sectors nationwide.</p>
+      </div>
+      <div>
+        <p class="section-label" style="margin-bottom:20px;">Some roles we place:</p>
+        <ul class="roles-list">
+          <li>Project Manager</li>
+          <li>Superintendent</li>
+          <li>Project Engineer</li>
+          <li>Assistant Field Staff</li>
+          <li>Director / Project Executive</li>
+          <li>Vice President</li>
+          <li>Preconstruction Manager</li>
+          <li>Estimator</li>
+          <li>Civil Engineer</li>
+          <li>Anything else your firm needs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <p class="section-label">How It Works</p>
+    <div class="rule"></div>
+    <h2 class="section-title">A search process<br><em>without the noise.</em></h2>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Discovery</div>
+        <p class="step-body">We learn your business, culture, and the exact profile you need — not just the job description.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Search</div>
+        <p class="step-body">We tap our deep construction network and conduct targeted outreach to passive and active candidates.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Screening</div>
+        <p class="step-body">We present only qualified, vetted candidates — saving you time and keeping your pipeline clean.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Placement</div>
+        <p class="step-body">We support you through offers, negotiation, and the candidate's first day — and beyond.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CANDIDATES -->
+  <section class="candidates" id="candidates">
+    <div class="candidates-left">
+      <p class="section-label">For Candidates</p>
+      <div class="rule"></div>
+      <h2 class="section-title">Looking for your<br><em>next opportunity?</em></h2>
+      <p class="section-body" style="margin-top:16px;">Hallbridge works on behalf of hiring companies — we never charge candidates and we don't post open roles. But if you're an experienced construction professional open to the right opportunity, we should already know your name.</p>
+    </div>
+    <div class="candidates-right">
+      <div class="candidates-card">
+        <p class="candidates-card-label">Construction Professionals</p>
+        <h3 class="candidates-card-title">Get on our radar.</h3>
+        <p class="candidates-card-body">Send your resume and a short note on the role you're targeting. When the right search crosses our desk, you'll be the first call we make.</p>
+        <a href="mailto:info@hallbridge.co?subject=Candidate Introduction" class="btn-primary" style="display:inline-block;margin-top:32px;">Submit Your Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="contact-title">Ready to find your<br><em>next key hire?</em></h2>
+    <p class="contact-sub">Whether you have a seat to fill today or simply want to know who's out there, the conversation is free — and confidential.</p>
+
+    <div class="contact-actions">
+      <a href="mailto:info@hallbridge.co" class="btn-light">Send an Email</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="assets/monogram-footer.svg" alt="Hallbridge bridge monogram" class="footer-mono" width="400" height="400">
+    <p class="footer-tag">Construction Executive Search</p>
+    <p class="footer-contact"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://www.linkedin.com/company/hallbridgetalentpartners" target="_blank" rel="noopener">LinkedIn</a></p>
+    <p class="footer-copy">&copy; 2026 Hallbridge LLC. All rights reserved.&nbsp;&nbsp;·&nbsp;&nbsp;<a href='/privacy' style='color:#7A7568;text-decoration:none;'>Privacy</a></p>
+  </footer>
+
+  <script>
+    // nav shadow on scroll
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // scroll reveal + stat count-up
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      var targets = document.querySelectorAll(
+        '.section-label, .rule, .section-title, .section-body, .service-card, .step, .stat, .candidates-card, .contact-title, .contact-sub, .contact-detail, .contact-actions'
+      );
+      targets.forEach(function(el) {
+        el.classList.add('reveal');
+        var siblings = el.parentElement ? Array.prototype.filter.call(el.parentElement.children, function(c) { return c.classList.contains('reveal'); }) : [];
+        var idx = siblings.indexOf(el);
+        if (idx > 0) el.style.transitionDelay = Math.min(idx * 0.1, 0.5) + 's';
+      });
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function(el) { io.observe(el); });
+
+      // count-up for stats
+      var counted = false;
+      var statIo = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting || counted) return;
+          counted = true;
+          document.querySelectorAll('.stat-number').forEach(function(el) {
+            var node = el.firstChild;
+            if (!node || node.nodeType !== 3) return;
+            var m = node.nodeValue.match(/^(\d+)(.*)$/);
+            if (!m) return;
+            var end = parseInt(m[1], 10), suffix = m[2], start = null;
+            function tick(ts) {
+              if (!start) start = ts;
+              var p = Math.min((ts - start) / 1200, 1);
+              node.nodeValue = Math.round(end * (1 - Math.pow(1 - p, 3))) + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
+          statIo.disconnect();
+        });
+      }, { threshold: 0.4 });
+      var statsEl = document.querySelector('.about-stats');
+      if (statsEl) statIo.observe(statsEl);
+    }
+
+    function toggleMenu() {
+      var h = document.getElementById('hamburger');
+      var n = document.getElementById('navLinks');
+      if (h) {
+        h.classList.toggle('open');
+        h.setAttribute('aria-expanded', h.classList.contains('open'));
+      }
+      if (n) n.classList.toggle('open');
+    }
+
+    function closeMenu() {
+      var h = document.getElementById('hamburger');
+      var n = document.getElementById('navLinks');
+      if (h) { h.classList.remove('open'); h.setAttribute('aria-expanded', 'false'); }
+      if (n) n.classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>
