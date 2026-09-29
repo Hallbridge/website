@@ -262,16 +262,6 @@
     .scroll-cue::after { content: ''; width: 1px; height: 64px; background: linear-gradient(var(--copper-light), transparent); animation: cue 2.4s ease-in-out infinite; transform-origin: top; }
     @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 
-    /* ── MARQUEE ── */
-    .marquee { background: var(--black); overflow: hidden; border-top: 1px solid rgba(184,115,51,0.35); }
-    .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
-    .marquee-track span {
-      display: flex; align-items: center; padding: 22px 18px;
-      font-family: var(--serif); font-style: italic; font-size: 22px; white-space: nowrap; color: var(--taupe-pale);
-    }
-    .marquee-track span::after { content: ''; width: 7px; height: 7px; background: var(--copper); transform: rotate(45deg); margin-left: 36px; }
-    @keyframes marquee { to { transform: translateX(-50%); } }
-
     /* ── ABOUT ── */
     .about { padding: clamp(96px, 12vw, 170px) var(--gutter); display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(48px, 7vw, 110px); align-items: center; max-width: 1440px; margin: 0 auto; }
     .about-media { position: relative; padding: 0 0 18% 12%; isolation: isolate; }
@@ -525,7 +515,6 @@
       .hero-sub { font-size: 16px; }
       .hero-actions .btn { flex: 1 1 100%; justify-content: center; }
       .scroll-cue { bottom: 18px; }
-      .marquee-track span { font-size: 18px; padding: 16px 12px; }
       .about-media { padding: 0 0 22% 8%; }
       .about-media .badge { padding: 18px 20px; max-width: 170px; right: 0; }
       .about-media .badge b { font-size: 34px; }
@@ -551,7 +540,6 @@
       .reveal { opacity: 1; transform: none; }
       .reveal-img { clip-path: none; }
       .hero h1 .line span { transform: none; }
-      .marquee-track { animation: none; }
     }
   </style>
 </head>
@@ -611,14 +599,6 @@
     </div>
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
   </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Project Managers</span><span>Superintendents</span><span>Project Executives</span><span>Estimators</span><span>Preconstruction</span><span>Project Engineers</span><span>Vice Presidents</span><span>High-Rise</span><span>Multifamily</span><span>Student Housing</span><span>Mixed-Use</span><span>Commercial</span>
-      <span>Project Managers</span><span>Superintendents</span><span>Project Executives</span><span>Estimators</span><span>Preconstruction</span><span>Project Engineers</span><span>Vice Presidents</span><span>High-Rise</span><span>Multifamily</span><span>Student Housing</span><span>Mixed-Use</span><span>Commercial</span>
-    </div>
-  </div>
 
   <!-- ABOUT -->
   <section class="about" id="about">

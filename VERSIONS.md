@@ -4,8 +4,9 @@ Every design is saved as a git tag, so any version can be restored.
 
 | Tag | What it is |
 | --- | --- |
-| `v1-original` | Original cream, text-only design (live until the v2 redesign) |
+| `v1-original` | Original cream, text-only design |
 | `v2-redesign` | Construction photography redesign: full-bleed hero, markets, testimonials |
+| `v2.1-clean-hero` | Centered HALLBRIDGE wordmark in hero, smaller headline, monogram-only nav; hero stats, eyebrow and scrolling banner removed |
 
 ## Revert the live site to an older version
 
