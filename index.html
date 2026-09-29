@@ -135,9 +135,8 @@
       box-shadow: 0 1px 0 var(--taupe-pale);
     }
     .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; position: relative; z-index: 2; }
-    .brand .mono { width: 46px; height: 46px; transition: width .4s var(--ease), height .4s var(--ease); }
-    .brand .word { height: 20px; width: auto; }
-    nav.scrolled .brand .mono { width: 40px; height: 40px; }
+    .brand .mono { width: 52px; height: 52px; transition: width .4s var(--ease), height .4s var(--ease); }
+    nav.scrolled .brand .mono { width: 42px; height: 42px; }
     .on-dark { display: block; }
     .on-light { display: none; }
     nav.scrolled .on-dark { display: none; }
@@ -219,8 +218,8 @@
     .hero::after {
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(21,16,12,0.55) 0%, rgba(21,16,12,0.05) 30%, rgba(21,16,12,0.25) 55%, rgba(21,16,12,0.92) 100%),
-        linear-gradient(90deg, rgba(21,16,12,0.6) 0%, rgba(21,16,12,0) 60%);
+        linear-gradient(180deg, rgba(21,16,12,0.6) 0%, rgba(21,16,12,0.25) 35%, rgba(21,16,12,0.35) 60%, rgba(21,16,12,0.92) 100%),
+        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(21,16,12,0.45), rgba(21,16,12,0) 75%);
     }
     .hero-grid {
       position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5;
@@ -229,26 +228,33 @@
       mask-image: linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%);
       -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%);
     }
-    .hero-content { position: relative; z-index: 2; padding: 140px var(--gutter) 0; max-width: 1360px; }
+    .hero-content {
+      position: relative; z-index: 2; flex: 1; width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 130px var(--gutter) 0; text-align: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .hero-brand { width: clamp(260px, 54vw, 780px); margin-bottom: clamp(34px, 5vh, 56px); opacity: 0; animation: up 1.2s var(--ease) .1s forwards; }
+    .hero-brand img { width: 100%; height: auto; filter: drop-shadow(0 6px 30px rgba(0,0,0,0.45)); }
+    .hero .eyebrow::after { content: ''; width: 36px; height: 1px; background: currentColor; }
     .hero .eyebrow { color: var(--copper-light); opacity: 0; animation: up 1s var(--ease) .3s forwards; }
     .hero h1 {
-      font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 7.6vw, 118px); line-height: .98; letter-spacing: -1.5px;
-      margin-top: 26px;
+      font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 4.6vw, 70px); line-height: 1.04; letter-spacing: -.5px;
+      margin-top: 22px;
     }
     .hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
     .hero h1 .line span { display: block; transform: translateY(105%); animation: rise 1.2s var(--ease) forwards; }
     .hero h1 .line:nth-child(2) span { animation-delay: .15s; }
     .hero h1 em { font-style: italic; color: var(--copper-light); }
     .hero-sub {
-      max-width: 540px; margin-top: 30px; font-size: 17px; line-height: 1.75; color: rgba(242,236,226,0.8);
+      max-width: 600px; margin: 26px auto 0; font-size: 17px; line-height: 1.75; color: rgba(242,236,226,0.8);
       opacity: 0; animation: up 1s var(--ease) .6s forwards;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; opacity: 0; animation: up 1s var(--ease) .8s forwards; }
+    .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; opacity: 0; animation: up 1s var(--ease) .8s forwards; }
     @keyframes rise { to { transform: none; } }
     @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 
     .hero-stats {
-      position: relative; z-index: 2; margin-top: 60px;
+      position: relative; z-index: 2; margin-top: 56px;
       display: grid; grid-template-columns: repeat(4, 1fr);
       border-top: 1px solid rgba(242,236,226,0.16);
       opacity: 0; animation: up 1s var(--ease) 1s forwards;
@@ -502,7 +508,6 @@
       .hamburger { display: block; }
     }
     @media (max-width: 960px) {
-      .brand .word { height: 17px; }
       .about, .record-inner { grid-template-columns: 1fr; }
       .about-media { max-width: 560px; }
       .roles, .candidates { grid-template-columns: 1fr; }
@@ -522,7 +527,10 @@
     @media (max-width: 700px) {
       nav { padding: 16px 20px; }
       .brand .mono { width: 40px; height: 40px; }
-      .hero-content { padding-top: 130px; }
+      .hero-content { padding-top: 110px; }
+      .hero-brand { width: 86vw; }
+      .hero .eyebrow { font-size: 10px; letter-spacing: 2.2px; gap: 10px; }
+      .hero .eyebrow::before, .hero .eyebrow::after { width: 20px; }
       .hero-sub { font-size: 16px; }
       .hero-actions .btn { flex: 1 1 100%; justify-content: center; }
       .hero-stats { grid-template-columns: 1fr 1fr; margin-top: 48px; }
@@ -565,10 +573,8 @@
   <!-- NAV -->
   <nav id="nav" aria-label="Main navigation">
     <a href="#top" class="brand" aria-label="Hallbridge home">
-      <img class="mono on-dark" src="assets/monogram-footer.svg" alt="" width="46" height="46">
-      <img class="mono on-light" src="assets/monogram.svg" alt="" width="46" height="46">
-      <img class="word on-dark" src="assets/wordmark-light.svg" alt="Hallbridge Talent Partners" width="128" height="20">
-      <img class="word on-light" src="assets/wordmark.svg" alt="Hallbridge Talent Partners" width="128" height="20">
+      <img class="mono on-dark" src="assets/monogram-footer.svg" alt="Hallbridge" width="46" height="46">
+      <img class="mono on-light" src="assets/monogram.svg" alt="Hallbridge" width="46" height="46">
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -605,6 +611,7 @@
     </div>
     <div class="hero-grid"></div>
     <div class="hero-content">
+      <h2 class="hero-brand"><img src="assets/wordmark-light.svg" alt="Hallbridge Talent Partners" width="1240" height="195"></h2>
       <p class="eyebrow">Construction Executive Search &middot; Nationwide</p>
       <h1>
         <span class="line"><span>Connecting the people</span></span>
