@@ -527,7 +527,11 @@
     /* ── ROLES ── */
     .roles { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
     .roles-media { position: relative; overflow: hidden; background: var(--ink); }
-    .roles-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 45% 50%; }
+    .roles-media { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; }
+    .roles-media .half { position: relative; overflow: hidden; }
+    .roles-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .half-field img { object-position: 50% 78%; }
+    .half-exec img { object-position: 55% 50%; }
     .roles-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(21,16,12,0.7)); }
     .roles-media .cap {
       position: absolute; left: var(--gutter); bottom: 40px; right: 40px; z-index: 1; color: var(--cream);
@@ -955,7 +959,8 @@
   <!-- ROLES -->
   <section class="roles" id="roles">
     <div class="roles-media">
-      <img src="assets/img/ironworkers-dusk-1600.webp" srcset="assets/img/ironworkers-dusk-800.webp 800w, assets/img/ironworkers-dusk-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Ironworkers welding structural steel at dusk" loading="lazy" decoding="async">
+      <div class="half half-field"><img src="assets/img/field-dusk-1600.webp" srcset="assets/img/field-dusk-800.webp 800w, assets/img/field-dusk-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Superintendent walking a construction site at dusk with a tower crane behind" loading="lazy" decoding="async"></div>
+      <div class="half half-exec"><img src="assets/img/execs-window-1600.webp" srcset="assets/img/execs-window-800.webp 800w, assets/img/execs-window-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Two executives looking out over the city from a high-rise office" loading="lazy" decoding="async"></div>
       <p class="cap">From the field to the executive suite.</p>
     </div>
     <div class="roles-body">
