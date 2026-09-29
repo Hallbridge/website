@@ -135,9 +135,8 @@
       box-shadow: 0 1px 0 var(--taupe-pale);
     }
     .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; position: relative; z-index: 2; }
-    .brand .mono { width: 46px; height: 46px; transition: width .4s var(--ease), height .4s var(--ease); }
-    .brand .word { height: 20px; width: auto; }
-    nav.scrolled .brand .mono { width: 40px; height: 40px; }
+    .brand .mono { width: 52px; height: 52px; transition: width .4s var(--ease), height .4s var(--ease); }
+    nav.scrolled .brand .mono { width: 42px; height: 42px; }
     .on-dark { display: block; }
     .on-light { display: none; }
     nav.scrolled .on-dark { display: none; }
@@ -219,8 +218,8 @@
     .hero::after {
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(21,16,12,0.55) 0%, rgba(21,16,12,0.05) 30%, rgba(21,16,12,0.25) 55%, rgba(21,16,12,0.92) 100%),
-        linear-gradient(90deg, rgba(21,16,12,0.6) 0%, rgba(21,16,12,0) 60%);
+        linear-gradient(180deg, rgba(21,16,12,0.6) 0%, rgba(21,16,12,0.25) 35%, rgba(21,16,12,0.35) 60%, rgba(21,16,12,0.92) 100%),
+        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(21,16,12,0.45), rgba(21,16,12,0) 75%);
     }
     .hero-grid {
       position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5;
@@ -229,51 +228,39 @@
       mask-image: linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%);
       -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%);
     }
-    .hero-content { position: relative; z-index: 2; padding: 140px var(--gutter) 0; max-width: 1360px; }
+    .hero-content {
+      position: relative; z-index: 2; flex: 1; width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 130px var(--gutter) 110px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .hero-brand { width: clamp(260px, 54vw, 780px); margin-bottom: clamp(26px, 4vh, 44px); opacity: 0; animation: up 1.2s var(--ease) .1s forwards; }
+    .hero-brand img { width: 100%; height: auto; filter: drop-shadow(0 6px 30px rgba(0,0,0,0.45)); }
+    .hero .eyebrow::after { content: ''; width: 36px; height: 1px; background: currentColor; }
     .hero .eyebrow { color: var(--copper-light); opacity: 0; animation: up 1s var(--ease) .3s forwards; }
     .hero h1 {
-      font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 7.6vw, 118px); line-height: .98; letter-spacing: -1.5px;
-      margin-top: 26px;
+      font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 4.6vw, 70px); line-height: 1.04; letter-spacing: -.5px;
+      margin-top: 22px;
     }
     .hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
     .hero h1 .line span { display: block; transform: translateY(105%); animation: rise 1.2s var(--ease) forwards; }
     .hero h1 .line:nth-child(2) span { animation-delay: .15s; }
     .hero h1 em { font-style: italic; color: var(--copper-light); }
     .hero-sub {
-      max-width: 540px; margin-top: 30px; font-size: 17px; line-height: 1.75; color: rgba(242,236,226,0.8);
+      max-width: 600px; margin: 26px auto 0; font-size: 17px; line-height: 1.75; color: rgba(242,236,226,0.8);
       opacity: 0; animation: up 1s var(--ease) .6s forwards;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; opacity: 0; animation: up 1s var(--ease) .8s forwards; }
+    .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; opacity: 0; animation: up 1s var(--ease) .8s forwards; }
     @keyframes rise { to { transform: none; } }
     @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 
-    .hero-stats {
-      position: relative; z-index: 2; margin-top: 60px;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(242,236,226,0.16);
-      opacity: 0; animation: up 1s var(--ease) 1s forwards;
-    }
-    .hero-stat { padding: 28px var(--gutter) 34px; border-right: 1px solid rgba(242,236,226,0.12); }
-    .hero-stat:last-child { border-right: 0; }
-    .hero-stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 44px); color: var(--cream); line-height: 1; white-space: nowrap; }
-    .hero-stat span { display: block; margin-top: 10px; font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--taupe-light); }
     .scroll-cue {
-      position: absolute; right: var(--gutter); bottom: 150px; z-index: 2; writing-mode: vertical-rl;
+      position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 2;
+      flex-direction: column;
       font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(242,236,226,0.6);
       display: flex; align-items: center; gap: 14px;
     }
     .scroll-cue::after { content: ''; width: 1px; height: 64px; background: linear-gradient(var(--copper-light), transparent); animation: cue 2.4s ease-in-out infinite; transform-origin: top; }
     @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
-
-    /* ── MARQUEE ── */
-    .marquee { background: var(--black); overflow: hidden; border-top: 1px solid rgba(184,115,51,0.35); }
-    .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
-    .marquee-track span {
-      display: flex; align-items: center; padding: 22px 18px;
-      font-family: var(--serif); font-style: italic; font-size: 22px; white-space: nowrap; color: var(--taupe-pale);
-    }
-    .marquee-track span::after { content: ''; width: 7px; height: 7px; background: var(--copper); transform: rotate(45deg); margin-left: 36px; }
-    @keyframes marquee { to { transform: translateX(-50%); } }
 
     /* ── ABOUT ── */
     .about { padding: clamp(96px, 12vw, 170px) var(--gutter); display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(48px, 7vw, 110px); align-items: center; max-width: 1440px; margin: 0 auto; }
@@ -502,7 +489,6 @@
       .hamburger { display: block; }
     }
     @media (max-width: 960px) {
-      .brand .word { height: 17px; }
       .about, .record-inner { grid-template-columns: 1fr; }
       .about-media { max-width: 560px; }
       .roles, .candidates { grid-template-columns: 1fr; }
@@ -522,15 +508,13 @@
     @media (max-width: 700px) {
       nav { padding: 16px 20px; }
       .brand .mono { width: 40px; height: 40px; }
-      .hero-content { padding-top: 130px; }
+      .hero-content { padding-top: 110px; }
+      .hero-brand { width: 86vw; }
+      .hero .eyebrow { font-size: 10px; letter-spacing: 2.2px; gap: 10px; }
+      .hero .eyebrow::before, .hero .eyebrow::after { width: 20px; }
       .hero-sub { font-size: 16px; }
       .hero-actions .btn { flex: 1 1 100%; justify-content: center; }
-      .hero-stats { grid-template-columns: 1fr 1fr; margin-top: 48px; }
-      .hero-stat { padding: 20px; border-bottom: 1px solid rgba(242,236,226,0.12); }
-      .hero-stat:nth-child(2) { border-right: 0; }
-      .hero-stat:nth-child(n+3) { border-bottom: 0; }
-      .scroll-cue { display: none; }
-      .marquee-track span { font-size: 18px; padding: 16px 12px; }
+      .scroll-cue { bottom: 18px; }
       .about-media { padding: 0 0 22% 8%; }
       .about-media .badge { padding: 18px 20px; max-width: 170px; right: 0; }
       .about-media .badge b { font-size: 34px; }
@@ -556,7 +540,6 @@
       .reveal { opacity: 1; transform: none; }
       .reveal-img { clip-path: none; }
       .hero h1 .line span { transform: none; }
-      .marquee-track { animation: none; }
     }
   </style>
 </head>
@@ -565,10 +548,8 @@
   <!-- NAV -->
   <nav id="nav" aria-label="Main navigation">
     <a href="#top" class="brand" aria-label="Hallbridge home">
-      <img class="mono on-dark" src="assets/monogram-footer.svg" alt="" width="46" height="46">
-      <img class="mono on-light" src="assets/monogram.svg" alt="" width="46" height="46">
-      <img class="word on-dark" src="assets/wordmark-light.svg" alt="Hallbridge Talent Partners" width="128" height="20">
-      <img class="word on-light" src="assets/wordmark.svg" alt="Hallbridge Talent Partners" width="128" height="20">
+      <img class="mono on-dark" src="assets/monogram-footer.svg" alt="Hallbridge" width="46" height="46">
+      <img class="mono on-light" src="assets/monogram.svg" alt="Hallbridge" width="46" height="46">
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -605,7 +586,7 @@
     </div>
     <div class="hero-grid"></div>
     <div class="hero-content">
-      <p class="eyebrow">Construction Executive Search &middot; Nationwide</p>
+      <h2 class="hero-brand"><img src="assets/wordmark-light.svg" alt="Hallbridge Talent Partners" width="1240" height="195"></h2>
       <h1>
         <span class="line"><span>Connecting the people</span></span>
         <span class="line"><span><em>who build America.</em></span></span>
@@ -617,21 +598,7 @@
       </div>
     </div>
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>100+</b><span>Leaders placed</span></div>
-      <div class="hero-stat"><b>$20M+</b><span>Project scale</span></div>
-      <div class="hero-stat"><b>95%</b><span>Retention rate</span></div>
-      <div class="hero-stat"><b>10+ yrs</b><span>Industry experience</span></div>
-    </div>
   </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Project Managers</span><span>Superintendents</span><span>Project Executives</span><span>Estimators</span><span>Preconstruction</span><span>Project Engineers</span><span>Vice Presidents</span><span>High-Rise</span><span>Multifamily</span><span>Student Housing</span><span>Mixed-Use</span><span>Commercial</span>
-      <span>Project Managers</span><span>Superintendents</span><span>Project Executives</span><span>Estimators</span><span>Preconstruction</span><span>Project Engineers</span><span>Vice Presidents</span><span>High-Rise</span><span>Multifamily</span><span>Student Housing</span><span>Mixed-Use</span><span>Commercial</span>
-    </div>
-  </div>
 
   <!-- ABOUT -->
   <section class="about" id="about">
