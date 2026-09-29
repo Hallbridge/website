@@ -527,14 +527,26 @@
     /* ── ROLES ── */
     .roles { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
     .roles-media { position: relative; overflow: hidden; background: var(--ink); }
-    .roles-media { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; }
-    .roles-media .half { position: relative; overflow: hidden; }
     .roles-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .half-field img { object-position: 50% 78%; }
-    .half-exec img { object-position: 55% 50%; }
-    .roles-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(21,16,12,0.7)); }
+    .rs { cursor: ew-resize; touch-action: pan-y; }
+    .rs-base { object-position: 50% 30%; }
+    .rs-top { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--x)); }
+    .rs-top img { object-position: 50% 30%; }
+    .rs.anim .rs-top { transition: clip-path .9s var(--ease); }
+    .rs.anim .rs-line { transition: left .9s var(--ease); }
+    .rs-line { position: absolute; top: 0; bottom: 0; left: var(--x); width: 2px; margin-left: -1px; background: var(--copper-light); z-index: 3; box-shadow: 0 0 18px rgba(0,0,0,.35); pointer-events: none; }
+    .rs-knob { position: absolute; top: 50%; left: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: rgba(21,16,12,.72); border: 1px solid var(--copper-light); color: var(--cream); display: grid; place-items: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+    .rs-knob svg { width: 20px; height: 20px; }
+    .rs-label { position: absolute; top: 28px; z-index: 2; font-size: 10.5px; font-weight: 600; letter-spacing: 2.6px; text-transform: uppercase; color: var(--cream); background: rgba(21,16,12,.5); padding: 8px 12px; pointer-events: none; }
+    .rs-l { left: 28px; } .rs-r { left: 28px; opacity: 0; }
+    .rs-label { transition: opacity .4s; }
+    .rs.suite .rs-l { opacity: 0; } .rs.suite .rs-r { opacity: 1; }
+    .rs-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; z-index: 4; cursor: ew-resize; margin: 0; }
+    .rs-range:focus-visible + .cap { outline: none; }
+    .rs:focus-within .rs-knob { box-shadow: 0 0 0 3px rgba(211,154,94,.5); }
+    .roles-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(21,16,12,0.7)); pointer-events: none; z-index: 1; }
     .roles-media .cap {
-      position: absolute; left: var(--gutter); bottom: 40px; right: 40px; z-index: 1; color: var(--cream);
+      position: absolute; left: var(--gutter); bottom: 40px; right: 40px; z-index: 2; color: var(--cream); pointer-events: none;
       font-family: var(--serif); font-style: italic; font-size: 22px;
     }
     .roles-body { padding: clamp(80px, 9vw, 140px) var(--gutter); background: var(--cream); }
@@ -673,6 +685,8 @@
       .roles, .candidates { grid-template-columns: 1fr; }
       .roles { min-height: 0; }
       .roles-media { min-height: 62vh; order: 2; }
+      .rs-label { top: 16px; font-size: 9px; letter-spacing: 2px; padding: 6px 9px; }
+      .rs-l, .rs-r { left: 16px; }
       .cand-media { min-height: 56vh; }
       .steps { grid-template-columns: 1fr 1fr; row-gap: 56px; }
       .steps-line { display: none; }
@@ -785,8 +799,8 @@
   <section class="about" id="about">
     <div class="about-media">
       <div class="frame" aria-hidden="true"></div>
-      <img class="main reveal-img" src="assets/img/crew-deck-v2-1280.webp" srcset="assets/img/crew-deck-v2-640.webp 640w, assets/img/crew-deck-v2-1280.webp 1280w" sizes="(max-width: 960px) 90vw, 45vw" alt="Construction project team standing together on a new concrete deck" decoding="async">
-      <img class="inset reveal-img" src="assets/img/jobsite-handshake-900.webp" alt="Two construction leaders in hard hats shaking hands on a jobsite" decoding="async">
+      <img class="main reveal-img" src="assets/img/crew-deck-v3-1280.webp" srcset="assets/img/crew-deck-v3-640.webp 640w, assets/img/crew-deck-v3-1280.webp 1280w" sizes="(max-width: 960px) 90vw, 45vw" alt="Construction project team standing together on a new concrete deck" decoding="async">
+      <img class="inset reveal-img" src="assets/img/jobsite-handshake-v2-900.webp" alt="Two construction leaders in hard hats shaking hands on a jobsite" decoding="async">
     </div>
     <div>
       <p class="eyebrow reveal">Who We Are</p>
@@ -959,9 +973,12 @@
 
   <!-- ROLES -->
   <section class="roles" id="roles">
-    <div class="roles-media">
-      <div class="half half-field"><img src="assets/img/field-dusk-1600.webp" srcset="assets/img/field-dusk-800.webp 800w, assets/img/field-dusk-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Superintendent walking a construction site at dusk with a tower crane behind" loading="lazy" decoding="async"></div>
-      <div class="half half-exec"><img src="assets/img/execs-window-1600.webp" srcset="assets/img/execs-window-800.webp 800w, assets/img/execs-window-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Two executives looking out over the city from a high-rise office" loading="lazy" decoding="async"></div>
+    <div class="roles-media rs" id="fieldSuite" style="--x:90%">
+      <img class="rs-base" src="assets/img/field-hardhat-1280.webp" srcset="assets/img/field-hardhat-640.webp 640w, assets/img/field-hardhat-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction superintendent in a red hard hat on a concrete jobsite" loading="lazy" decoding="async">
+      <div class="rs-top"><img src="assets/img/exec-office-1280.webp" srcset="assets/img/exec-office-640.webp 640w, assets/img/exec-office-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction executive in a suit in his office" loading="lazy" decoding="async"></div>
+      <span class="rs-label rs-l">The Field</span><span class="rs-label rs-r">The Executive Suite</span>
+      <div class="rs-line" aria-hidden="true"><span class="rs-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+      <input class="rs-range" type="range" min="0" max="100" value="90" aria-label="Slide to compare the field and the executive suite">
       <p class="cap">From the field to the executive suite.</p>
     </div>
     <div class="roles-body">
@@ -1267,6 +1284,32 @@
             ticking = false;
           });
         }, { passive: true });
+      }
+
+      // field / executive suite slider
+      var rs = document.getElementById('fieldSuite');
+      if (rs) {
+        var range = rs.querySelector('.rs-range');
+        var set = function (v) { v = Math.max(0, Math.min(100, v)); rs.style.setProperty('--x', v + '%'); range.value = Math.round(v); rs.classList.toggle('suite', v < 55); };
+        range.addEventListener('input', function () { rs.classList.remove('anim'); set(+range.value); });
+        if (window.matchMedia('(hover: hover)').matches) {
+          rs.addEventListener('pointermove', function (e) {
+            if (e.pointerType !== 'mouse') return;
+            rs.classList.remove('anim');
+            var r = rs.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100);
+          });
+          rs.addEventListener('pointerleave', function () { rs.classList.add('anim'); set(90); });
+        }
+        if (!reduce && 'IntersectionObserver' in window) {
+          var hinted = false;
+          var hio = new IntersectionObserver(function (en) {
+            if (!en[0].isIntersecting || hinted) return;
+            hinted = true; hio.disconnect(); rs.classList.add('anim');
+            setTimeout(function () { set(22); }, 400);
+            setTimeout(function () { set(90); }, 2000);
+          }, { threshold: 0.5 });
+          hio.observe(rs);
+        }
       }
 
       // testimonials
