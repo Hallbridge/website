@@ -294,14 +294,16 @@
     .about-points div { display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--taupe-pale); font-size: 15px; color: var(--charcoal); line-height: 1.6; }
     .about-points i { font-style: normal; font-family: var(--serif); color: var(--copper); font-size: 18px; min-width: 26px; }
 
-    /* ── STATS BAND ── */
-    .stats { background: var(--cream-dark); border-top: 1px solid var(--taupe-pale); border-bottom: 1px solid var(--taupe-pale); }
-    .stats-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
-    .stat { padding: 56px var(--gutter); border-right: 1px solid var(--taupe-pale); }
-    .stat:last-child { border-right: 0; }
-    .stat-number { font-family: var(--serif); font-size: clamp(52px, 5.6vw, 82px); font-weight: 400; line-height: 1; color: var(--black); }
+    /* ── TRACK RECORD ── */
+    .record { background: var(--cream-dark); border-top: 1px solid var(--taupe-pale); border-bottom: 1px solid var(--taupe-pale); padding: clamp(96px, 11vw, 150px) var(--gutter); }
+    .record-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(48px, 6vw, 100px); align-items: center; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--taupe-pale); }
+    .stat { padding: 34px 28px 34px 0; border-bottom: 1px solid var(--taupe-pale); }
+    .stat:nth-child(odd) { border-right: 1px solid var(--taupe-pale); }
+    .stat:nth-child(even) { padding-left: 32px; }
+    .stat-number { font-family: var(--serif); font-size: clamp(52px, 5vw, 76px); font-weight: 400; line-height: 1; color: var(--black); }
     .stat-number sup { font-size: .45em; color: var(--copper); vertical-align: top; margin-left: 2px; }
-    .stat-label { margin-top: 14px; font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); line-height: 1.6; max-width: 220px; }
+    .stat-label { margin-top: 12px; font-size: 11.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); line-height: 1.6; max-width: 230px; }
 
     /* ── MARKETS ── */
     .markets { padding: clamp(96px, 12vw, 160px) 0 clamp(96px, 10vw, 140px); background: var(--cream); }
@@ -487,7 +489,7 @@
     }
     @media (max-width: 960px) {
       .brand .word { height: 17px; }
-      .about { grid-template-columns: 1fr; }
+      .about, .record-inner { grid-template-columns: 1fr; }
       .about-media { max-width: 560px; }
       .roles, .candidates { grid-template-columns: 1fr; }
       .roles { min-height: 0; }
@@ -519,10 +521,9 @@
       .about-media .badge { padding: 18px 20px; max-width: 170px; right: 0; }
       .about-media .badge b { font-size: 34px; }
       .about-media .frame { top: -12px; right: -8px; }
-      .stats-inner { grid-template-columns: 1fr 1fr; }
-      .stat { padding: 36px 20px; border-bottom: 1px solid var(--taupe-pale); }
-      .stat:nth-child(2) { border-right: 0; }
-      .stat:nth-child(n+3) { border-bottom: 0; }
+      .stat { padding: 26px 16px 26px 0; }
+      .stat:nth-child(even) { padding-left: 18px; }
+      .stat-label { font-size: 10.5px; letter-spacing: 1px; }
       .section-head { margin-bottom: 40px; }
       .roles-cols { grid-template-columns: 1fr; gap: 36px; }
       .roles-cols li { font-size: 21px; }
@@ -601,10 +602,10 @@
     </div>
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
     <div class="hero-stats">
-      <div class="hero-stat"><b>10+ yrs</b><span>Construction only</span></div>
       <div class="hero-stat"><b>100+</b><span>Leaders placed</span></div>
-      <div class="hero-stat"><b>95%</b><span>Retention rate</span></div>
       <div class="hero-stat"><b>$20M+</b><span>Project scale</span></div>
+      <div class="hero-stat"><b>95%</b><span>Retention rate</span></div>
+      <div class="hero-stat"><b>10+ yrs</b><span>Construction only</span></div>
     </div>
   </section>
 
@@ -637,13 +638,20 @@
     </div>
   </section>
 
-  <!-- STATS -->
-  <section class="stats" aria-label="Hallbridge by the numbers">
-    <div class="stats-inner">
-      <div class="stat reveal"><div class="stat-number" data-count="10">10<sup>+</sup></div><div class="stat-label">Years partnering with ENR firms and NMHC developers</div></div>
-      <div class="stat reveal"><div class="stat-number" data-count="95">95<sup>%</sup></div><div class="stat-label">Employee retention across all placements</div></div>
-      <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>+</sup></div><div class="stat-label">Construction leaders placed nationwide</div></div>
-      <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>%</sup></div><div class="stat-label">AEC industry focused</div></div>
+  <!-- TRACK RECORD -->
+  <section class="record" aria-label="Hallbridge track record">
+    <div class="record-inner">
+      <div class="record-copy">
+        <p class="eyebrow reveal">Track Record</p>
+        <h2 class="title reveal">Placements from<br><em>coast to coast.</em></h2>
+        <p class="body reveal">We've placed construction leaders with general contractors, developers and engineering firms across the country, on projects from $20M to well over $100M. The people we place stay, and our clients come back.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>+</sup></div><div class="stat-label">Construction professionals placed</div></div>
+        <div class="stat reveal"><div class="stat-number" data-count="95">95<sup>%</sup></div><div class="stat-label">Retention across our placements</div></div>
+        <div class="stat reveal"><div class="stat-number" data-count="10">10<sup>+</sup></div><div class="stat-label">Years partnering with ENR firms and NMHC developers</div></div>
+        <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>%</sup></div><div class="stat-label">Focused on construction and AEC</div></div>
+      </div>
     </div>
   </section>
 
