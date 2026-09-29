@@ -11,6 +11,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v2.3-moody-graded` | Moody photo set (dark executive handshake, rooftop executive, ironworkers at dusk) and one warm color grade across every photo |
 | `v2.4-relationships` | About: two executives walking together (main) + jobsite handshake (inset) |
 | `v2.5-roles-split` | Roles: split image, site at dusk over executives at a high-rise window |
+| `v2.6-subline` | Original logo kept; TALENT PARTNERS brighter and slightly larger on dark backgrounds |
 
 ## Revert the live site to an older version
 
