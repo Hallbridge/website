@@ -305,6 +305,20 @@
     .stat-number sup { font-size: .45em; color: var(--copper); vertical-align: top; margin-left: 2px; }
     .stat-label { margin-top: 12px; font-size: 11.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); line-height: 1.6; max-width: 230px; }
 
+    .stats-grid { margin-top: 44px; }
+    .map { background: var(--cream); border: 1px solid var(--taupe-pale); padding: clamp(22px, 3vw, 44px); box-shadow: 0 40px 80px -50px rgba(30,23,18,0.35); }
+    .tiles { display: grid; grid-template-columns: repeat(11, 1fr); gap: 5px; }
+    .tile {
+      aspect-ratio: 1; display: grid; place-items: center; font-size: clamp(8px, .8vw, 11px); font-weight: 500; letter-spacing: .5px;
+      background: #EAE3D9; color: #B7AB9C; transition: transform .3s var(--ease), background .3s, color .3s;
+    }
+    .tile.on { background: var(--copper); color: #fff; }
+    .tile.on:hover { transform: scale(1.12); background: var(--black); color: var(--cream); }
+    .map-key { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 26px; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); }
+    .map-key span { display: inline-flex; align-items: center; gap: 8px; }
+    .map-key i { width: 12px; height: 12px; display: inline-block; }
+    .map-key .k1 { background: var(--copper); } .map-key .k0 { background: #EAE3D9; }
+
     /* ── MARKETS ── */
     .markets { padding: clamp(96px, 12vw, 160px) 0 clamp(96px, 10vw, 140px); background: var(--cream); }
     .section-head { padding: 0 var(--gutter); max-width: 1440px; margin: 0 auto 56px; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
@@ -524,6 +538,8 @@
       .stat { padding: 26px 16px 26px 0; }
       .stat:nth-child(even) { padding-left: 18px; }
       .stat-label { font-size: 10.5px; letter-spacing: 1px; }
+      .tiles { gap: 3px; }
+      .map-key { gap: 14px; font-size: 10px; }
       .section-head { margin-bottom: 40px; }
       .roles-cols { grid-template-columns: 1fr; gap: 36px; }
       .roles-cols li { font-size: 21px; }
@@ -645,13 +661,68 @@
         <p class="eyebrow reveal">Track Record</p>
         <h2 class="title reveal">Placements from<br><em>coast to coast.</em></h2>
         <p class="body reveal">We've placed construction leaders with general contractors, developers and engineering firms across the country, on projects from $20M to well over $100M. The people we place stay, and our clients come back.</p>
+        <div class="stats-grid">
+          <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>+</sup></div><div class="stat-label">Construction professionals placed</div></div>
+          <div class="stat reveal"><div class="stat-number" data-count="95">95<sup>%</sup></div><div class="stat-label">Retention across our placements</div></div>
+          <div class="stat reveal"><div class="stat-number" data-count="10">10<sup>+</sup></div><div class="stat-label">Years partnering with ENR firms and NMHC developers</div></div>
+          <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>%</sup></div><div class="stat-label">Focused on construction and AEC</div></div>
+        </div>
       </div>
-      <div class="stats-grid">
-        <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>+</sup></div><div class="stat-label">Construction professionals placed</div></div>
-        <div class="stat reveal"><div class="stat-number" data-count="95">95<sup>%</sup></div><div class="stat-label">Retention across our placements</div></div>
-        <div class="stat reveal"><div class="stat-number" data-count="10">10<sup>+</sup></div><div class="stat-label">Years partnering with ENR firms and NMHC developers</div></div>
-        <div class="stat reveal"><div class="stat-number" data-count="100">100<sup>%</sup></div><div class="stat-label">Focused on construction and AEC</div></div>
-      </div>
+      <figure class="map reveal" aria-label="Map of states where Hallbridge has placed construction professionals">
+        <div class="tiles">
+          <span class="tile" style="grid-row:1;grid-column:1">AK</span>
+          <span class="tile" style="grid-row:1;grid-column:11">ME</span>
+          <span class="tile" style="grid-row:2;grid-column:10">VT</span>
+          <span class="tile" style="grid-row:2;grid-column:11">NH</span>
+          <span class="tile on" style="grid-row:3;grid-column:1">WA</span>
+          <span class="tile" style="grid-row:3;grid-column:2">ID</span>
+          <span class="tile" style="grid-row:3;grid-column:3">MT</span>
+          <span class="tile" style="grid-row:3;grid-column:4">ND</span>
+          <span class="tile" style="grid-row:3;grid-column:5">MN</span>
+          <span class="tile on" style="grid-row:3;grid-column:6">IL</span>
+          <span class="tile" style="grid-row:3;grid-column:7">WI</span>
+          <span class="tile" style="grid-row:3;grid-column:8">MI</span>
+          <span class="tile on" style="grid-row:3;grid-column:9">NY</span>
+          <span class="tile" style="grid-row:3;grid-column:10">RI</span>
+          <span class="tile on" style="grid-row:3;grid-column:11">MA</span>
+          <span class="tile on" style="grid-row:4;grid-column:1">OR</span>
+          <span class="tile on" style="grid-row:4;grid-column:2">NV</span>
+          <span class="tile" style="grid-row:4;grid-column:3">WY</span>
+          <span class="tile" style="grid-row:4;grid-column:4">SD</span>
+          <span class="tile" style="grid-row:4;grid-column:5">IA</span>
+          <span class="tile on" style="grid-row:4;grid-column:6">IN</span>
+          <span class="tile" style="grid-row:4;grid-column:7">OH</span>
+          <span class="tile on" style="grid-row:4;grid-column:8">PA</span>
+          <span class="tile on" style="grid-row:4;grid-column:9">NJ</span>
+          <span class="tile" style="grid-row:4;grid-column:10">CT</span>
+          <span class="tile on" style="grid-row:5;grid-column:1">CA</span>
+          <span class="tile on" style="grid-row:5;grid-column:2">UT</span>
+          <span class="tile on" style="grid-row:5;grid-column:3">CO</span>
+          <span class="tile" style="grid-row:5;grid-column:4">NE</span>
+          <span class="tile" style="grid-row:5;grid-column:5">MO</span>
+          <span class="tile" style="grid-row:5;grid-column:6">KY</span>
+          <span class="tile" style="grid-row:5;grid-column:7">WV</span>
+          <span class="tile on" style="grid-row:5;grid-column:8">VA</span>
+          <span class="tile" style="grid-row:5;grid-column:9">MD</span>
+          <span class="tile" style="grid-row:5;grid-column:10">DE</span>
+          <span class="tile on" style="grid-row:6;grid-column:2">AZ</span>
+          <span class="tile" style="grid-row:6;grid-column:3">NM</span>
+          <span class="tile" style="grid-row:6;grid-column:4">KS</span>
+          <span class="tile" style="grid-row:6;grid-column:5">AR</span>
+          <span class="tile on" style="grid-row:6;grid-column:6">TN</span>
+          <span class="tile on" style="grid-row:6;grid-column:7">NC</span>
+          <span class="tile on" style="grid-row:6;grid-column:8">SC</span>
+          <span class="tile" style="grid-row:7;grid-column:4">OK</span>
+          <span class="tile" style="grid-row:7;grid-column:5">LA</span>
+          <span class="tile" style="grid-row:7;grid-column:6">MS</span>
+          <span class="tile" style="grid-row:7;grid-column:7">AL</span>
+          <span class="tile on" style="grid-row:7;grid-column:8">GA</span>
+          <span class="tile on" style="grid-row:8;grid-column:1">HI</span>
+          <span class="tile on" style="grid-row:8;grid-column:4">TX</span>
+          <span class="tile on" style="grid-row:8;grid-column:9">FL</span>
+        </div>
+        <figcaption class="map-key"><span><i class="k1"></i>Placements made</span><span><i class="k0"></i>Open territory</span></figcaption>
+      </figure>
     </div>
   </section>
 
