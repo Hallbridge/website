@@ -15,6 +15,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v2.7-crew-deck` | About main photo: project team on a new concrete deck; mobile roles text before photos |
 | `v2.8-crops` | About collage rearranged, 100% badge removed, crew photo recropped; phone crops fixed for hero and welding band |
 | `v2.9-field-suite` | Roles: field-to-executive-suite reveal slider (hard hat superintendent / office executive); crew photo retouched and centered; handshake recentered |
+| `v2.10-align` | Slider heads aligned across field and executive photos; Field Operations Manager added to roles |
 
 ## Revert the live site to an older version
 
