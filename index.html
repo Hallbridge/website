@@ -266,6 +266,12 @@
     .btn-ghost { border-color: rgba(242,236,226,0.45); color: var(--cream); }
     .btn-ghost:hover { background: var(--cream); color: var(--black); border-color: var(--cream); }
 
+    /* shared photo grade: warm, slightly muted, matches the copper/charcoal palette */
+    .about-media img, .roles-media img, .cand-media img, .statement .bg img, .contact .bg img {
+      filter: saturate(.78) contrast(1.06) brightness(.92) sepia(.12);
+    }
+    .hero-media img { filter: saturate(.86) contrast(1.04) sepia(.08); }
+
     /* scroll reveal */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
     .reveal.in { opacity: 1; transform: none; }
@@ -466,7 +472,7 @@
       position: relative; flex: 1; overflow: hidden; color: var(--cream);
       transition: flex 0.9s var(--ease); min-width: 0; background: var(--ink);
     }
-    .market img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease), filter .8s; filter: saturate(.85); }
+    .market img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease), filter .8s; filter: saturate(.72) contrast(1.06) brightness(.88) sepia(.14); }
     .market::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,16,12,0.1) 30%, rgba(21,16,12,0.88) 100%); }
     .market-num { position: absolute; top: 26px; left: 28px; z-index: 2; font-family: var(--serif); font-size: 18px; color: var(--copper-light); }
     .market-text { position: absolute; left: 28px; right: 28px; bottom: 30px; z-index: 2; }
@@ -480,7 +486,7 @@
     @media (hover: hover) and (min-width: 901px) {
       .markets-row:hover .market { flex: .8; }
       .markets-row .market:hover { flex: 2.6; }
-      .market:hover img { transform: scale(1.06); filter: saturate(1); }
+      .market:hover img { transform: scale(1.06); filter: saturate(.9) contrast(1.05) brightness(.95) sepia(.08); }
       .market:hover p { max-height: 140px; opacity: 1; margin-top: 14px; }
       .market:hover .bar { width: 70px; }
     }
@@ -521,7 +527,7 @@
     /* ── ROLES ── */
     .roles { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
     .roles-media { position: relative; overflow: hidden; background: var(--ink); }
-    .roles-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .roles-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 45% 50%; }
     .roles-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(21,16,12,0.7)); }
     .roles-media .cap {
       position: absolute; left: var(--gutter); bottom: 40px; right: 40px; z-index: 1; color: var(--cream);
@@ -591,7 +597,7 @@
     /* ── CANDIDATES ── */
     .candidates { display: grid; grid-template-columns: 1.1fr 1fr; background: var(--black); color: var(--cream); }
     .cand-media { position: relative; min-height: 640px; overflow: hidden; }
-    .cand-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .cand-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 72% 50%; }
     .cand-body { padding: clamp(80px, 9vw, 140px) var(--gutter); display: flex; flex-direction: column; justify-content: center; }
     .cand-list { list-style: none; margin-top: 34px; }
     .cand-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(242,236,226,0.1); font-size: 15px; color: rgba(242,236,226,0.8); line-height: 1.6; }
@@ -773,8 +779,8 @@
   <section class="about" id="about">
     <div class="about-media">
       <div class="frame" aria-hidden="true"></div>
-      <img class="main reveal-img" src="assets/img/concrete-pour-crew-1600.webp" srcset="assets/img/concrete-pour-crew-800.webp 800w, assets/img/concrete-pour-crew-1600.webp 1600w" sizes="(max-width: 960px) 90vw, 45vw" alt="Construction crew running a concrete pour on a multifamily jobsite" decoding="async">
-      <img class="inset reveal-img" src="assets/img/exec-handshake-900.webp" alt="Two executives shaking hands across a conference table" decoding="async">
+      <img class="main reveal-img" src="assets/img/exec-handshake-dark-1600.webp" srcset="assets/img/exec-handshake-dark-800.webp 640w, assets/img/exec-handshake-dark-1600.webp 1280w" sizes="(max-width: 960px) 90vw, 45vw" alt="Two executives shaking hands in a dimly lit room" decoding="async">
+      <img class="inset reveal-img" src="assets/img/handshake-closeup-900.webp" alt="Close-up of a handshake between two professionals" decoding="async">
       <div class="badge reveal"><b>100%</b><span>Focused on the AEC industry</span></div>
     </div>
     <div>
@@ -949,7 +955,7 @@
   <!-- ROLES -->
   <section class="roles" id="roles">
     <div class="roles-media">
-      <img src="assets/img/site-review-1600.webp" srcset="assets/img/site-review-800.webp 800w, assets/img/site-review-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction superintendents reviewing plans on a jobsite" loading="lazy" decoding="async">
+      <img src="assets/img/ironworkers-dusk-1600.webp" srcset="assets/img/ironworkers-dusk-800.webp 800w, assets/img/ironworkers-dusk-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Ironworkers welding structural steel at dusk" loading="lazy" decoding="async">
       <p class="cap">From the field to the executive suite.</p>
     </div>
     <div class="roles-body">
@@ -1061,7 +1067,7 @@
   <!-- CANDIDATES -->
   <section class="candidates dark" id="candidates">
     <div class="cand-media">
-      <img class="reveal-img" src="assets/img/plans-office-1600.webp" srcset="assets/img/plans-office-800.webp 800w, assets/img/plans-office-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 55vw" alt="Construction project managers reviewing drawings in an office" loading="lazy" decoding="async">
+      <img class="reveal-img" src="assets/img/exec-rooftop-1600.webp" srcset="assets/img/exec-rooftop-800.webp 800w, assets/img/exec-rooftop-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 55vw" alt="Construction executive on a rooftop looking out over the city skyline at dusk" loading="lazy" decoding="async">
     </div>
     <div class="cand-body">
       <p class="eyebrow reveal">For Candidates</p>
