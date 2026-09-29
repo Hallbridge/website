@@ -18,7 +18,7 @@
 
 ## Roles placed
 
-- Field: Superintendent, Assistant Superintendent, Project Manager, Project Engineer, Assistant Field Staff
+- Field: Superintendent, Field Operations Manager, Project Manager, Project Engineer, Assistant Field Staff
 - Office and executive: Vice President, Director / Project Executive, Preconstruction Manager, Estimator, Civil Engineer
 
 ## For candidates
