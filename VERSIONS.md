@@ -7,6 +7,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v1-original` | Original cream, text-only design |
 | `v2-redesign` | Construction photography redesign: full-bleed hero, markets, testimonials |
 | `v2.1-clean-hero` | Centered HALLBRIDGE wordmark in hero, smaller headline, monogram-only nav; hero stats, eyebrow and scrolling banner removed |
+| `v2.2-seo-photos` | Centered nav, new section photos, faster loading, FAQ, structured data, robots.txt, sitemap, llms.txt, new share image |
 
 ## Revert the live site to an older version
 
