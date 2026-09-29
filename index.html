@@ -230,7 +230,7 @@
     }
     .hero-content {
       position: relative; z-index: 2; flex: 1; width: 100%; max-width: 1200px; margin: 0 auto;
-      padding: 130px var(--gutter) 0; text-align: center;
+      padding: 130px var(--gutter) 110px; text-align: center;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
     .hero-brand { width: clamp(260px, 54vw, 780px); margin-bottom: clamp(26px, 4vh, 44px); opacity: 0; animation: up 1.2s var(--ease) .1s forwards; }
@@ -253,18 +253,9 @@
     @keyframes rise { to { transform: none; } }
     @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 
-    .hero-stats {
-      position: relative; z-index: 2; margin-top: 56px;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(242,236,226,0.16);
-      opacity: 0; animation: up 1s var(--ease) 1s forwards;
-    }
-    .hero-stat { padding: 28px var(--gutter) 34px; border-right: 1px solid rgba(242,236,226,0.12); }
-    .hero-stat:last-child { border-right: 0; }
-    .hero-stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 44px); color: var(--cream); line-height: 1; white-space: nowrap; }
-    .hero-stat span { display: block; margin-top: 10px; font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--taupe-light); }
     .scroll-cue {
-      position: absolute; right: var(--gutter); bottom: 150px; z-index: 2; writing-mode: vertical-rl;
+      position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 2;
+      flex-direction: column;
       font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(242,236,226,0.6);
       display: flex; align-items: center; gap: 14px;
     }
@@ -533,11 +524,7 @@
       .hero .eyebrow::before, .hero .eyebrow::after { width: 20px; }
       .hero-sub { font-size: 16px; }
       .hero-actions .btn { flex: 1 1 100%; justify-content: center; }
-      .hero-stats { grid-template-columns: 1fr 1fr; margin-top: 48px; }
-      .hero-stat { padding: 20px; border-bottom: 1px solid rgba(242,236,226,0.12); }
-      .hero-stat:nth-child(2) { border-right: 0; }
-      .hero-stat:nth-child(n+3) { border-bottom: 0; }
-      .scroll-cue { display: none; }
+      .scroll-cue { bottom: 18px; }
       .marquee-track span { font-size: 18px; padding: 16px 12px; }
       .about-media { padding: 0 0 22% 8%; }
       .about-media .badge { padding: 18px 20px; max-width: 170px; right: 0; }
@@ -623,12 +610,6 @@
       </div>
     </div>
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>100+</b><span>Leaders placed</span></div>
-      <div class="hero-stat"><b>$20M+</b><span>Project scale</span></div>
-      <div class="hero-stat"><b>95%</b><span>Retention rate</span></div>
-      <div class="hero-stat"><b>10+ yrs</b><span>Industry experience</span></div>
-    </div>
   </section>
 
   <!-- MARQUEE -->
