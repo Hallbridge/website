@@ -1,3 +1,10 @@
 # Static site: no build step, publish the repo root.
 [build]
   publish = "."
+
+# Photos are cached for a year. Never overwrite a photo in place:
+# give a changed photo a new filename so visitors get the new one.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
