@@ -12,6 +12,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v2.4-relationships` | About: two executives walking together (main) + jobsite handshake (inset) |
 | `v2.5-roles-split` | Roles: split image, site at dusk over executives at a high-rise window |
 | `v2.6-subline` | Original logo kept; TALENT PARTNERS brighter and slightly larger on dark backgrounds |
+| `v2.7-crew-deck` | About main photo: project team on a new concrete deck; mobile roles text before photos |
 
 ## Revert the live site to an older version
 
