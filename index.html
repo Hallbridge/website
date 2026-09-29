@@ -421,15 +421,15 @@
 
     /* ── ABOUT ── */
     .about { padding: clamp(96px, 12vw, 170px) var(--gutter); display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(48px, 7vw, 110px); align-items: center; max-width: 1440px; margin: 0 auto; }
-    .about-media { position: relative; padding: 0 0 18% 12%; isolation: isolate; }
+    .about-media { position: relative; padding: 18% 0 0 12%; isolation: isolate; }
     .about-media .main { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
     .about-media .inset {
-      position: absolute; left: 0; bottom: 0; width: 46%; aspect-ratio: 1; object-fit: cover;
+      position: absolute; left: 0; top: 0; width: 46%; aspect-ratio: 1; object-fit: cover;
       border: 10px solid var(--cream); box-shadow: 0 30px 60px -30px rgba(30,23,18,0.5);
     }
-    .about-media .frame { position: absolute; top: -22px; right: -22px; width: 60%; height: 60%; border: 1px solid var(--copper); z-index: -1; }
+    .about-media .frame { position: absolute; bottom: -22px; right: -22px; width: 60%; height: 60%; border: 1px solid var(--copper); z-index: -1; }
     .about-media .badge {
-      position: absolute; right: -10px; bottom: 12%; background: var(--black); color: var(--cream);
+      position: absolute; right: -10px; top: calc(18% + 28px); background: var(--black); color: var(--cream);
       padding: 24px 26px; max-width: 220px; box-shadow: 0 30px 60px -30px rgba(30,23,18,0.6);
     }
     .about-media .badge b { font-family: var(--serif); font-weight: 400; font-size: 44px; color: var(--copper-light); line-height: 1; display: block; }
@@ -694,10 +694,10 @@
       .hero-sub { font-size: 15px; line-height: 1.7; }
       .hero-actions .btn { flex: 1 1 100%; justify-content: center; }
       .scroll-cue { bottom: 18px; }
-      .about-media { padding: 0 0 22% 8%; }
+      .about-media { padding: 22% 0 0 8%; }
       .about-media .badge { padding: 18px 20px; max-width: 170px; right: 0; }
       .about-media .badge b { font-size: 34px; }
-      .about-media .frame { top: -12px; right: -8px; }
+      .about-media .frame { bottom: -12px; right: -8px; }
       .stat { padding: 26px 16px 26px 0; }
       .stat:nth-child(even) { padding-left: 18px; }
       .stat-label { font-size: 10.5px; letter-spacing: 1px; }
