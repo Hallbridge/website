@@ -9,6 +9,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v2.1-clean-hero` | Centered HALLBRIDGE wordmark in hero, smaller headline, monogram-only nav; hero stats, eyebrow and scrolling banner removed |
 | `v2.2-seo-photos` | Centered nav, new section photos, faster loading, FAQ, structured data, robots.txt, sitemap, llms.txt, new share image |
 | `v2.3-moody-graded` | Moody photo set (dark executive handshake, rooftop executive, ironworkers at dusk) and one warm color grade across every photo |
+| `v2.4-relationships` | About: two executives walking together (main) + jobsite handshake (inset) |
 
 ## Revert the live site to an older version
 
