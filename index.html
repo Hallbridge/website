@@ -112,6 +112,22 @@
               "name": "Market Intelligence",
               "description": "Compensation benchmarking, talent mapping and candidate availability analysis for the construction market."
             }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Websites for Builders",
+              "description": "Website design, hosting and maintenance for construction companies, including project portfolios, careers pages and bid forms."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Construction Business Development Research",
+              "description": "Market and target-account research, contact databases and CRM setup for construction companies."
+            }
           }
         ]
       }
@@ -184,6 +200,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Clients typically see qualified, vetted candidates within a few days to a week of starting a search."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Hallbridge build websites for contractors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Hallbridge designs, builds and maintains websites for general contractors, subcontractors and builders, including project portfolios, careers pages and bid forms, with hosting and updates handled for you. Every project starts with a concept mockup of your new site. Email info@hallbridge.co to ask for one."
           }
         },
         {
@@ -514,6 +538,70 @@
     .service li { font-size: 13px; color: var(--taupe-light); padding: 12px 0; border-bottom: 1px solid rgba(242,236,226,0.08); display: flex; gap: 12px; align-items: center; }
     .service li::before { content: ''; width: 5px; height: 5px; background: var(--copper); transform: rotate(45deg); flex: none; }
 
+
+    /* ── CLIENT SERVICES ── */
+    .cs { padding: clamp(96px, 12vw, 160px) var(--gutter) clamp(72px, 8vw, 110px); background: var(--cream); }
+    .cs-inner { max-width: 1440px; margin: 0 auto; }
+    .cs .section-head { padding: 0; }
+    .cs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3vw, 48px); }
+    .pillar { border-top: 1px solid var(--taupe-pale); padding-top: 34px; position: relative; display: flex; flex-direction: column; }
+    .pillar::before { content: ''; position: absolute; top: -1px; left: 0; height: 2px; width: 44px; background: var(--copper); transition: width .7s var(--ease); }
+    .pillar:hover::before { width: 100%; }
+    .pillar-num { font-family: var(--serif); font-size: 15px; color: var(--copper); letter-spacing: 1px; }
+    .pillar h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 2.8vw, 38px); line-height: 1.1; color: var(--black); margin-top: 18px; }
+    .pillar h3 em { font-style: italic; color: var(--copper); }
+    .pillar p { margin-top: 16px; font-size: 15px; line-height: 1.8; color: #5B5048; }
+    .pillar ul { list-style: none; margin-top: 22px; }
+    .pillar li { font-size: 13px; color: var(--taupe); padding: 10px 0; border-bottom: 1px solid var(--taupe-pale); display: flex; gap: 12px; align-items: center; }
+    .pillar li::before { content: ''; width: 5px; height: 5px; background: var(--copper); transform: rotate(45deg); flex: none; }
+    .pillar-link { margin-top: auto; padding-top: 26px; font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--copper); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+    .pillar-link svg { width: 15px; height: 15px; transition: transform .3s var(--ease); }
+    .pillar-link:hover svg { transform: translateX(4px); }
+
+    /* ── WEBSITES FOR BUILDERS ── */
+    .web { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream-dark); border-top: 1px solid var(--taupe-pale); overflow: hidden; }
+    .web-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.08fr; gap: clamp(48px, 6vw, 110px); align-items: center; }
+    .web-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; margin-top: 40px; border-top: 1px solid var(--taupe-pale); }
+    .web-list li { font-size: 14px; line-height: 1.5; color: var(--charcoal); padding: 14px 0; border-bottom: 1px solid var(--taupe-pale); display: flex; gap: 12px; align-items: baseline; }
+    .web-list li::before { content: ''; width: 5px; height: 5px; background: var(--copper); transform: rotate(45deg) translateY(-2px); flex: none; }
+    .web-concept { margin-top: 34px; padding: 22px 26px; border-left: 2px solid var(--copper); background: var(--cream); font-size: 15px; line-height: 1.75; color: #5B5048; max-width: 560px; }
+    .web-concept b { font-weight: 600; color: var(--black); }
+    .web-actions { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-line { border-color: var(--taupe-light); color: var(--black); }
+    .btn-line:hover { background: var(--black); color: var(--cream); border-color: var(--black); }
+
+    /* browser + phone mockup (a generic site, no real company) */
+    .mock { position: relative; padding: 0 clamp(28px, 5vw, 70px) clamp(40px, 6vw, 70px) 0; }
+    .mock-browser { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(30,23,18,0.45), 0 0 0 1px rgba(30,23,18,0.08); }
+    .mock-bar { height: 34px; background: #EEE8DF; display: flex; align-items: center; gap: 7px; padding: 0 14px; }
+    .mock-bar i { width: 9px; height: 9px; border-radius: 50%; background: #D5CBBE; }
+    .mock-bar span { margin-left: 14px; flex: 1; max-width: 260px; height: 20px; border-radius: 5px; background: #F9F6F1; font-size: 10px; color: var(--taupe); display: flex; align-items: center; padding: 0 10px; letter-spacing: .3px; }
+    .mock-hero { position: relative; aspect-ratio: 16 / 8.2; overflow: hidden; background: var(--ink); }
+    .mock-hero img { width: 100%; height: 100%; object-fit: cover; }
+    .mock-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(21,16,12,0.82), rgba(21,16,12,0.15) 75%); }
+    .mock-nav { position: absolute; top: 0; left: 0; right: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; padding: 4% 5%; font-size: clamp(6px, .62vw, 9px); letter-spacing: 1.6px; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+    .mock-nav b { font-family: var(--serif); font-size: clamp(10px, 1.05vw, 15px); font-weight: 600; letter-spacing: 2px; color: #fff; }
+    .mock-nav span { display: flex; gap: 1.6em; }
+    .mock-copy { position: absolute; left: 5%; bottom: 13%; z-index: 1; color: #fff; max-width: 60%; }
+    .mock-copy small { display: block; font-size: clamp(6px, .6vw, 9px); letter-spacing: 2px; text-transform: uppercase; color: var(--copper-light); }
+    .mock-copy strong { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(16px, 2.2vw, 32px); line-height: 1.05; margin-top: .4em; }
+    .mock-copy em { display: inline-block; margin-top: 1.1em; font-style: normal; font-size: clamp(6px, .6vw, 9px); letter-spacing: 1.6px; text-transform: uppercase; background: var(--copper); padding: .9em 1.4em; }
+    .mock-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; background: #fff; }
+    .mock-strip figure { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink); }
+    .mock-strip img { width: 100%; height: 100%; object-fit: cover; }
+    .mock-strip figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18% 8% 7%; font-size: clamp(6px, .58vw, 9px); letter-spacing: 1.4px; text-transform: uppercase; color: #fff; background: linear-gradient(transparent, rgba(21,16,12,0.8)); }
+    .mock-phone { position: absolute; right: 0; bottom: 0; width: clamp(110px, 24%, 170px); aspect-ratio: 9 / 19; background: var(--ink); border-radius: 22px; padding: 6px; box-shadow: 0 30px 60px -20px rgba(30,23,18,0.6); }
+    .mock-screen { width: 100%; height: 100%; border-radius: 17px; overflow: hidden; background: var(--cream); display: flex; flex-direction: column; }
+    .mock-screen .ph-hero { position: relative; flex: 0 0 52%; overflow: hidden; }
+    .mock-screen .ph-hero img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+    .mock-screen .ph-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,16,12,0.15), rgba(21,16,12,0.75)); }
+    .mock-screen .ph-hero b { position: absolute; left: 10%; bottom: 10%; right: 10%; z-index: 1; font-family: var(--serif); font-weight: 400; font-size: clamp(11px, 1.1vw, 15px); line-height: 1.1; color: #fff; }
+    .mock-screen .ph-row { margin: 8% 10% 0; padding-bottom: 7%; border-bottom: 1px solid var(--taupe-pale); font-size: clamp(6px, .55vw, 8px); letter-spacing: 1.2px; text-transform: uppercase; color: var(--taupe); display: flex; justify-content: space-between; }
+    .mock-screen .ph-row i { font-style: normal; color: var(--copper); }
+    .mock-screen .ph-row { white-space: nowrap; gap: 6px; }
+    .mock-tag { position: absolute; left: -10px; bottom: 18%; background: var(--black); color: var(--cream); font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+    .mock-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--copper-light); }
+
     /* ── STATEMENT BAND ── */
     .statement { position: relative; min-height: 78vh; display: flex; align-items: center; color: var(--cream); overflow: hidden; background: var(--ink); }
     .statement .bg { position: absolute; inset: -12% 0; }
@@ -668,18 +756,23 @@
     .foot-bottom a { color: var(--muted); }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1360px) {
+      .nav-links { gap: 26px; }
+    }
     @media (max-width: 1180px) {
-      .nav-links { gap: 24px; }
       .services-grid { grid-template-columns: 1fr; }
       .service { padding: 44px 34px; }
+      .nav-links { gap: 20px; }
       .foot-top { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 1120px) {
+    @media (max-width: 1160px) {
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: block; }
     }
     @media (max-width: 960px) {
-      .about, .record-inner, .faq-inner { grid-template-columns: 1fr; }
+      .about, .record-inner, .faq-inner, .web-inner { grid-template-columns: 1fr; }
+      .cs-grid { grid-template-columns: 1fr; gap: 44px; }
+      .mock { max-width: 640px; }
       .faq-head { position: static; }
       .about-media { max-width: 560px; }
       .roles, .candidates { grid-template-columns: 1fr; }
@@ -722,6 +815,12 @@
       .section-head { margin-bottom: 40px; }
       .roles-cols { grid-template-columns: 1fr; gap: 36px; }
       .roles-cols li { font-size: 21px; }
+      .web-list { grid-template-columns: 1fr; }
+      .web-actions .btn { flex: 1 1 100%; justify-content: center; }
+      .mock { padding: 0 34px 46px 0; }
+      .mock-nav span { display: none; }
+      .mock-tag { left: -6px; font-size: 9px; padding: 10px 12px; }
+      .mock-screen .ph-row { font-size: 5.5px; letter-spacing: .5px; }
       .steps { grid-template-columns: 1fr; row-gap: 44px; }
       .t-tabs { width: 100%; }
       .t-tab { flex: 1; padding: 14px 10px; }
@@ -750,6 +849,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#markets">Markets</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#websites">Websites</a></li>
       <li><a href="#roles">Roles</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#candidates">Candidates</a></li>
@@ -764,6 +864,7 @@
     <a href="#about">About</a>
     <a href="#markets">Markets</a>
     <a href="#services">Services</a>
+    <a href="#websites">Websites</a>
     <a href="#testimonials">Testimonials</a>
     <a href="#candidates">Candidates</a>
     <a href="#contact">Start a Search</a>
@@ -962,6 +1063,92 @@
     </div>
   </section>
 
+  <!-- CLIENT SERVICES -->
+  <section class="cs" id="client-services">
+    <div class="cs-inner">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Client Services</p>
+          <h2 class="title reveal">More than recruiting.<br><em>Built for builders.</em></h2>
+        </div>
+        <p class="body reveal">Recruiting is still the core of what we do. Our clients kept asking for help with the rest: how they show up online, who to go after next and the systems behind it. Now we help with that too, for construction companies only.</p>
+      </div>
+      <div class="cs-grid">
+        <div class="pillar reveal">
+          <div class="pillar-num">01</div>
+          <h3>Hire <em>better</em></h3>
+          <p>Construction recruiting and executive search, from field leadership to the C-suite.</p>
+          <ul><li>PMs, superintendents and estimators</li><li>Preconstruction and executive search</li><li>Talent mapping and comp research</li></ul>
+          <a class="pillar-link" href="#services">Recruiting services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-num">02</div>
+          <h3>Look <em>better</em></h3>
+          <p>Websites that show what you have built, to owners, developers and the people you want to hire.</p>
+          <ul><li>Websites and redesigns</li><li>Project portfolios and careers pages</li><li>Construction photography</li></ul>
+          <a class="pillar-link" href="#websites">Builder websites <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-num">03</div>
+          <h3>Grow</h3>
+          <p>The research and setup behind business development, so your team knows who to call next.</p>
+          <ul><li>Market and target-account research</li><li>Contact databases</li><li>CRM setup</li></ul>
+          <a class="pillar-link" href="mailto:info@hallbridge.co?subject=Client%20Services">Start a conversation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEBSITES FOR BUILDERS -->
+  <section class="web" id="websites">
+    <div class="web-inner">
+      <div class="web-body">
+        <p class="eyebrow reveal">Websites for Builders</p>
+        <h2 class="title reveal">A website that shows<br><em>what you've built.</em></h2>
+        <p class="body reveal">Owners, developers and GCs look at your website before they call you back. So does every superintendent you're trying to hire. We design, build and run websites for contractors that put your projects, your markets and your people up front, and work on every phone.</p>
+        <ul class="web-list reveal">
+          <li>Custom design around your projects</li>
+          <li>Project portfolio and case studies</li>
+          <li>Careers page that helps you hire</li>
+          <li>Bid and contact forms that reach the right person</li>
+          <li>Fast and built for mobile</li>
+          <li>Google Search Console, analytics and clear structure for AI search</li>
+          <li>Hosting, security and backups</li>
+          <li>Text, photo and project updates handled for you</li>
+        </ul>
+        <p class="web-concept reveal"><b>Start with a concept.</b> We mock up what a modern version of your site could look like before you commit to anything.</p>
+        <div class="web-actions reveal">
+          <a href="mailto:info@hallbridge.co?subject=Website%20Concept" class="btn btn-copper">Request a Concept <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+          <a href="#client-services" class="btn btn-line">All Client Services</a>
+        </div>
+      </div>
+      <div class="mock reveal" role="img" aria-label="Example of a contractor website on a laptop and phone, with a project portfolio and careers page">
+        <div class="mock-browser" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i><span>yourcompany.com</span></div>
+          <div class="mock-hero">
+            <img src="assets/img/highrise-cranes-800.webp" srcset="assets/img/highrise-cranes-800.webp 800w, assets/img/highrise-cranes-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="" loading="lazy" decoding="async">
+            <div class="mock-nav"><b>YOUR COMPANY</b><span><span>Projects</span><span>Services</span><span>Careers</span><span>Contact</span></span></div>
+            <div class="mock-copy"><small>General Contractor &middot; Since 1998</small><strong>Built right.<br>Built on schedule.</strong><em>View Projects</em></div>
+          </div>
+          <div class="mock-strip">
+            <figure><img src="assets/img/multifamily-balconies-800.webp" srcset="assets/img/multifamily-balconies-800.webp 800w, assets/img/multifamily-balconies-1600.webp 1600w" sizes="16vw" alt="" loading="lazy" decoding="async"><figcaption>Multifamily</figcaption></figure>
+            <figure><img src="assets/img/mixed-use-corner-800.webp" srcset="assets/img/mixed-use-corner-800.webp 800w, assets/img/mixed-use-corner-1600.webp 1600w" sizes="16vw" alt="" loading="lazy" decoding="async"><figcaption>Mixed-Use</figcaption></figure>
+            <figure><img src="assets/img/student-housing-crane-800.webp" srcset="assets/img/student-housing-crane-800.webp 800w, assets/img/student-housing-crane-1600.webp 1600w" sizes="16vw" alt="" loading="lazy" decoding="async"><figcaption>Student Housing</figcaption></figure>
+          </div>
+        </div>
+        <div class="mock-phone" aria-hidden="true">
+          <div class="mock-screen">
+            <div class="ph-hero"><img src="assets/img/night-build-800.webp" srcset="assets/img/night-build-800.webp 800w, assets/img/night-build-1600.webp 1600w" sizes="170px" alt="" loading="lazy" decoding="async"><b>Join a team that builds.</b></div>
+            <div class="ph-row">Superintendent <i>Apply</i></div>
+            <div class="ph-row">Project Manager <i>Apply</i></div>
+            <div class="ph-row">Estimator <i>Apply</i></div>
+          </div>
+        </div>
+        <div class="mock-tag" aria-hidden="true">Desktop + Mobile</div>
+      </div>
+    </div>
+  </section>
+
   <!-- STATEMENT -->
   <section class="statement" aria-label="Our philosophy">
     <div class="bg" data-parallax><img src="assets/img/ironworker-welding-1600.webp" srcset="assets/img/ironworker-welding-800.webp 800w, assets/img/ironworker-welding-1600.webp 1600w" sizes="100vw" alt="Ironworker welding structural steel at sunset" loading="lazy" decoding="async"></div>
@@ -1143,6 +1330,10 @@
           <p>Clients typically see qualified, vetted candidates within a few days to a week of starting a search.</p>
         </details>
         <details class="faq-item">
+          <summary>Does Hallbridge build websites for contractors?</summary>
+          <p>Yes. Hallbridge designs, builds and maintains websites for general contractors, subcontractors and builders, including project portfolios, careers pages and bid forms, with hosting and updates handled for you. Every project starts with a concept mockup of your new site. Email info@hallbridge.co to ask for one.</p>
+        </details>
+        <details class="faq-item">
           <summary>How do we start a search?</summary>
           <p>Email info@hallbridge.co with the role, the location and your timing. The first conversation is free and confidential.</p>
         </details>
@@ -1178,7 +1369,7 @@
         </div>
         <div>
           <h5>Firm</h5>
-          <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#faq">FAQ</a></li></ul>
+          <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#client-services">Client Services</a></li><li><a href="#websites">Websites for Builders</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#faq">FAQ</a></li></ul>
         </div>
         <div>
           <h5>Markets</h5>
