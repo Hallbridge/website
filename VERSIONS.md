@@ -18,6 +18,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v2.10-align` | Slider heads aligned across field and executive photos; Field Operations Manager added to roles |
 | `v2.11-slider-zoom` | Slider zoomed out: smaller faces, full hard hat, heads still aligned |
 | `v2.12-client-services` | Client Services section (Hire / Look / Grow) and Websites for Builders section with laptop + phone mockup; Websites in nav, FAQ and schema |
+| `v2.13-hero-client-services` | Hero line: construction client services company, in person and online |
 
 ## Revert the live site to an older version
 
