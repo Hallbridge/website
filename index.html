@@ -601,8 +601,9 @@
     .mock-screen .ph-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,16,12,0.7), rgba(21,16,12,0.25) 55%, rgba(21,16,12,0.1)); }
     .mock-screen .ph-hero b { position: absolute; left: 8%; top: 8%; right: 8%; z-index: 1; text-align: center; font-family: var(--serif); font-weight: 400; font-size: clamp(11px, 1.1vw, 15px); line-height: 1.1; color: #fff; }
     .mock-screen .ph-row { margin: 8% 10% 0; padding-bottom: 7%; border-bottom: 1px solid var(--taupe-pale); font-size: clamp(6px, .55vw, 8px); letter-spacing: 1.2px; text-transform: uppercase; color: var(--taupe); display: flex; justify-content: space-between; }
-    .mock-screen .ph-row i { font-style: normal; color: var(--copper); }
-    .mock-screen .ph-row { white-space: nowrap; gap: 6px; }
+    .mock-screen .ph-row span { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: clip; }
+    .mock-screen .ph-row i { font-style: normal; color: var(--copper); flex: 0 0 auto; text-align: right; letter-spacing: .5px; }
+    .mock-screen .ph-row { white-space: nowrap; gap: 6px; align-items: baseline; letter-spacing: .3px; margin-left: 8%; margin-right: 8%; font-size: clamp(5.5px, .5vw, 7.5px); }
     .mock-tag { position: absolute; left: -10px; bottom: 18%; background: var(--black); color: var(--cream); font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
     .mock-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--copper-light); }
 
@@ -824,7 +825,7 @@
       .mock { padding: 0 34px 46px 0; }
       .mock-nav span { display: none; }
       .mock-tag { left: -6px; font-size: 9px; padding: 10px 12px; }
-      .mock-screen .ph-row { font-size: 5.5px; letter-spacing: .5px; }
+      .mock-screen .ph-row { font-size: 5px; letter-spacing: .2px; }
       .steps { grid-template-columns: 1fr; row-gap: 44px; }
       .t-tabs { width: 100%; }
       .t-tab { flex: 1; padding: 14px 10px; }
@@ -1146,9 +1147,9 @@
         <div class="mock-phone" aria-hidden="true">
           <div class="mock-screen">
             <div class="ph-hero"><img src="assets/img/mock-crew-rebar-800.webp" srcset="assets/img/mock-crew-rebar-800.webp 800w, assets/img/mock-crew-rebar-1600.webp 1600w" sizes="170px" alt="" loading="lazy" decoding="async"><b>Join a team that builds.</b></div>
-            <div class="ph-row">Superintendent <i>Apply</i></div>
-            <div class="ph-row">Project Manager <i>Apply</i></div>
-            <div class="ph-row">Estimator <i>Apply</i></div>
+            <div class="ph-row"><span>Superintendent</span><i>Apply</i></div>
+            <div class="ph-row"><span>Project Manager</span><i>Apply</i></div>
+            <div class="ph-row"><span>Estimator</span><i>Apply</i></div>
           </div>
         </div>
         <div class="mock-tag" aria-hidden="true">Desktop + Mobile</div>
