@@ -17,6 +17,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v2.9-field-suite` | Roles: field-to-executive-suite reveal slider (hard hat superintendent / office executive); crew photo retouched and centered; handshake recentered |
 | `v2.10-align` | Slider heads aligned across field and executive photos; Field Operations Manager added to roles |
 | `v2.11-slider-zoom` | Slider zoomed out: smaller faces, full hard hat, heads still aligned |
+| `v3-hallbridge-company` | Rebrand to The Hallbridge Company: stacked THE / HALLBRIDGE / COMPANY hero, new wording, schema, link preview, centered footer, signature wordmark asset |
 
 ## Revert the live site to an older version
 
