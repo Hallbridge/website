@@ -22,6 +22,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v3-hallbridge-company` | Rebrand to The Hallbridge Company: stacked THE / HALLBRIDGE / COMPANY hero, new wording, schema, link preview, centered footer, signature wordmark asset |
 | `v3.1-mockup-photos` | Websites mockup uses new photos (glass towers, brick multifamily, glass midrise, residential tower, crew on rebar) so none repeat sections above |
 | `v3.2-phone-headline` | Phone mockup: "Join a team that builds" centered near the top, clear of the crew |
+| `v3.3-apply-align` | Phone mockup: Apply buttons aligned in one right column, full job titles fit |
 
 ## Revert the live site to an older version
 
