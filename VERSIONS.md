@@ -19,6 +19,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v2.11-slider-zoom` | Slider zoomed out: smaller faces, full hard hat, heads still aligned |
 | `v2.12-client-services` | Client Services section (Hire / Look / Grow) and Websites for Builders section with laptop + phone mockup; Websites in nav, FAQ and schema |
 | `v2.13-hero-client-services` | Hero line: construction client services company, in person and online |
+| `v2.14-intro-3d` | 3D intro on the home page: a copper wireframe bridge assembles beam by beam, camera flies across it to a crane skyline at dawn, HALLBRIDGE lands; opt-in generated sound; once per session, skippable, off for reduced motion |
 
 ## Revert the live site to an older version
 
