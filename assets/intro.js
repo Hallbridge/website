@@ -175,50 +175,62 @@ function run() {
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
 
-  // ---------- sound ----------
-  let ac = null, master = null, soundOn = false;
+  // ---------- sound: generated live, tuned so phone and laptop speakers carry it ----------
+  let ac = null, master = null, soundOn = false, unlockEl = null;
   const btn = root.querySelector('.intro-sound');
+  function unlockIOS() {   // a looping silent <audio> flips iOS into playback mode so Web Audio plays even with the mute switch on
+    if (unlockEl) return;
+    unlockEl = document.createElement('audio'); unlockEl.loop = true; unlockEl.setAttribute('playsinline', '');
+    unlockEl.src = 'data:audio/wav;base64,UklGRmQGAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YUAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'; unlockEl.volume = 0.01;
+    const p = unlockEl.play(); if (p && p.catch) p.catch(() => {});
+  }
+  function loopNoise() { const b = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; const s = ac.createBufferSource(); s.buffer = b; s.loop = true; s.start(); return s; }
   function startAudio() {
     if (ac) return;
     ac = new (window.AudioContext || window.webkitAudioContext)();
     master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
-    const comp = ac.createDynamicsCompressor(); comp.connect(master); master.out = comp;
-    const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 260; lp.Q.value = 5; lp.connect(comp);
-    [55, 55.7, 82.4, 110.3].forEach((f, i) => { const o = ac.createOscillator(); o.type = i === 3 ? 'triangle' : 'sawtooth'; o.frequency.value = f; const g = ac.createGain(); g.gain.value = i === 3 ? 0.03 : 0.045; o.connect(g); g.connect(lp); o.start(); });
-    const lfo = ac.createOscillator(); lfo.frequency.value = 0.07; const lg = ac.createGain(); lg.gain.value = 160; lfo.connect(lg); lg.connect(lp.frequency); lfo.start();
+    const comp = ac.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 4; comp.connect(master); master.out = comp;
+    // jobsite wind that slowly breathes
+    const wind = loopNoise(), wf = ac.createBiquadFilter(); wf.type = 'bandpass'; wf.frequency.value = 520; wf.Q.value = 0.6;
+    const wg = ac.createGain(); wg.gain.value = 0.05; wind.connect(wf); wf.connect(wg); wg.connect(comp);
+    const wl = ac.createOscillator(); wl.frequency.value = 0.11; const wlg = ac.createGain(); wlg.gain.value = 260; wl.connect(wlg); wlg.connect(wf.frequency); wl.start();
+    // warm pad in the mid range
+    [220, 220.9, 330, 440.6].forEach((f, i) => { const o = ac.createOscillator(); o.type = i < 2 ? 'sawtooth' : 'triangle'; o.frequency.value = f; const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
+      const g = ac.createGain(); g.gain.value = i < 2 ? 0.03 : 0.022; o.connect(lp); lp.connect(g); g.connect(comp); o.start(); });
   }
   const out = () => master.out;
   function noise(dur) { const b = ac.createBuffer(1, Math.ceil(ac.sampleRate * dur), ac.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; const s = ac.createBufferSource(); s.buffer = b; return s; }
   let lastClank = 0;
-  function clank(strength) {
+  function clank(strength) {   // a steel beam seating: bright strike, ringing body
     if (!ac || !soundOn) return;
-    const t = ac.currentTime; if (t - lastClank < 0.045) return; lastClank = t;
-    const s = noise(0.2), bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1200 + Math.random() * 1800; bp.Q.value = 10;
-    const g = ac.createGain(); g.gain.setValueAtTime(0.28 * strength, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
-    s.connect(bp); bp.connect(g); g.connect(out()); s.start(t);
-    [1, 2.76].forEach((r) => { const o = ac.createOscillator(); o.type = 'sine'; o.frequency.value = (320 + Math.random() * 200) * r; const og = ac.createGain();
-      og.gain.setValueAtTime(0.09 * strength / r, t); og.gain.exponentialRampToValueAtTime(0.0008, t + 0.7); o.connect(og); og.connect(out()); o.start(t); o.stop(t + 0.72); });
+    const t = ac.currentTime; if (t - lastClank < 0.05) return; lastClank = t;
+    const s = noise(0.12), hp = ac.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 1500;
+    const g = ac.createGain(); g.gain.setValueAtTime(0.5 * strength, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+    s.connect(hp); hp.connect(g); g.connect(out()); s.start(t);
+    const base = 480 + Math.random() * 260;
+    [1, 1.5, 2.37, 3.1].forEach((r, i) => { const o = ac.createOscillator(); o.type = 'sine'; o.frequency.value = base * r; const og = ac.createGain();
+      og.gain.setValueAtTime((0.22 / (i + 1)) * strength, t); og.gain.exponentialRampToValueAtTime(0.0005, t + 0.9 - i * 0.12); o.connect(og); og.connect(out()); o.start(t); o.stop(t + 1); });
   }
   function whoosh(at, dur) {
     if (!ac || !soundOn) return;
-    const t = ac.currentTime + (at || 0), s = noise(dur + 0.2), f = ac.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.4;
-    f.frequency.setValueAtTime(180, t); f.frequency.exponentialRampToValueAtTime(2600, t + dur * 0.75);
-    const g = ac.createGain(); g.gain.setValueAtTime(0.001, t); g.gain.exponentialRampToValueAtTime(0.45, t + dur * 0.55); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    const t = ac.currentTime + (at || 0), s = noise(dur + 0.2), f = ac.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.2;
+    f.frequency.setValueAtTime(300, t); f.frequency.exponentialRampToValueAtTime(3200, t + dur * 0.75);
+    const g = ac.createGain(); g.gain.setValueAtTime(0.001, t); g.gain.exponentialRampToValueAtTime(0.6, t + dur * 0.55); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
     s.connect(f); f.connect(g); g.connect(out()); s.start(t);
   }
-  function swell() {
-    if (!ac || !soundOn) return;
-    const t = ac.currentTime;
-    [110, 164.8, 220, 277.2].forEach((f) => { const o = ac.createOscillator(); o.type = 'sine'; o.frequency.value = f; const g = ac.createGain();
-      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.07, t + 1.2); g.gain.exponentialRampToValueAtTime(0.0001, t + 4.5); o.connect(g); g.connect(out()); o.start(t); o.stop(t + 4.6); });
-    const o = ac.createOscillator(); o.frequency.setValueAtTime(80, t); o.frequency.exponentialRampToValueAtTime(30, t + 1.4);
-    const g = ac.createGain(); g.gain.setValueAtTime(0.6, t); g.gain.exponentialRampToValueAtTime(0.001, t + 1.8); o.connect(g); g.connect(out()); o.start(t); o.stop(t + 1.9);
+  function swell() {   // the name lands: chord bloom plus a mid-range impact
+    if (!ac || !soundOn) return; const t = ac.currentTime;
+    [220, 277.2, 329.6, 440, 554.4].forEach((f, i) => { const o = ac.createOscillator(); o.type = 'triangle'; o.frequency.value = f; const g = ac.createGain();
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.09 - i * 0.01, t + 0.9); g.gain.exponentialRampToValueAtTime(0.0001, t + 4.5); o.connect(g); g.connect(out()); o.start(t); o.stop(t + 4.6); });
+    const o = ac.createOscillator(); o.frequency.setValueAtTime(240, t); o.frequency.exponentialRampToValueAtTime(70, t + 0.7);
+    const g = ac.createGain(); g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.001, t + 1.2); o.connect(g); g.connect(out()); o.start(t); o.stop(t + 1.3);
+    const s = noise(0.5), bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900; bp.Q.value = 0.8;
+    const sg = ac.createGain(); sg.gain.setValueAtTime(0.35, t); sg.gain.exponentialRampToValueAtTime(0.001, t + 0.45); s.connect(bp); bp.connect(sg); sg.connect(out()); s.start(t);
   }
+  function ramp(v, d) { master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(master.gain.value, ac.currentTime); master.gain.linearRampToValueAtTime(v, ac.currentTime + d); }
   function setSound(on) {
-    soundOn = on;
-    btn.classList.toggle('on', on); btn.querySelector('span').textContent = on ? 'Sound off' : 'Sound on';
-    if (on) { startAudio(); ac.resume(); master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(master.gain.value, ac.currentTime); master.gain.linearRampToValueAtTime(0.85, ac.currentTime + 0.8); }
-    else if (ac) { master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(master.gain.value, ac.currentTime); master.gain.linearRampToValueAtTime(0, ac.currentTime + 0.4); }
+    soundOn = on; btn.classList.toggle('on', on); btn.querySelector('span').textContent = on ? 'Sound off' : 'Sound on';
+    if (on) { unlockIOS(); startAudio(); ac.resume(); ramp(1.0, 0.6); } else if (ac) ramp(0, 0.4);
   }
   btn.addEventListener('click', (e) => { e.stopPropagation(); setSound(!soundOn); });
 
