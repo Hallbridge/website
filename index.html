@@ -844,8 +844,45 @@
       .hero h1 .line span { transform: none; }
     }
   </style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&sessionStorage.getItem('hb-intro')!=='1')document.documentElement.classList.add('intro-on')}catch(e){}
+// Safety net: if the 3D intro has not started within 4s (old browser, blocked script), show the site.
+setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.remove('intro-on');var i=document.getElementById('intro');if(i)i.remove();}},4000);</script>
+<style>
+#intro{display:none}
+.intro-on #intro{display:block;position:fixed;inset:0;z-index:9999;background:#15100C;transition:opacity 1.1s ease,visibility 1.1s}
+.intro-on body{overflow:hidden}
+#intro.out{opacity:0;visibility:hidden}
+#intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#intro .intro-mark{position:absolute;left:50%;top:50%;width:min(72vw,620px);transform:translate(-50%,-40%) scale(.96);opacity:0;filter:blur(8px);transition:opacity 1.2s ease,transform 1.6s cubic-bezier(.16,1,.3,1),filter 1.2s ease;pointer-events:none;text-align:center}
+#intro .intro-mark.in{opacity:1;transform:translate(-50%,-50%) scale(1);filter:blur(0)}
+#intro .intro-mark img{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 30px rgba(0,0,0,.6))}
+#intro .intro-mark{display:flex;flex-direction:column;align-items:center}
+#intro .intro-mark::before{content:'';position:absolute;left:50%;top:50%;width:170%;height:190%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(15,11,8,.92) 0%,rgba(15,11,8,.7) 40%,rgba(15,11,8,0) 70%);z-index:-1}
+#intro .intro-mark img{position:relative}
+#intro .intro-mark .lk-the,#intro .intro-mark .lk-co{position:relative;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;text-transform:uppercase;color:#EFCDA6;line-height:1;letter-spacing:.6em;margin-right:-.6em;text-shadow:0 2px 14px rgba(0,0,0,.9),0 0 2px rgba(0,0,0,.8)}
+#intro .intro-mark .lk-the{font-size:clamp(19px,2.9vw,40px);margin-bottom:clamp(10px,1.8vw,26px)}
+#intro .intro-mark .lk-co{font-size:clamp(21px,3.2vw,46px);margin-top:clamp(11px,2.1vw,30px)}
+#intro .intro-ui{position:absolute;right:22px;bottom:20px;display:flex;gap:10px}
+#intro button{font:500 11px/1 Inter,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#E2D9CF;background:rgba(21,16,12,.55);border:1px solid rgba(211,154,94,.35);padding:11px 14px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;backdrop-filter:blur(6px)}
+#intro button:hover{border-color:#D39A5E;color:#fff}
+#intro .intro-sound i{display:inline-flex;gap:2px;align-items:flex-end;height:10px}
+#intro .intro-sound i b{width:2px;background:#D39A5E;height:3px;border-radius:1px}
+#intro .intro-sound.on i b{animation:eq .9s ease-in-out infinite}
+#intro .intro-sound.on i b:nth-child(2){animation-delay:.2s}#intro .intro-sound.on i b:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:3px}50%{height:10px}}
+</style>
 </head>
 <body>
+  <div id="intro" aria-hidden="true">
+    <canvas></canvas>
+    <div class="intro-mark" role="img" aria-label="The Hallbridge Company"><span class="lk-the">The</span><img src="assets/hallbridge-word-light.svg" alt=""><span class="lk-co">Company</span></div>
+    <div class="intro-ui">
+      <button class="intro-sound" type="button"><i><b></b><b></b><b></b></i><span>Sound on</span></button>
+      <button class="intro-skip" type="button">Skip</button>
+    </div>
+  </div>
+  <script type="module" src="assets/intro.js"></script>
 
   <!-- NAV -->
   <nav id="nav" aria-label="Main navigation">
@@ -895,7 +932,7 @@
         <span class="line"><span>Connecting the people</span></span>
         <span class="line"><span><em>who build America.</em></span></span>
       </h1>
-      <p class="hero-sub">The Hallbridge Company is a construction client services company. We help builders grow, in person and online. From executive search to your website, we've got you covered.</p>
+      <p class="hero-sub">The Hallbridge Company is a construction client services company. We help builders grow, in person and online. From recruiting and executive search to your website, we've got you covered.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-copper">Start a Search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         <a href="#candidates" class="btn btn-ghost">I'm a Candidate</a>
