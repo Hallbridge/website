@@ -37,3 +37,7 @@ From the repo:
     git push
 
 Photos in assets/img are from Unsplash (free for commercial use, no attribution required).
+| v3.5-intro-options (preview only) | 2026-10-26 | Sunrise rebuilt to match the hero photo (sky/sun/cloud ride with the camera so towers can't hide it); five intro variants behind ?v=1..5, options page /intro-options.html; deployed to lambent-toffee-c7d0ac only, live site unchanged (v3.4 backed up to ~/Developer/_backups/hallbridge-site/hallbridge-site-live-v3.4-intro-20261026.zip and assets/intro-v34-current.js) |
+| v3.5b-intro-smooth (preview only) | 2026-10-26 | Options 1, 2, 3, 5: smoothed the camera rise at the end of the deck (no bump). All options: towers in the sun's column are capped so the sun is at least half visible at the end. Preview lambent-toffee-c7d0ac only; live unchanged. |
+| v3.5c-intro-city (preview only) | 2026-10-26 | Option 3 starts centered on the deck (no opening pan). City laid out in staggered rows with jitter instead of random placement, so the skyline has no open gaps. Preview only; live unchanged. |
+| v3.6-intro-bridge | 2026-10-26 | LIVE. Intro option 3 is the default: starts centered on the finished bridge, towers rise around the cranes as the sun comes up (always at least half visible over a rooftop), smooth camera rise at the end of the deck, staggered city layout. Other options still reachable with ?intro=1&v=1..5. Previous intro: git 2458e3c / assets/intro-v34-current.js (untracked) / _backups zip. |

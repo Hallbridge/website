@@ -1,7 +1,9 @@
-// Hallbridge 3D intro. A suspension bridge assembles beam by beam on a night jobsite, the camera flies
-// across it toward a city skyline full of tower cranes at dawn, the wordmark lands, then the intro fades
-// into the site. Sound is opt-in ("Sound on"), generated live with Web Audio (no audio files).
+// Hallbridge 3D intro. A suspension bridge on a night jobsite, the camera flies across it toward a city skyline
+// full of tower cranes while the sun rises behind the towers (matched to the home page photo), the wordmark lands,
+// then the intro fades into the site. Sound is opt-in ("Sound on"), generated live with Web Audio (no audio files).
 // Shown once per browser session; skipped for reduced-motion visitors. Click, key, scroll or Skip ends it.
+// Variants (preview only): ?v=1 current pacing, ?v=2 quick start, ?v=3 start on the bridge while the city rises,
+// ?v=4 dawn aerial over the finished bridge, ?v=5 fast cut. No ?v = variant 3 (the live intro since 2026-10-26).
 import * as THREE from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -11,14 +13,46 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 const root = document.getElementById('intro');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const force = /[?&]intro=1/.test(location.search);
+const VN = Math.min(5, Math.max(1, parseInt((location.search.match(/[?&]v=(\d)/) || [])[1] || '3', 10)));
 let seen = false;
 try { seen = sessionStorage.getItem('hb-intro') === '1'; } catch (e) {}
+
+// ---------- variant settings ----------
+const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
+const deckY = 7;
+const VARIANTS = {
+  // 1: the current intro. Bridge assembles beam by beam, flythrough, sunrise over the skyline, name lands.
+  1: { dur: 10.2, speed: 1, part: 0.75, prebuilt: false, cityGrow: false, sunAt: 5.6, sunDur: 3.6, cityAt: 4.2, markAt: 7.1, whoosh: [3.9, 5.6],
+       path: [V3(70, 6, 120), V3(38, 12, 82), V3(10, 13, 52), V3(0, deckY + 5, 26), V3(0, deckY + 6, -18), V3(0, deckY + 8, -44), V3(0, 19, -66), V3(0, 27, -84)],
+       look: [V3(0, 14, 0), V3(0, 15, -20), V3(0, 16, -50), V3(0, 22, -140), V3(0, 32, -300), V3(0, 48, -520), V3(0, 56, -640)] },
+  // 2: same film, quicker start. The build runs at almost double speed and the camera gets moving sooner.
+  2: { dur: 7.4, speed: 0.55, part: 0.5, prebuilt: false, cityGrow: false, sunAt: 3.4, sunDur: 3.2, cityAt: 2.4, markAt: 4.9, whoosh: [2.2, 3.5],
+       path: [V3(60, 7, 110), V3(30, 12, 74), V3(6, 13, 44), V3(0, deckY + 5, 20), V3(0, deckY + 6, -18), V3(0, deckY + 8, -44), V3(0, 19, -66), V3(0, 27, -84)],
+       look: [V3(0, 14, 0), V3(0, 15, -24), V3(0, 16, -60), V3(0, 22, -150), V3(0, 32, -300), V3(0, 48, -520), V3(0, 56, -640)] },
+  // 3: start on the finished bridge. Driving the deck toward the city while the towers rise out of the ground
+  // around the cranes and the sun comes up behind them.
+  3: { dur: 7.6, speed: 1, part: 0.75, prebuilt: true, cityGrow: true, sunAt: 2.6, sunDur: 3.6, cityAt: 0.8, markAt: 5.1, whoosh: [0.3, 2.8],
+       path: [V3(0, deckY + 4, 64), V3(0, deckY + 5, 20), V3(0, deckY + 6, -18), V3(0, deckY + 8, -44), V3(0, 19, -66), V3(0, 27, -84)],
+       look: [V3(0, 14, -30), V3(0, 16, -80), V3(0, 22, -160), V3(0, 32, -300), V3(0, 48, -520), V3(0, 56, -640)] },
+  // 4: dawn aerial. Start high and wide over the water, sweep down across the finished bridge as the sun rises over
+  // a city that is lit and finishing (towers fill in from wireframe to solid).
+  4: { dur: 8.2, speed: 1, part: 0.75, prebuilt: true, cityGrow: 'finish', sunAt: 1.6, sunDur: 4.6, cityAt: 0.2, markAt: 5.6, whoosh: [0.6, 3.2], aerial: true,
+       path: [V3(120, 70, 150), V3(60, 46, 90), V3(14, 26, 30), V3(0, deckY + 8, -28), V3(0, 16, -56), V3(0, 27, -84)],
+       look: [V3(0, 12, 0), V3(0, 16, -60), V3(0, 24, -200), V3(0, 46, -500), V3(0, 56, -640)] },
+  // 5: fast cut. Towers already standing, the deck snaps in under the camera as it crosses at speed, straight to the
+  // skyline, sunrise and the name. About six seconds.
+  5: { dur: 6.0, speed: 0.28, part: 0.35, prebuilt: 'towers', cityGrow: false, sunAt: 2.2, sunDur: 2.8, cityAt: 1.2, markAt: 4.0, whoosh: [0.4, 2.0],
+       path: [V3(14, 11, 70), V3(2, deckY + 5, 26), V3(0, deckY + 6, -18), V3(0, deckY + 8, -44), V3(0, 19, -66), V3(0, 27, -84)],
+       look: [V3(0, 14, -10), V3(0, 16, -60), V3(0, 24, -180), V3(0, 48, -520), V3(0, 56, -640)] },
+};
+
 if (!root || ((reduce || seen) && !force)) { if (root) root.remove(); document.documentElement.classList.remove('intro-on'); }
 else { document.documentElement.classList.add('intro-on'); run(); }
 
 function run() {
   window.__hbIntro = true;
   try { sessionStorage.setItem('hb-intro', '1'); } catch (e) {}
+  const V = VARIANTS[VN];
   const bail = () => { document.documentElement.classList.remove('intro-on'); root.remove(); };
   if (!window.WebGLRenderingContext) return bail();
   const COPPER = 0xB87333, COPPER_L = 0xD39A5E, INK = 0x0f0b08;
@@ -33,69 +67,107 @@ function run() {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(INK);
   scene.fog = new THREE.FogExp2(0x1a120c, 0.0085);
-  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 900);
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1400);
 
   scene.add(new THREE.HemisphereLight(0x8a6a50, 0x0a0705, 1.1));
   const key = new THREE.DirectionalLight(0xffb27a, 2.4); key.position.set(-30, 40, -120); scene.add(key);
   const fill = new THREE.PointLight(COPPER_L, 18, 140, 1.6); fill.position.set(0, 34, 30); scene.add(fill);
+  // Sunrise light: warms the whole scene from behind the city as the sun comes up
+  const sunLight = new THREE.DirectionalLight(0xff9a4a, 0); sunLight.position.set(20, 60, -400); scene.add(sunLight);
 
-  // Dawn sky glow behind the city
+  // ---------- dawn backdrop, matched to the home page photo ----------
+  // Sky, sun, haze and cloud band ride with the camera (position only), far away, so the towers never hide them.
+  const backdrop = new THREE.Group(); scene.add(backdrop);
+  const canvasTex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d')); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; };
   const sky = (() => {
-    const c = document.createElement('canvas'); c.width = 16; c.height = 512; const g = c.getContext('2d');
-    const gr = g.createLinearGradient(0, 0, 0, 512);
-    gr.addColorStop(0, '#0f0b08'); gr.addColorStop(0.45, '#2a1a10'); gr.addColorStop(0.7, '#7a3f18'); gr.addColorStop(0.82, '#e08a3c'); gr.addColorStop(0.9, '#3a2214'); gr.addColorStop(1, '#0f0b08');
-    g.fillStyle = gr; g.fillRect(0, 0, 16, 512);
-    const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(1400, 420), new THREE.MeshBasicMaterial({ map: tex, fog: false, transparent: true, opacity: 0 }));
-    m.position.set(0, 120, -520); scene.add(m); return m;
+    const tex = canvasTex(16, 512, (g) => {
+      const gr = g.createLinearGradient(0, 0, 0, 512);
+      gr.addColorStop(0, '#0f0b08'); gr.addColorStop(0.42, '#1c110b'); gr.addColorStop(0.62, '#4a2211'); gr.addColorStop(0.74, '#8a3a14'); gr.addColorStop(0.8, '#d4601e'); gr.addColorStop(0.845, '#f0893a'); gr.addColorStop(0.9, '#7a3614'); gr.addColorStop(1, '#0f0b08');
+      g.fillStyle = gr; g.fillRect(0, 0, 16, 512);
+    });
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(2600, 1100), new THREE.MeshBasicMaterial({ map: tex, fog: false, transparent: true, opacity: 0, depthWrite: false }));
+    m.position.set(0, 330, -1000); backdrop.add(m); return m;
   })();
-  const sun = new THREE.Mesh(new THREE.CircleGeometry(26, 48), new THREE.MeshBasicMaterial({ color: 0xe8893a, fog: false, transparent: true, opacity: 0 }));
-  sun.position.set(40, 34, -510); scene.add(sun);
+  const sun = (() => {   // orange disc with a soft rim
+    const tex = canvasTex(256, 256, (g) => {
+      const r = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+      r.addColorStop(0, '#ffd98a'); r.addColorStop(0.3, '#ffb24a'); r.addColorStop(0.62, '#ff8426'); r.addColorStop(0.84, '#ff5f12'); r.addColorStop(0.9, 'rgba(255,80,10,0.55)'); r.addColorStop(1, 'rgba(255,70,10,0)');
+      g.fillStyle = r; g.fillRect(0, 0, 256, 256);
+    });
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(118, 118), new THREE.MeshBasicMaterial({ map: tex, fog: false, transparent: true, opacity: 0, depthWrite: false }));
+    m.position.set(70, 240, -960); backdrop.add(m); return m;
+  })();
+  const glow = (() => {   // wide additive haze around the sun
+    const tex = canvasTex(256, 256, (g) => {
+      const r = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+      r.addColorStop(0, 'rgba(255,130,45,0.42)'); r.addColorStop(0.35, 'rgba(255,100,30,0.18)'); r.addColorStop(1, 'rgba(255,80,20,0)');
+      g.fillStyle = r; g.fillRect(0, 0, 256, 256);
+    });
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(620, 420), new THREE.MeshBasicMaterial({ map: tex, fog: false, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
+    m.position.set(70, 250, -955); backdrop.add(m); return m;
+  })();
+  const cloud = (() => {   // dark cloud bank that the sun climbs out from under, like the photo
+    const tex = canvasTex(512, 128, (g) => {
+      g.clearRect(0, 0, 512, 128);
+      const gr = g.createLinearGradient(0, 0, 0, 128);
+      gr.addColorStop(0, 'rgba(24,14,9,0)'); gr.addColorStop(0.3, 'rgba(24,14,9,0.96)'); gr.addColorStop(0.72, 'rgba(30,16,10,0.96)'); gr.addColorStop(1, 'rgba(30,16,10,0)');
+      g.fillStyle = gr; g.fillRect(0, 0, 512, 128);
+      g.globalCompositeOperation = 'destination-out';
+      for (let i = 0; i < 26; i++) { const x = Math.random() * 512, y = 70 + Math.random() * 60, rr = 14 + Math.random() * 34; const rg = g.createRadialGradient(x, y, 0, x, y, rr); rg.addColorStop(0, 'rgba(0,0,0,0.9)'); rg.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = rg; g.fillRect(x - rr, y - rr, rr * 2, rr * 2); }
+    });
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(2400, 300), new THREE.MeshBasicMaterial({ map: tex, fog: false, transparent: true, opacity: 0, depthWrite: false }));
+    m.position.set(0, 345, -940); backdrop.add(m); return m;
+  })();
 
   // Blueprint ground grid + water sheen under the bridge
   const grid = new THREE.GridHelper(900, 300, COPPER, 0x2a1d14);
   grid.material.transparent = true; grid.material.opacity = 0; scene.add(grid);
-  const water = new THREE.Mesh(new THREE.PlaneGeometry(900, 900), new THREE.MeshStandardMaterial({ color: 0x0a0806, metalness: 0.6, roughness: 0.78 }));
+  const water = new THREE.Mesh(new THREE.PlaneGeometry(1200, 1200), new THREE.MeshStandardMaterial({ color: 0x0a0806, metalness: 0.6, roughness: 0.78 }));
   water.rotation.x = -Math.PI / 2; water.position.y = -0.05; scene.add(water);
 
   // ---------- the bridge ----------
   const parts = [];
-  function part(geo, x, y, z, delay, from, solid = true) {
+  function part(geo, x, y, z, delay, from, solid = true, kind = 'deck') {
     const grp = new THREE.Group();
     let m = null;
     if (solid) { m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0x2b211a, metalness: 0.45, roughness: 0.68, transparent: true, opacity: 0 })); grp.add(m); }
     const e = new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({ color: 0xffb070, transparent: true, opacity: 0 }));
     grp.add(e); grp.position.set(x, y, z); scene.add(grp);
-    parts.push({ grp, m, e, to: new THREE.Vector3(x, y, z), from: from || new THREE.Vector3(x, y - 16, z), delay });
+    parts.push({ grp, m, e, to: new THREE.Vector3(x, y, z), from: from || new THREE.Vector3(x, y - 16, z), delay: delay * V.speed, kind });
     return grp;
   }
   const box = (w, h, d) => new THREE.BoxGeometry(w, h, d);
-  const L = 150, deckY = 7, TZ = [-38, 38], TH = 32;
+  const L = 150, TZ = [-38, 38], TH = 32;
   TZ.forEach((z, i) => {
     [-6, 6].forEach((x, j) => {
-      part(box(2.2, deckY + 2, 2.2), x, (deckY + 2) / 2 - 1, z, 0.15 + i * 0.2 + j * 0.06);
-      part(box(1.4, TH, 1.4), x, deckY + TH / 2, z, 0.7 + i * 0.2 + j * 0.06, new THREE.Vector3(x, deckY + TH / 2 + 40, z));
+      part(box(2.2, deckY + 2, 2.2), x, (deckY + 2) / 2 - 1, z, 0.15 + i * 0.2 + j * 0.06, null, true, 'tower');
+      part(box(1.4, TH, 1.4), x, deckY + TH / 2, z, 0.7 + i * 0.2 + j * 0.06, new THREE.Vector3(x, deckY + TH / 2 + 40, z), true, 'tower');
     });
-    [TH - 0.6, TH * 0.62, TH * 0.28].forEach((h, k) => part(box(13.4, 1.1, 1.1), 0, deckY + h, z, 1.2 + i * 0.2 + k * 0.1, new THREE.Vector3(0, deckY + h + 45, z)));
-    // X bracing between the top two crossbeams
+    [TH - 0.6, TH * 0.62, TH * 0.28].forEach((h, k) => part(box(13.4, 1.1, 1.1), 0, deckY + h, z, 1.2 + i * 0.2 + k * 0.1, new THREE.Vector3(0, deckY + h + 45, z), true, 'tower'));
     const bh = TH * 0.34, bl = Math.hypot(12, bh);
-    [1, -1].forEach((s) => { const g = part(box(bl, 0.35, 0.35), 0, deckY + TH * 0.8, z, 1.5 + i * 0.2, new THREE.Vector3(0, deckY + TH * 0.8 + 45, z), false); g.rotation.z = s * Math.atan2(bh, 12); });
+    [1, -1].forEach((s) => { const g = part(box(bl, 0.35, 0.35), 0, deckY + TH * 0.8, z, 1.5 + i * 0.2, new THREE.Vector3(0, deckY + TH * 0.8 + 45, z), false, 'tower'); g.rotation.z = s * Math.atan2(bh, 12); });
   });
   const segs = small ? 22 : 30, segL = L / segs;
   for (let s = 0; s < segs; s++) {
     const z = -L / 2 + (s + 0.5) * segL;
     const side = s % 2 ? 1 : -1;
     part(box(12, 0.8, segL - 0.3), 0, deckY, z, 1.0 + (segs - s) * 0.055, new THREE.Vector3(side * 22, deckY + 10, z));
-    // truss under the deck: a V per segment on both sides
     [-6, 6].forEach((x) => {
       const g = part(box(0.25, Math.hypot(2.4, segL / 2), 0.25), x, deckY - 1.6, z, 1.3 + (segs - s) * 0.055, new THREE.Vector3(x, deckY - 20, z), false);
       g.rotation.x = (s % 2 ? 1 : -1) * Math.atan2(segL / 2, 2.4);
     });
   }
   [-6, 6].forEach((x) => part(box(0.5, 0.5, L), x, deckY - 3, 0, 2.6, new THREE.Vector3(x, deckY - 22, 0), false));
+  // Pre-built variants: place the finished parts before the first frame
+  parts.forEach((q) => {
+    const pre = V.prebuilt === true || (V.prebuilt === 'towers' && q.kind === 'tower');
+    if (!pre) return;
+    q.grp.position.copy(q.to); q.e.material.opacity = 0.55; if (q.m) q.m.material.opacity = 0.96; q.clanked = true; q.done = true;
+  });
 
   // Suspension cables (drawn on) + hangers
   const cables = [];
+  const cableAt = V.prebuilt === true ? -9 : 2.8 * V.speed, hangerAt = V.prebuilt === true ? -9 : 3.3 * V.speed, lampAt = V.prebuilt === true ? -9 : 3.6 * V.speed;
   [-6, 6].forEach((x) => {
     const pts = [];
     const top = deckY + TH - 0.6;
@@ -121,15 +193,32 @@ function run() {
   });
 
   // ---------- skyline with tower cranes ----------
+  // Towers are kept under the sun line and a little further back so the sunrise reads like the photo.
   const city = new THREE.Group(); scene.add(city);
-  const bMat = new THREE.MeshStandardMaterial({ color: 0x120d0a, metalness: 0.3, roughness: 0.8 });
-  const winPos = [];
-  for (let i = 0; i < (small ? 70 : 120); i++) {
-    const w = 8 + Math.random() * 16, d = 8 + Math.random() * 14, h = 18 + Math.pow(Math.random(), 1.8) * 110;
-    const x = (Math.random() - 0.5) * 520, z = -200 - Math.random() * 180;
-    if (Math.abs(x) < 14 && z > -230) continue;
-    const b = new THREE.Mesh(box(w, h, d), bMat); b.position.set(x, h / 2, z); city.add(b);
+  const bMat = new THREE.MeshStandardMaterial({ color: 0x120d0a, metalness: 0.3, roughness: 0.8, transparent: true, opacity: 1 });
+  // Keep the sun at least half visible from the final camera: any tower standing in the sun's column is capped
+  // at the sun's centre line, and the tallest of them is raised to just under it so the sun peeks over a rooftop.
+  const camEnd = V.path[V.path.length - 1], SUN = { x: 70, y: 200, z: -960, r: 65 };
+  const inSunColumn = (x, w, z) => { const f = (z - camEnd.z) / SUN.z; const sx = camEnd.x + SUN.x * f, half = SUN.r * f + w / 2; return Math.abs(x - sx) < half; };
+  const sunLine = (z) => camEnd.y + SUN.y * (z - camEnd.z) / SUN.z;
+  const winPos = [], buildings = [], inSun = [];
+  // Staggered rows (each row offset by half a column, with jitter) so the skyline is full with no open gaps.
+  const lots = [], colW = small ? 34 : 24;
+  for (let r = 0; r < 5; r++) for (let x0 = -300 + (r % 2) * colW / 2; x0 <= 300; x0 += colW) lots.push([x0 + (Math.random() - 0.5) * 8, -232 - r * 42 + (Math.random() - 0.5) * 16]);
+  for (const [x, z] of lots) {
+    const w = 10 + Math.random() * 14, d = 8 + Math.random() * 14; let h = 16 + Math.pow(Math.random(), 1.4) * 78;
+    if (Math.abs(x) < 14 && z > -250) continue;
+    if (inSunColumn(x, w, z)) { h = Math.min(h, sunLine(z) - 2); inSun.push({ i: buildings.length, h, z }); }
+    const b = new THREE.Mesh(box(w, h, d), bMat.clone()); b.position.set(x, h / 2, z); city.add(b);
+    const e = new THREE.LineSegments(new THREE.EdgesGeometry(box(w, h, d)), new THREE.LineBasicMaterial({ color: COPPER_L, transparent: true, opacity: 0 }));
+    e.position.copy(b.position); city.add(e);
+    buildings.push({ b, e, h, w, d, seed: Math.random() });
     for (let k = 0; k < h / 5; k++) if (Math.random() < 0.35) winPos.push(x + (Math.random() - 0.5) * w, 3 + Math.random() * (h - 4), z + d / 2 + 0.1);
+  }
+  if (inSun.length) {   // make sure one rooftop actually reaches up to the sun
+    const t = inSun.reduce((a, q) => (q.h / sunLine(q.z) > a.h / sunLine(a.z) ? q : a));
+    const q = buildings[t.i], want = sunLine(t.z) - 4;
+    if (q.h < want * 0.8) { q.h = want; q.b.geometry = box(q.w, want, q.d); q.e.geometry = new THREE.EdgesGeometry(q.b.geometry); q.b.position.y = q.e.position.y = want / 2; }
   }
   const wg = new THREE.BufferGeometry(); wg.setAttribute('position', new THREE.Float32BufferAttribute(winPos, 3));
   const windows = new THREE.Points(wg, new THREE.PointsMaterial({ color: 0xffc27a, size: 0.9, transparent: true, opacity: 0 }));
@@ -148,7 +237,7 @@ function run() {
     red.position.set(0, h + 7.8, 0); g.add(red); craneLights.push(red);
     g.position.set(x, 0, z); g.rotation.y = rot; city.add(g); return { g, m };
   }
-  const cranes = [crane(-70, -230, 96, 0.4), crane(55, -250, 120, 2.5), crane(-160, -300, 110, 1.2), crane(150, -290, 104, -0.6), crane(5, -330, 130, 1.9)];
+  const cranes = [crane(-80, -250, 104, 0.4), crane(60, -270, 122, 2.5), crane(-170, -320, 112, 1.2), crane(160, -310, 108, -0.6), crane(5, -350, 128, 1.9), crane(-30, -290, 96, 0.9)];
 
   // Floating sparks
   const N = small ? 900 : 1800, pos = new Float32Array(N * 3), seed = new Float32Array(N);
@@ -157,18 +246,11 @@ function run() {
   const dust = new THREE.Points(dg, new THREE.PointsMaterial({ color: 0xffb46e, size: 0.28, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
   scene.add(dust);
 
-  // Camera: low wide shot, along the deck through both towers, then up and out toward the skyline
-  const path = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(70, 6, 120), new THREE.Vector3(38, 12, 82), new THREE.Vector3(10, 13, 52),
-    new THREE.Vector3(0, deckY + 5, 26), new THREE.Vector3(0, deckY + 6, -20), new THREE.Vector3(0, deckY + 10, -58),
-    new THREE.Vector3(0, 30, -96), new THREE.Vector3(0, 40, -118),
-  ]);
-  const look = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0, 14, 0), new THREE.Vector3(0, 15, -20), new THREE.Vector3(0, 16, -50),
-    new THREE.Vector3(0, 20, -120), new THREE.Vector3(0, 46, -320), new THREE.Vector3(0, 52, -420),
-  ]);
+  // Camera path for this variant. It ends in front of the city, low, looking up at the skyline and the sun.
+  const path = new THREE.CatmullRomCurve3(V.path);
+  const look = new THREE.CatmullRomCurve3(V.look);
 
-  // Post-processing: bloom makes the copper edges and lights glow
+  // Post-processing: bloom makes the copper edges, lights and the sun glow
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.7, 0.45, 0.62);
@@ -181,7 +263,7 @@ function run() {
   function unlockIOS() {   // a looping silent <audio> flips iOS into playback mode so Web Audio plays even with the mute switch on
     if (unlockEl) return;
     unlockEl = document.createElement('audio'); unlockEl.loop = true; unlockEl.setAttribute('playsinline', '');
-    unlockEl.src = 'data:audio/wav;base64,UklGRmQGAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YUAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'; unlockEl.volume = 0.01;
+    unlockEl.src = 'data:audio/wav;base64,UklGRmQGAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YUAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'; unlockEl.volume = 0.01;
     const p = unlockEl.play(); if (p && p.catch) p.catch(() => {});
   }
   function loopNoise() { const b = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; const s = ac.createBufferSource(); s.buffer = b; s.loop = true; s.start(); return s; }
@@ -190,18 +272,16 @@ function run() {
     ac = new (window.AudioContext || window.webkitAudioContext)();
     master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
     const comp = ac.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 4; comp.connect(master); master.out = comp;
-    // jobsite wind that slowly breathes
     const wind = loopNoise(), wf = ac.createBiquadFilter(); wf.type = 'bandpass'; wf.frequency.value = 520; wf.Q.value = 0.6;
     const wg = ac.createGain(); wg.gain.value = 0.05; wind.connect(wf); wf.connect(wg); wg.connect(comp);
     const wl = ac.createOscillator(); wl.frequency.value = 0.11; const wlg = ac.createGain(); wlg.gain.value = 260; wl.connect(wlg); wlg.connect(wf.frequency); wl.start();
-    // warm pad in the mid range
     [220, 220.9, 330, 440.6].forEach((f, i) => { const o = ac.createOscillator(); o.type = i < 2 ? 'sawtooth' : 'triangle'; o.frequency.value = f; const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
       const g = ac.createGain(); g.gain.value = i < 2 ? 0.03 : 0.022; o.connect(lp); lp.connect(g); g.connect(comp); o.start(); });
   }
   const out = () => master.out;
   function noise(dur) { const b = ac.createBuffer(1, Math.ceil(ac.sampleRate * dur), ac.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; const s = ac.createBufferSource(); s.buffer = b; return s; }
   let lastClank = 0;
-  function clank(strength) {   // a steel beam seating: bright strike, ringing body
+  function clank(strength) {
     if (!ac || !soundOn) return;
     const t = ac.currentTime; if (t - lastClank < 0.05) return; lastClank = t;
     const s = noise(0.12), hp = ac.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 1500;
@@ -218,7 +298,7 @@ function run() {
     const g = ac.createGain(); g.gain.setValueAtTime(0.001, t); g.gain.exponentialRampToValueAtTime(0.6, t + dur * 0.55); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
     s.connect(f); f.connect(g); g.connect(out()); s.start(t);
   }
-  function swell() {   // the name lands: chord bloom plus a mid-range impact
+  function swell() {
     if (!ac || !soundOn) return; const t = ac.currentTime;
     [220, 277.2, 329.6, 440, 554.4].forEach((f, i) => { const o = ac.createOscillator(); o.type = 'triangle'; o.frequency.value = f; const g = ac.createGain();
       g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.09 - i * 0.01, t + 0.9); g.gain.exponentialRampToValueAtTime(0.0001, t + 4.5); o.connect(g); g.connect(out()); o.start(t); o.stop(t + 4.6); });
@@ -235,7 +315,7 @@ function run() {
   btn.addEventListener('click', (e) => { e.stopPropagation(); setSound(!soundOn); });
 
   // ---------- timeline ----------
-  const DUR = 10.2;
+  const DUR = V.dur;
   const clamp = (x) => Math.min(Math.max(x, 0), 1);
   const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
   const easeIO = (x) => (x = clamp(x), x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
@@ -266,15 +346,16 @@ function run() {
     if (!root.isConnected) return;
     if (t0 === null) t0 = now;
     const t = (now - t0) / 1000;
-
-    grid.material.opacity = 0.35 * ease(t / 1.4) * (1 - 0.6 * ease((t - 6) / 2));
+    const gridIn = V.prebuilt === true ? 0.5 : 1.4;
+    grid.material.opacity = 0.35 * ease(t / gridIn) * (1 - 0.6 * ease((t - V.cityAt - 1.5) / 2));
     dust.material.opacity = 0.8 * ease((t - 0.3) / 1.5);
     const p = dust.geometry.attributes.position.array;
     for (let i = 0; i < N; i++) { p[i * 3 + 1] += 0.01 + seed[i] * 0.025; if (p[i * 3 + 1] > 70) p[i * 3 + 1] = 0; }
     dust.geometry.attributes.position.needsUpdate = true;
 
     parts.forEach((q) => {
-      const k = (t - q.delay) / 0.75;
+      if (q.done) { q.e.material.opacity = Math.max(0.3, q.e.material.opacity - 0.004); return; }
+      const k = (t - q.delay) / V.part;
       if (k <= 0) return;
       q.grp.position.lerpVectors(q.from, q.to, ease(k));
       q.e.material.opacity = Math.min(1, k * 2.5) * (1 - 0.45 * ease((t - q.delay - 1) / 1.4));
@@ -282,24 +363,42 @@ function run() {
       if (!q.clanked && k >= 1) { q.clanked = true; clank(0.3 + Math.random() * 0.35); }
     });
     cables.forEach((c) => {
-      if (c.line) c.line.geometry.setDrawRange(0, Math.floor(c.n * ease((t - 2.8) / 1.8)));
-      if (c.hanger) c.hanger.material.opacity = 0.75 * ease((t - 3.3 - (75 - Math.abs(c.z)) / 110) / 0.5);
+      if (c.line) c.line.geometry.setDrawRange(0, Math.floor(c.n * ease((t - cableAt) / 1.8)));
+      if (c.hanger) c.hanger.material.opacity = 0.75 * ease((t - hangerAt - (75 - Math.abs(c.z)) / 110) / 0.5);
     });
-    lamps.forEach((l, i) => { l.material.opacity = ease((t - 3.6 - i * 0.025) / 0.3); });
+    lamps.forEach((l, i) => { l.material.opacity = ease((t - lampAt - i * 0.025) / 0.3); });
 
-    const city = ease((t - 4.2) / 2.2);
-    sky.material.opacity = city; sun.material.opacity = 0.7 * ease((t - 6) / 2.5); sun.position.y = 18 + 22 * ease((t - 5.5) / 4);
-    windows.material.opacity = city;
-    cranes.forEach((c, i) => { c.m.opacity = 0.85 * ease((t - 4.4 - i * 0.18) / 1.2); c.g.rotation.y += 0.0009 * (i % 2 ? 1 : -1); });
-    craneLights.forEach((l, i) => { l.material.opacity = city * (Math.sin(t * 3.2 + i * 1.7) > 0.2 ? 1 : 0.08); });
+    // City: fade in, or rise out of the ground (variant 3), or fill in from wireframe to solid (variant 4)
+    const cityK = ease((t - V.cityAt) / 2.2);
+    if (V.cityGrow === true) {
+      buildings.forEach((q) => { const k = ease((t - V.cityAt - q.seed * 2.4) / 1.6); q.b.scale.y = Math.max(0.02, k); q.b.position.y = q.h * q.b.scale.y / 2; q.e.scale.y = q.b.scale.y; q.e.position.y = q.b.position.y; q.e.material.opacity = 0.7 * Math.min(1, k * 3) * (1 - 0.75 * ease((t - V.cityAt - q.seed * 2.4 - 1.4) / 1.4)); });
+      windows.material.opacity = ease((t - V.cityAt - 1.8) / 1.8);
+    } else if (V.cityGrow === 'finish') {
+      buildings.forEach((q) => { const k = ease((t - V.cityAt - q.seed * 3.2) / 1.8); q.b.material.opacity = k; q.e.material.opacity = 0.75 * (1 - k) + 0.08; });
+      windows.material.opacity = ease((t - V.cityAt - 0.6) / 2.4);
+    } else {
+      windows.material.opacity = cityK;
+    }
+    cranes.forEach((c, i) => { c.m.opacity = 0.85 * ease((t - V.cityAt - 0.2 - i * 0.18) / 1.2); c.g.rotation.y += 0.0009 * (i % 2 ? 1 : -1); });
+    craneLights.forEach((l, i) => { l.material.opacity = cityK * (Math.sin(t * 3.2 + i * 1.7) > 0.2 ? 1 : 0.08); });
+
+    // Sunrise: sky warms, the sun climbs out from under the cloud bank, the light wraps the scene
+    const sr = ease((t - V.sunAt) / V.sunDur);
+    sky.material.opacity = Math.max(cityK * 0.75, sr);
+    cloud.material.opacity = Math.min(1, cityK + sr);
+    sun.position.y = 96 + 104 * sr; glow.position.y = sun.position.y + 10;
+    sun.material.opacity = Math.min(1, sr * 1.6); glow.material.opacity = 0.9 * sr;
+    sun.scale.setScalar(0.85 + 0.25 * sr); glow.scale.setScalar(0.8 + 0.4 * sr);
+    sunLight.intensity = 1.6 * sr; scene.fog.color.setHex(0x1a120c).lerp(new THREE.Color(0x4a2412), sr * 0.6);
+    backdrop.position.copy(camera.position);
 
     const ct = easeIO(t / (DUR - 0.8));
     camera.position.copy(path.getPointAt(ct));
     camera.lookAt(look.getPointAt(ct, tmpLook));
-    bloom.strength = 0.65 + 0.3 * ease((t - 6.5) / 2);
-    if (!w1 && t > 3.9) { w1 = true; whoosh(0, 1.6); }
-    if (!w2 && t > 5.6) { w2 = true; whoosh(0, 2.2); }
-    if (!sw && t > 7.1) { sw = true; swell(); mark.classList.add('in'); }
+    bloom.strength = 0.65 + 0.3 * ease((t - V.markAt + 0.6) / 2);
+    if (!w1 && t > V.whoosh[0]) { w1 = true; whoosh(0, 1.6); }
+    if (!w2 && t > V.whoosh[1]) { w2 = true; whoosh(0, 2.2); }
+    if (!sw && t > V.markAt) { sw = true; swell(); mark.classList.add('in'); }
     if (t > DUR) finish();
 
     composer.render();
