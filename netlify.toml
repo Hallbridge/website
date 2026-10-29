@@ -8,3 +8,11 @@
   for = "/assets/img/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Internal notes live in the repo root, which is the publish folder, so they would be public.
+# Serve a 404 for them. (Netlify splats only work at the end of a path, so list each file.)
+[[redirects]]
+  from = "/VERSIONS.md"
+  to = "/404"
+  status = 404
+  force = true
