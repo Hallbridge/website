@@ -442,6 +442,9 @@
       max-width: 700px; margin: 26px auto 0; text-wrap: pretty; font-size: 17px; line-height: 1.75; color: rgba(242,236,226,0.8);
       opacity: 0; animation: up 1s var(--ease) .6s forwards;
     }
+    .hero-web { margin: 22px 0 72px; font-size: 13px; letter-spacing: .3px; opacity: 0; animation: up 1s var(--ease) 1s forwards; }
+    .hero-web a { color: inherit; opacity: .78; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; transition: opacity .3s; }
+    .hero-web a:hover { opacity: 1; }
     .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; opacity: 0; animation: up 1s var(--ease) .8s forwards; }
     @keyframes rise { to { transform: none; } }
     @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
@@ -654,7 +657,7 @@
     }
     .roles-body { padding: clamp(80px, 9vw, 140px) var(--gutter); background: var(--cream); }
     .roles-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 48px; }
-    .roles-cols h4 { font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--copper); padding-bottom: 16px; border-bottom: 1px solid var(--copper); }
+    .roles-cols h3 { font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--copper); padding-bottom: 16px; border-bottom: 1px solid var(--copper); }
     .roles-cols ul { list-style: none; }
     .roles-cols li {
       font-family: var(--serif); font-size: 23px; color: var(--black); padding: 14px 0; border-bottom: 1px solid var(--taupe-pale);
@@ -762,7 +765,7 @@
     .foot-brand { display: flex; flex-direction: column; align-items: center; text-align: center; justify-self: start; }
     .foot-brand img.mono { width: 72px; height: 72px; }
     .foot-brand img.word { height: 74px; width: auto; margin-top: 24px; }
-    footer h5 { font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--cream); margin-bottom: 20px; }
+    footer h3 { font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--cream); margin-bottom: 20px; }
     footer ul { list-style: none; }
     footer li { margin-bottom: 12px; font-size: 14px; }
     footer a { color: var(--taupe-light); text-decoration: none; transition: color .2s; }
@@ -947,6 +950,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <a href="#contact" class="btn btn-copper">Start a Search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         <a href="#candidates" class="btn btn-ghost">I'm a Candidate</a>
       </div>
+      <p class="hero-web"><a href="#websites">Need a website for your construction company? See our websites &rarr;</a></p>
     </div>
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
   </section>
@@ -1231,11 +1235,11 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       <p class="body reveal">Experienced professionals across every phase of construction, for commercial, residential, industrial and civil builders nationwide.</p>
       <div class="roles-cols">
         <div class="reveal">
-          <h4>Field Leadership</h4>
+          <h3>Field Leadership</h3>
           <ul><li>Superintendent</li><li>Field Operations Manager</li><li>Project Manager</li><li>Project Engineer</li><li>Assistant Field Staff</li></ul>
         </div>
         <div class="reveal">
-          <h4>Office &amp; Executive</h4>
+          <h3>Office &amp; Executive</h3>
           <ul><li>Vice President</li><li>Director / Project Executive</li><li>Preconstruction Manager</li><li>Estimator</li><li>Civil Engineer</li></ul>
         </div>
       </div>
@@ -1428,15 +1432,15 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
           <img class="word" src="assets/thc-wordmark-on-dark.png" alt="The Hallbridge Company" width="320" height="95">
         </div>
         <div>
-          <h5>Firm</h5>
+          <h3>Firm</h3>
           <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#client-services">Client Services</a></li><li><a href="#websites">Websites for Builders</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#faq">FAQ</a></li></ul>
         </div>
         <div>
-          <h5>Markets</h5>
+          <h3>Markets</h3>
           <ul><li><a href="#markets">High-Rise</a></li><li><a href="#markets">Multifamily</a></li><li><a href="#markets">Student Housing</a></li><li><a href="#markets">Mixed-Use</a></li><li><a href="#markets">Commercial</a></li></ul>
         </div>
         <div>
-          <h5>Contact</h5>
+          <h3>Contact</h3>
           <ul><li><a href="mailto:info@hallbridge.co">info@hallbridge.co</a></li><li><a href="https://www.linkedin.com/company/thehallbridgecompany" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="#candidates">Submit a resume</a></li></ul>
         </div>
       </div>
