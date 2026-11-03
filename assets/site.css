@@ -840,3 +840,6 @@ body.sub { background: var(--cream); }
 [id] { scroll-margin-top: 100px; }
 @media (max-width: 860px) { .dg-row { grid-template-columns: 1fr; } .dg-row.flip .dg-media { order: 0; } }
 .dg-list span a { color: var(--copper); text-decoration: none; white-space: nowrap; } .dg-list span a:hover { text-decoration: underline; }
+@keyframes hbFlash { 0% { background: rgba(184,115,51,.16); } 100% { background: transparent; } }
+.flash { animation: hbFlash 2.2s ease-out 1; }
+.dg-list li.flash { box-shadow: inset 3px 0 0 var(--copper); padding-left: 14px; transition: padding .3s; }

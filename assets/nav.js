@@ -23,6 +23,25 @@
     menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
   }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); if (menu) setMenu(false); } });
+
+  /* Menu links that point at one service inside a section land at the top of that section, then highlight the service. */
+  function landOnSection() {
+    var id = decodeURIComponent(location.hash.slice(1)); if (!id) return;
+    var el = document.getElementById(id); if (!el) return;
+    var box = el.closest('.dg-row') || el.closest('section');
+    if (!box || box === el) return;
+    var nav = document.getElementById('nav'), off = (nav ? nav.offsetHeight : 70) + 24;
+    window.scrollTo({ top: box.getBoundingClientRect().top + window.pageYOffset - off, behavior: 'auto' });
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  }
+  window.addEventListener('load', function () { setTimeout(landOnSection, 60); });
+  window.addEventListener('hashchange', landOnSection);
+  document.querySelectorAll('a[href*="#"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var u = new URL(a.href, location.href);
+      if (u.pathname === location.pathname && u.hash === location.hash) setTimeout(landOnSection, 0);
+    });
+  });
   var els = document.querySelectorAll('.reveal, .reveal-img');
   if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
   var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
