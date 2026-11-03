@@ -523,6 +523,13 @@
     .foot-connect { margin-top: 26px; font-size: 14px; line-height: 2; text-align: center; }
     .foot-connect a { color: var(--taupe-light); text-decoration: none; }
     .foot-connect a:hover { color: var(--cream); }
+    .li-btn { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin-top: 18px; border: 1px solid rgba(211,154,94,.6); color: var(--cream); transition: background .3s, border-color .3s, color .3s; }
+    .li-btn svg { width: 18px; height: 18px; }
+    .li-btn:hover, .li-btn:focus-visible { background: var(--copper); border-color: var(--copper); color: #fff; outline: none; }
+    .li-btn.light { color: var(--copper); border-color: var(--taupe-light); }
+    .li-btn.light:hover { color: #fff; }
+    .btn .li-ico { width: 15px; height: 15px; margin-right: 2px; }
+
     /* mega menu (Digital Growth) */
     .dd-mega .dd-panel { width: min(960px, 94vw); padding: 22px 14px 14px; }
     .dd-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }

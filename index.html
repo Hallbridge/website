@@ -758,6 +758,13 @@
     .foot-connect { margin-top: 26px; font-size: 14px; line-height: 2; text-align: center; }
     .foot-connect a { color: var(--taupe-light); text-decoration: none; }
     .foot-connect a:hover { color: var(--cream); }
+    .li-btn { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin-top: 18px; border: 1px solid rgba(211,154,94,.6); color: var(--cream); transition: background .3s, border-color .3s, color .3s; }
+    .li-btn svg { width: 18px; height: 18px; }
+    .li-btn:hover, .li-btn:focus-visible { background: var(--copper); border-color: var(--copper); color: #fff; outline: none; }
+    .li-btn.light { color: var(--copper); border-color: var(--taupe-light); }
+    .li-btn.light:hover { color: #fff; }
+    .btn .li-ico { width: 15px; height: 15px; margin-right: 2px; }
+
     /* mega menu (Digital Growth) */
     .dd-mega .dd-panel { width: min(960px, 94vw); padding: 22px 14px 14px; }
     .dd-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
@@ -1114,13 +1121,13 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
   <!-- FOUNDER -->
   <section class="founder" id="founder" aria-labelledby="founder-title">
     <div class="founder-inner">
-      <img class="founder-photo reveal-img" src="assets/img/alex-hall-headshot-600.webp" srcset="assets/img/alex-hall-headshot-300.webp 300w, assets/img/alex-hall-headshot-600.webp 600w" sizes="(max-width: 760px) 220px, 280px" alt="Alex Hall, founder of The Hallbridge Company" width="600" height="600" loading="lazy" decoding="async">
+      <img class="founder-photo reveal-img" src="assets/img/alex-hall-headshot-v2-600.webp" srcset="assets/img/alex-hall-headshot-v2-300.webp 300w, assets/img/alex-hall-headshot-v2-600.webp 600w" sizes="(max-width: 760px) 220px, 280px" alt="Alexander Hall, founder of The Hallbridge Company" width="600" height="600" loading="lazy" decoding="async">
       <div>
         <p class="eyebrow reveal">Our Founder</p>
-        <h2 class="title reveal" id="founder-title">Alex Hall</h2>
+        <h2 class="title reveal" id="founder-title">Alexander Hall</h2>
         <p class="founder-role reveal">Founder &amp; Head of Recruiting</p>
         <p class="body reveal">Alex founded The Hallbridge Company and leads its recruiting and digital growth work. He is the point of contact on every search and every website, so clients work with the person doing the work from the first call to the finished hire or launch.</p>
-        <a class="link-arrow reveal" href="https://www.linkedin.com/in/hallbridge" target="_blank" rel="noopener">Connect on LinkedIn &rarr;</a>
+        <a class="li-btn light reveal" href="https://www.linkedin.com/in/hallbridge" target="_blank" rel="noopener" aria-label="Alexander Hall on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a>
       </div>
     </div>
   </section>
@@ -1582,7 +1589,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       <p class="reveal">Whether you have a seat to fill today or just want to know who's out there, the conversation is free and confidential.</p>
       <div class="contact-actions reveal">
         <a href="mailto:info@hallbridge.co?subject=New%20Search" class="btn btn-copper">Start a Search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-        <a href="https://www.linkedin.com/company/thehallbridgecompany" target="_blank" rel="noopener" class="btn btn-ghost">Follow on LinkedIn</a>
+        <a href="https://www.linkedin.com/company/thehallbridgecompany" target="_blank" rel="noopener" class="btn btn-ghost"><svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg> Follow on LinkedIn</a>
       </div>
       <div class="contact-lines reveal"><a href="mailto:info@hallbridge.co" class="contact-mail">info@hallbridge.co</a><a href="tel:+18138500583" class="contact-mail contact-phone">(813) 850-0583</a></div>
     </div>
@@ -1597,7 +1604,8 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <div class="foot-brand">
           <img class="mono" src="/assets/monogram-footer.svg" alt="Hallbridge bridge monogram" width="64" height="64">
           <img class="word" src="/assets/thc-wordmark-on-dark.png" alt="The Hallbridge Company" width="320" height="95">
-          <p class="foot-connect"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a><br><a href="https://www.linkedin.com/company/thehallbridgecompany" target="_blank" rel="noopener">LinkedIn</a></p>
+          <p class="foot-connect"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a></p>
+          <a class="li-btn" href="https://www.linkedin.com/company/thehallbridgecompany" target="_blank" rel="noopener" aria-label="The Hallbridge Company on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a>
         </div>
         <div>
           <h3>Company</h3>
