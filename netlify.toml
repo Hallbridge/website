@@ -16,3 +16,9 @@
   to = "/404"
   status = 404
   force = true
+
+# Renamed blog post (11/3/2026)
+[[redirects]]
+  from = "/blog/what-we-found-on-37000-contractor-websites.html"
+  to = "/blog/what-contractor-websites-are-missing.html"
+  status = 301
