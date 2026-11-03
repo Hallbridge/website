@@ -671,6 +671,77 @@
     .roles-note a { color: var(--copper); }
 
     /* ── PROCESS ── */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    /* nav dropdowns */
+    .nav-links .dd { position: relative; }
+    .dd-btn { display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; cursor: pointer; font: 500 11px/1 var(--sans); letter-spacing: 2.4px; text-transform: uppercase; color: rgba(242,236,226,0.85); padding: 6px 0; transition: color .25s; }
+    .dd-btn svg { width: 9px; height: 6px; transition: transform .3s var(--ease); }
+    nav.scrolled .dd-btn { color: var(--taupe); }
+    .dd:hover .dd-btn, .dd:focus-within .dd-btn { color: #fff; }
+    nav.scrolled .dd:hover .dd-btn, nav.scrolled .dd:focus-within .dd-btn { color: var(--black); }
+    .dd:hover .dd-btn svg, .dd:focus-within .dd-btn svg { transform: rotate(180deg); }
+    .dd-menu { position: absolute; top: 100%; left: 50%; min-width: 220px; padding-top: 16px; transform: translate(-50%, 6px); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s var(--ease), visibility .25s; }
+    .dd-menu::before { content: ''; position: absolute; inset: 16px 0 0; background: var(--cream); border: 1px solid var(--taupe-pale); box-shadow: 0 18px 40px rgba(21,16,12,.12); }
+    .dd:hover .dd-menu, .dd:focus-within .dd-menu, .dd.open .dd-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+    .nav-links .dd-menu a { position: relative; display: block; padding: 11px 22px; font-size: 13px; letter-spacing: .2px; text-transform: none; font-weight: 400; color: var(--charcoal); white-space: nowrap; }
+    .nav-links .dd-menu a:first-child { margin-top: 8px; } .nav-links .dd-menu a:last-child { margin-bottom: 8px; }
+    .nav-links .dd-menu a::after { display: none; }
+    .nav-links .dd-menu a:hover, nav.scrolled .nav-links .dd-menu a:hover { color: var(--copper); }
+    nav.scrolled .nav-links .dd-menu a { color: var(--charcoal); }
+    .mobile-menu { justify-content: flex-start; overflow-y: auto; }
+    .mm-group { position: relative; margin-bottom: 22px; }
+    .mm-label { font-size: 10px; letter-spacing: 2.6px; text-transform: uppercase; color: var(--copper-light); margin-bottom: 4px; opacity: 0; transition: opacity .5s var(--ease); }
+    .menu-open .mm-label { opacity: 1; }
+    .mobile-menu .mm-group a { display: block; font-size: 22px; line-height: 1.5; }
+    /* founder */
+    .founder { padding: clamp(80px, 10vw, 130px) var(--gutter); background: var(--cream-dark); }
+    .founder-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+    .founder-photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+    .founder-role { font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--taupe); margin-top: 10px; }
+    .founder .body { max-width: 560px; }
+    .link-arrow { display: inline-block; margin-top: 22px; font-size: 13px; color: var(--copper); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+    /* salary guide */
+    .guide { padding: clamp(96px, 12vw, 150px) var(--gutter); background: var(--ink); color: var(--cream); }
+    .guide-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+    .guide-cover { width: 100%; height: auto; box-shadow: 0 30px 60px rgba(0,0,0,.45); transform: rotate(-2deg); }
+    .guide .title { color: var(--cream); } .guide .body { color: rgba(242,236,226,0.72); max-width: 480px; }
+    .guide-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; max-width: 560px; }
+    .guide-form label { display: block; }
+    .guide-form label span { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe-light); margin-bottom: 6px; }
+    .guide-form input { width: 100%; background: transparent; border: 0; border-bottom: 1px solid rgba(226,217,207,.35); color: var(--cream); font: 400 15px var(--sans); padding: 8px 0; border-radius: 0; }
+    .guide-form input:focus { outline: none; border-bottom-color: var(--copper-light); }
+    .guide-form .btn { align-self: end; justify-content: center; }
+    .guide-form .hp { position: absolute; left: -9999px; }
+    .guide-form .opt { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.55; color: rgba(242,236,226,0.6); cursor: pointer; }
+    .guide-form .opt input { width: auto; margin-top: 3px; accent-color: var(--copper); }
+    @media (max-width: 760px) { .founder-inner, .guide-inner { grid-template-columns: 1fr; } .founder-photo { max-width: 220px; } .guide-cover { max-width: 220px; } .guide-form { grid-template-columns: 1fr; } }
+    .hero-actions { margin-bottom: 72px; }
+    /* insights */
+    .insights { padding: clamp(90px, 11vw, 140px) var(--gutter); background: var(--cream); }
+    .insights-inner { max-width: 1440px; margin: 0 auto; }
+    .insights .section-head { padding: 0; }
+    .ins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ins-card { display: block; text-decoration: none; background: #fff; border: 1px solid var(--taupe-pale); padding: 30px 28px 32px; transition: border-color .3s, transform .3s, opacity 1s var(--ease); }
+    .ins-card:hover { border-color: var(--copper); }
+    .ins-card span { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); }
+    .ins-card h3 { font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1.2; color: var(--black); margin: 12px 0 18px; text-wrap: balance; }
+    .ins-card em { font-style: normal; font-size: 13px; color: var(--copper); }
+    @media (max-width: 860px) { .ins-grid { grid-template-columns: 1fr; } }
+    /* BRIDGE values */
+    .values { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream); }
+    .values-inner { max-width: 1440px; margin: 0 auto; }
+    .values .section-head { padding: 0; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--taupe-pale); border-left: 1px solid var(--taupe-pale); }
+    .value { position: relative; padding: 44px 40px 48px; border-right: 1px solid var(--taupe-pale); border-bottom: 1px solid var(--taupe-pale); background: var(--cream); transition: opacity 1s var(--ease), transform 1s var(--ease), background .5s var(--ease); }
+    .value:hover { background: #fff; }
+    .value-letter { display: block; font-family: var(--serif); font-weight: 500; font-size: clamp(76px, 7vw, 108px); line-height: .8; color: transparent; -webkit-text-stroke: 1.2px var(--copper); margin-bottom: 28px; transition: color .5s var(--ease); }
+    .value:hover .value-letter, .value.in .value-letter { color: var(--copper); }
+    .value.in:nth-child(1) .value-letter { transition-delay: .1s } .value.in:nth-child(2) .value-letter { transition-delay: .3s } .value.in:nth-child(3) .value-letter { transition-delay: .5s } .value.in:nth-child(4) .value-letter { transition-delay: .7s } .value.in:nth-child(5) .value-letter { transition-delay: .9s } .value.in:nth-child(6) .value-letter { transition-delay: 1.1s }
+    .value h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(24px, 2.1vw, 30px); line-height: 1.15; color: var(--black); margin-bottom: 14px; text-wrap: balance; }
+    .value p { font-size: 15px; line-height: 1.7; color: var(--muted); max-width: 36ch; text-wrap: pretty; }
+    @media (max-width: 960px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .values-grid { grid-template-columns: 1fr; } .value { padding: 34px 26px 38px; } .value-letter { font-size: 72px; margin-bottom: 20px; } }
+    @media (prefers-reduced-motion: reduce) { .value-letter { transition: none; } }
     .process { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream-dark); }
     .process-inner { max-width: 1440px; margin: 0 auto; }
     .process .section-head { padding: 0; }
@@ -907,12 +978,9 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       <img class="mono on-light" src="assets/monogram.svg" alt="Hallbridge" width="46" height="46">
     </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#markets">Markets</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#websites">Websites</a></li>
-      <li><a href="#roles">Roles</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
+      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">About<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><a href="#about">Who We Are</a><a href="#values">Our Values</a><a href="#founder">Our Founder</a><a href="#testimonials">Testimonials</a><a href="/blog/">Insights</a><a href="#faq">FAQ</a></div></li>
+      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">Hiring Managers<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><a href="#services">Search Services</a><a href="#roles">Roles We Place</a><a href="#markets">Markets</a><a href="#process">How It Works</a><a href="#salary-guide">2026 Salary Guide</a></div></li>
+      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">Client Services<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><a href="#websites">Websites for Builders</a><a href="#client-services">Branding &amp; Growth</a></div></li>
       <li><a href="#candidates">Candidates</a></li>
     </ul>
     <a href="#contact" class="btn btn-copper nav-cta">Start a Search</a>
@@ -922,14 +990,11 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
   </nav>
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="#about">About</a>
-    <a href="#markets">Markets</a>
-    <a href="#services">Services</a>
-    <a href="#websites">Websites</a>
-    <a href="#testimonials">Testimonials</a>
-    <a href="#candidates">Candidates</a>
-    <a href="#contact">Start a Search</a>
-    <div class="mm-foot"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a></div>
+    <div class="mm-group"><p class="mm-label">About</p><a href="#about">Who We Are</a><a href="#values">Our Values</a><a href="#founder">Our Founder</a><a href="#testimonials">Testimonials</a><a href="/blog/">Insights</a><a href="#faq">FAQ</a></div>
+    <div class="mm-group"><p class="mm-label">Hiring Managers</p><a href="#services">Search Services</a><a href="#roles">Roles We Place</a><a href="#markets">Markets</a><a href="#process">How It Works</a><a href="#salary-guide">2026 Salary Guide</a></div>
+    <div class="mm-group"><p class="mm-label">Client Services</p><a href="#websites">Websites for Builders</a><a href="#client-services">Branding &amp; Growth</a></div>
+    <div class="mm-group"><p class="mm-label">Candidates</p><a href="#candidates">For Candidates</a></div>
+    <div class="mm-foot"><a href="#contact">Start a Search</a><br><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a></div>
   </div>
 
   <main id="top">
@@ -953,7 +1018,6 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <a href="#contact" class="btn btn-copper">Start a Search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         <a href="#candidates" class="btn btn-ghost">I'm a Candidate</a>
       </div>
-      <p class="hero-web"><a href="#websites">Need a website for your construction company? See our websites &rarr;</a></p>
     </div>
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
   </section>
@@ -971,11 +1035,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       <p class="body reveal">The Hallbridge Company is a specialized executive search firm focused exclusively on construction. Over ten years in construction recruiting means we know the timelines, the culture and the caliber of people who thrive on a jobsite.</p>
       <p class="body reveal">We partner with general contractors, multifamily developers and engineering firms building $10M to $100M+ projects, and we find the leaders with the exact experience to drive them forward.</p>
       <p class="body reveal">We're AI-powered behind the scenes, so research, market mapping and the details move fast. That leaves our time for building relationships where it matters most, with a real conversation with every client and every candidate.</p>
-      <div class="about-points reveal">
-        <div><i>i.</i>We speak the language. Podium, wrap, tilt-up, post-tension. No explaining the job twice.</div>
-        <div><i>ii.</i>Passive talent. The best superintendents aren't on job boards. We already know them.</div>
-        <div><i>iii.</i>Built to last. We screen for fit with your team and the work, not just the resume, so the hire sticks long after topping out.</div>
-      </div>
+      <p class="body reveal">The best superintendents aren&rsquo;t on job boards. We already know them.</p>
     </div>
   </section>
 
@@ -1222,6 +1282,41 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
     </div>
   </section>
 
+  <!-- VALUES: THE HALLBRIDGE STANDARD (BRIDGE) -->
+  <section class="values" id="values" aria-labelledby="values-title">
+    <div class="values-inner">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">The Hallbridge Standard</p>
+          <h2 class="title reveal" id="values-title">Six values.<br><em>One BRIDGE.</em></h2>
+        </div>
+        <p class="body reveal">How we run every search and every site, for every client and every candidate.</p>
+      </div>
+      <div class="values-grid" id="valuesGrid">
+        <div class="value reveal"><span class="value-letter" aria-hidden="true">B</span><h3><span class="sr-only">B: </span>Builders first.</h3><p>Construction is all we do. Every search, site and strategy starts with how builders actually&nbsp;work.</p></div>
+        <div class="value reveal"><span class="value-letter" aria-hidden="true">R</span><h3><span class="sr-only">R: </span>Relationships over transactions.</h3><p>A real conversation with every client and every candidate, and we stay in touch long after the start&nbsp;date.</p></div>
+        <div class="value reveal"><span class="value-letter" aria-hidden="true">I</span><h3><span class="sr-only">I: </span>Integrity in every answer.</h3><p>Straight answers on comp, on fit and on what your website is doing, even when it&rsquo;s not what you hoped to&nbsp;hear.</p></div>
+        <div class="value reveal"><span class="value-letter" aria-hidden="true">D</span><h3><span class="sr-only">D: </span>Deliver with urgency.</h3><p>An open seat costs schedule and margin every week, so we move in days, not&nbsp;weeks.</p></div>
+        <div class="value reveal"><span class="value-letter" aria-hidden="true">G</span><h3><span class="sr-only">G: </span>Get the fit right.</h3><p>We screen for your team and your work, not just the r&eacute;sum&eacute;, so the hire sticks long after topping&nbsp;out.</p></div>
+        <div class="value reveal"><span class="value-letter" aria-hidden="true">E</span><h3><span class="sr-only">E: </span>Expertise in the field.</h3><p>Podium, wrap, tilt-up, post-tension. We speak the language, so you never explain the job&nbsp;twice.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="founder" id="founder" aria-labelledby="founder-title">
+    <div class="founder-inner">
+      <img class="founder-photo reveal-img" src="assets/img/alex-hall-headshot-600.webp" srcset="assets/img/alex-hall-headshot-300.webp 300w, assets/img/alex-hall-headshot-600.webp 600w" sizes="(max-width: 760px) 220px, 280px" alt="Alex Hall, founder of The Hallbridge Company" width="600" height="600" loading="lazy" decoding="async">
+      <div>
+        <p class="eyebrow reveal">Our Founder</p>
+        <h2 class="title reveal" id="founder-title">Alex Hall</h2>
+        <p class="founder-role reveal">Founder &amp; Head of Recruiting</p>
+        <p class="body reveal">Alex founded The Hallbridge Company and leads its recruiting and client services work. He is the point of contact on every search and every website, so clients work with the person doing the work from the first call to the finished hire or launch.</p>
+        <a class="link-arrow reveal" href="https://www.linkedin.com/in/hallbridge" target="_blank" rel="noopener">Connect on LinkedIn &rarr;</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ROLES -->
   <section class="roles" id="roles">
     <div class="roles-media rs" id="fieldSuite" style="--x:90%">
@@ -1251,7 +1346,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
   </section>
 
   <!-- PROCESS -->
-  <section class="process">
+  <section class="process" id="process">
     <div class="process-inner">
       <div class="section-head">
         <div>
@@ -1265,6 +1360,27 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <div class="step reveal"><div class="step-dot">02</div><h3>Search</h3><p>We tap our construction network and run targeted outreach to passive and active candidates.</p></div>
         <div class="step reveal"><div class="step-dot">03</div><h3>Screening</h3><p>You only see qualified, vetted people. Your time is saved and your pipeline stays clean.</p></div>
         <div class="step reveal"><div class="step-dot">04</div><h3>Placement</h3><p>We handle offers, negotiation and the first day, and we stay in touch well beyond it.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SALARY GUIDE -->
+  <section class="guide" id="salary-guide" aria-labelledby="guide-title">
+    <div class="guide-inner">
+      <img class="guide-cover reveal" src="assets/img/salary-guide-cover-600.webp" alt="Cover of the 2026 Construction Leadership Salary Guide" width="600" height="776" loading="lazy" decoding="async">
+      <div>
+        <p class="eyebrow reveal">2026 Salary Guide</p>
+        <h2 class="title reveal" id="guide-title">What builders are<br><em>paying this year.</em></h2>
+        <p class="body reveal">Posted base pay for 16 construction leadership roles by region and metro, built from 2,734 real job postings. We&rsquo;ll email it to&nbsp;you.</p>
+        <form class="guide-form reveal" name="salary-guide" method="POST" action="/salary-guide-thanks.html" data-netlify="true" netlify-honeypot="company-website">
+          <input type="hidden" name="form-name" value="salary-guide">
+          <p class="hp" aria-hidden="true"><label>Leave blank <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+          <label><span>Name</span><input name="name" autocomplete="name" required></label>
+          <label><span>Work email</span><input name="email" type="email" autocomplete="email" required></label>
+          <label><span>Company</span><input name="company" autocomplete="organization"></label>
+          <button class="btn btn-copper" type="submit">Email Me the Guide</button>
+          <label class="opt"><input type="checkbox" name="newsletter" value="yes" checked> Also send me the 2027 guide free when it&rsquo;s out, plus occasional pay updates. Unsubscribe anytime.</label>
+        </form>
       </div>
     </div>
   </section>
@@ -1357,6 +1473,20 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <li>An advocate through offers, negotiation and your first day.</li>
       </ul>
       <a href="mailto:info@hallbridge.co?subject=Candidate%20Introduction" class="btn btn-copper reveal">Submit Your Resume <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section class="insights" id="insights" aria-labelledby="insights-title">
+    <div class="insights-inner">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Insights</p>
+          <h2 class="title reveal" id="insights-title">Pay data and advice<br><em>for builders.</em></h2>
+        </div>
+        <a class="link-arrow reveal" href="/blog/">All insights &rarr;</a>
+      </div>
+      <div class="ins-grid"><a class="ins-card reveal" href="/blog/what-we-found-on-37000-contractor-websites.html"><span>Websites</span><h3>What We Found on 37,000 Contractor Websites</h3><em>Read &rarr;</em></a><a class="ins-card reveal" href="/blog/superintendent-vs-project-manager-pay-2026.html"><span>Salary Data</span><h3>Superintendent vs. Project Manager Pay in 2026</h3><em>Read &rarr;</em></a><a class="ins-card reveal" href="/blog/construction-pay-by-metro-2026.html"><span>Salary Data</span><h3>Construction Pay by Metro: 30 Markets Ranked</h3><em>Read &rarr;</em></a></div>
     </div>
   </section>
 
@@ -1463,6 +1593,18 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 60); }
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+
+      // nav dropdowns: click/tap toggles, Escape and outside click close
+      document.querySelectorAll('.dd-btn').forEach(function (b) {
+        b.addEventListener('click', function (e) {
+          var li = b.parentElement, open = !li.classList.contains('open');
+          document.querySelectorAll('.dd.open').forEach(function (x) { x.classList.remove('open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); });
+          if (open) { li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+          e.stopPropagation();
+        });
+      });
+      document.addEventListener('click', function () { document.querySelectorAll('.dd.open').forEach(function (x) { x.classList.remove('open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); }); });
+      document.querySelectorAll('.dd-menu a').forEach(function (a) { a.addEventListener('click', function () { a.blur(); var li = a.closest('.dd'); li.classList.remove('open'); }); });
 
       // mobile menu
       var burger = document.getElementById('hamburger');

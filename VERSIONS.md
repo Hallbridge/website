@@ -24,6 +24,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v3.2-phone-headline` | Phone mockup: "Join a team that builds" centered near the top, clear of the crew |
 | `v3.3-apply-align` | Phone mockup: Apply buttons aligned in one right column, full job titles fit |
 | `v3.4-intro-3d` | 3D intro on the home page: copper wireframe bridge assembles beam by beam, camera flies across it to a crane skyline at dawn, THE HALLBRIDGE COMPANY lands; opt-in generated sound; once per session, skippable, off for reduced motion. Hero line adds recruiting |
+| `v3.6-bridge-insights` | BRIDGE values (The Hallbridge Standard), nav dropdowns (About / Hiring Managers / Client Services / Candidates), founder section with headshot, 2026 Salary Guide email signup (Netlify form + thank-you page), Insights blog with 5 posts, hero website link removed, Who We Are points folded in, privacy updated for the form |
 
 ## Revert the live site to an older version
 
