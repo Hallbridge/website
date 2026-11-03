@@ -478,8 +478,8 @@
     .link-arrow { display: inline-block; margin-top: 22px; font-size: 13px; color: var(--copper); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
     /* salary guide */
     .guide { padding: clamp(96px, 12vw, 150px) var(--gutter); background: var(--ink); color: var(--cream); }
-    .guide-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
-    .guide-cover { width: 100%; height: auto; box-shadow: 0 30px 60px rgba(0,0,0,.45); transform: rotate(-2deg); }
+    .guide-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+    .guide-cover { width: 100%; height: auto; }
     .guide .title { color: var(--cream); } .guide .body { color: rgba(242,236,226,0.72); max-width: 480px; }
     .guide-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; max-width: 560px; }
     .guide-form label { display: block; }
@@ -491,7 +491,7 @@
     .guide-form .hp { position: absolute; left: -9999px; }
     .guide-form .opt { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.55; color: rgba(242,236,226,0.6); cursor: pointer; }
     .guide-form .opt input { width: auto; margin-top: 3px; accent-color: var(--copper); }
-    @media (max-width: 760px) { .founder-inner, .guide-inner { grid-template-columns: 1fr; } .founder-photo { max-width: 220px; } .guide-cover { max-width: 220px; } .guide-form { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) { .founder-inner, .guide-inner { grid-template-columns: 1fr; } .founder-photo { max-width: 220px; } .guide-cover { max-width: 100%; } .guide-form { grid-template-columns: 1fr; } }
     .hero-actions { margin-bottom: 72px; }
     /* insights */
     .insights { padding: clamp(90px, 11vw, 140px) var(--gutter); background: var(--cream); }
@@ -814,13 +814,13 @@ body.sub { background: var(--cream); }
 .dark .form input, .dark .form textarea { color: var(--cream); border-bottom-color: rgba(226,217,207,.35); }
 .dark .form .fine { color: rgba(242,236,226,.55); }
 .dark .form .choices label { color: rgba(242,236,226,.85); }
-.guide-hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
-.guide-hero img { width: 100%; max-width: 380px; justify-self: center; box-shadow: 0 30px 60px rgba(0,0,0,.45); transform: rotate(-2deg); }
-@media (max-width: 860px) { .models, .steps3, .split, .guide-hero, .form { grid-template-columns: 1fr; } .guide-hero img { max-width: 240px; order: -1; } }
+.guide-hero { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+.guide-hero img { width: 112%; height: auto; max-width: 760px; justify-self: center; margin: -40px -6% -40px 0; }
+@media (max-width: 860px) { .models, .steps3, .split, .guide-hero, .form { grid-template-columns: 1fr; } .guide-hero img { width: 100%; max-width: 100%; margin: 10px 0 0; } }
 
 .form input[type=file]::file-selector-button { font: 500 11px var(--sans); letter-spacing: 1.6px; text-transform: uppercase; background: transparent; color: var(--copper-light); border: 1px solid var(--copper); padding: 10px 14px; margin-right: 14px; cursor: pointer; }
 .dark .form input[type=file] { color: rgba(242,236,226,.6); }
-.guide-hero img { outline: 1px solid rgba(226,217,207,.18); }
+
 .form input[type=tel] { width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--taupe-light); font: 400 16px var(--sans); color: var(--black); padding: 8px 0; border-radius: 0; }
 .dark .form input[type=tel] { color: var(--cream); border-bottom-color: rgba(226,217,207,.35); }
 .form input::placeholder { color: rgba(140,123,107,.6); }

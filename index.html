@@ -713,8 +713,8 @@
     .link-arrow { display: inline-block; margin-top: 22px; font-size: 13px; color: var(--copper); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
     /* salary guide */
     .guide { padding: clamp(96px, 12vw, 150px) var(--gutter); background: var(--ink); color: var(--cream); }
-    .guide-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
-    .guide-cover { width: 100%; height: auto; box-shadow: 0 30px 60px rgba(0,0,0,.45); transform: rotate(-2deg); }
+    .guide-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+    .guide-cover { width: 100%; height: auto; }
     .guide .title { color: var(--cream); } .guide .body { color: rgba(242,236,226,0.72); max-width: 480px; }
     .guide-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; max-width: 560px; }
     .guide-form label { display: block; }
@@ -726,7 +726,7 @@
     .guide-form .hp { position: absolute; left: -9999px; }
     .guide-form .opt { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.55; color: rgba(242,236,226,0.6); cursor: pointer; }
     .guide-form .opt input { width: auto; margin-top: 3px; accent-color: var(--copper); }
-    @media (max-width: 760px) { .founder-inner, .guide-inner { grid-template-columns: 1fr; } .founder-photo { max-width: 220px; } .guide-cover { max-width: 220px; } .guide-form { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) { .founder-inner, .guide-inner { grid-template-columns: 1fr; } .founder-photo { max-width: 220px; } .guide-cover { max-width: 100%; } .guide-form { grid-template-columns: 1fr; } }
     .hero-actions { margin-bottom: 72px; }
     /* insights */
     .insights { padding: clamp(90px, 11vw, 140px) var(--gutter); background: var(--cream); }
@@ -1515,7 +1515,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
   <!-- SALARY GUIDE -->
   <section class="guide" id="salary-guide" aria-labelledby="guide-title">
     <div class="guide-inner">
-      <img class="guide-cover reveal" src="assets/img/salary-guide-cover-v2-600.webp" alt="Cover of the 2026 Construction Leadership Salary Guide" width="600" height="776" loading="lazy" decoding="async">
+      <img class="guide-cover reveal" src="assets/img/salary-guide-mockup-1200.webp" srcset="assets/img/salary-guide-mockup-1200.webp 1200w, assets/img/salary-guide-mockup-1800.webp 1800w" sizes="(max-width: 760px) 92vw, 45vw" alt="The 2026 Construction Leadership Salary Guide, cover and inside pages" width="1200" height="833" loading="lazy" decoding="async">
       <div>
         <p class="eyebrow reveal">2026 Salary Guide</p>
         <h2 class="title reveal" id="guide-title">What builders are<br><em>paying this year.</em></h2>
