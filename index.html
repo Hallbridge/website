@@ -753,6 +753,19 @@
     .mobile-menu .mm-items a { display: block; font-family: var(--sans); font-size: 16px; line-height: 1.4; padding: 9px 0; color: rgba(242,236,226,.82); }
     .mobile-menu .mm-cta { display: flex; justify-content: center; margin-top: 30px; font-family: var(--sans); font-size: 12px; line-height: 1; color: #fff; }
     .mobile-menu .mm-foot { margin-top: 26px; }
+    .mm-sub { font-size: 10px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--copper-light); margin: 14px 0 2px; }
+    .mm-sub:first-child { margin-top: 0; }
+    .foot-connect { margin-top: 26px; font-size: 14px; line-height: 2; text-align: center; }
+    .foot-connect a { color: var(--taupe-light); text-decoration: none; }
+    .foot-connect a:hover { color: var(--cream); }
+    /* mega menu (Digital Growth) */
+    .dd-mega .dd-panel { width: min(960px, 94vw); padding: 22px 14px 14px; }
+    .dd-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .dd-h { font-size: 10px; letter-spacing: 1.8px; white-space: nowrap; text-transform: uppercase; color: var(--copper-light); padding: 10px 14px 6px; }
+    .dd-mega .dd-panel b { font-size: 13px; font-weight: 400; color: rgba(242,236,226,.86); }
+    .nav-links .dd-mega .dd-panel a { padding: 8px 14px; }
+    .nav-links .dd-panel a.dd-all { display: block; margin-top: 10px; padding: 14px; border-top: 1px solid rgba(226,217,207,.12); font-size: 12px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--copper-light); }
+    .foot-top { grid-template-columns: 1.3fr repeat(4, 1fr); gap: 40px; }
     /* BRIDGE values */
     .values { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream); }
     .values-inner { max-width: 1440px; margin: 0 auto; }
@@ -1004,12 +1017,12 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       <img class="mono on-light" src="assets/monogram.svg" alt="Hallbridge" width="46" height="46">
     </a>
     <ul class="nav-links">
-      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">For Employers<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Find the leaders who deliver</p><a href="/recruiting/"><b>Search Services<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Contingency, retained and executive search</small></a><a href="/#roles"><b>Roles We Place<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From the field to the executive suite</small></a><a href="/#markets"><b>Markets<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>High-rise, multifamily, student housing</small></a><a href="/recruiting/#market-intelligence"><b>Market Intelligence<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay benchmarks and talent mapping</small></a><a href="/#process"><b>How It Works<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From discovery to placement</small></a></div></div></li>
-      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">Client Services<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Look better, grow faster</p><a href="/#websites"><b>Contractor Websites<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Design, build and care for contractor sites</small></a><a href="/#look-better"><b>Branding, Photo &amp; Video<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Logos, photography, drone and video</small></a><a href="/#grow"><b>Business Development Research<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Target accounts, contacts and CRM setup</small></a></div></div></li>
+      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">For Employers<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Recruiting and executive search</p><a href="/recruiting/#executive-search"><b>Executive Search<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Leadership for the people who run the business</small></a><a href="/recruiting/#contingency"><b>Contingency Recruiting<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>No upfront cost, pay only when we place</small></a><a href="/recruiting/#retained"><b>Retained Search<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Dedicated focus for critical hires</small></a><a href="/#roles"><b>Positions We Fill<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From the field to the executive suite</small></a><a href="/#markets"><b>Industries We Serve<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>High-rise, multifamily, student housing</small></a><a href="/recruiting/#market-intelligence"><b>Market Intelligence<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay benchmarks and talent mapping</small></a></div></div></li>
       <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">For Candidates<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Your next build, confidentially</p><a href="/candidates/"><b>Work With Us<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Confidential, and never a fee</small></a><a href="/candidates/#resume-review"><b>Free Resume Review<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Honest feedback from a construction recruiter</small></a><a href="/salary-guide/"><b>2026 Salary Guide<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>What builders are paying this year</small></a><a href="/candidates/#submit"><b>Submit Your Resume<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Start a confidential conversation</small></a></div></div></li>
-      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">About<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Who we are and how we work</p><a href="/#about"><b>Our Story<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Construction-only recruiting and client services</small></a><a href="/#values"><b>Our Values<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>The Hallbridge Standard: BRIDGE</small></a><a href="/#track-record"><b>Track Record<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Placements from coast to coast</small></a><a href="/#testimonials"><b>Testimonials<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From clients and placed candidates</small></a><a href="/blog/"><b>Insights<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay data and advice for builders</small></a></div></div></li>
+      <li class="dd dd-mega"><button type="button" class="dd-btn" aria-expanded="false">Digital Growth<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Websites, brand and business development for builders</p><div class="dd-cols"><div class="dd-col"><p class="dd-h">Websites &amp; Digital Presence</p><a href="/digital-growth/#contractor-websites"><b>Contractor Websites<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#website-redesign"><b>Website Redesign<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#website-maintenance"><b>Website Maintenance<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Branding &amp; Creative</p><a href="/digital-growth/#branding"><b>Branding &amp; Logo Design<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#photography"><b>Photography &amp; Drone<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#video"><b>Video &amp; Content<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/on-site/"><b>On-Site Content Days<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Business Development</p><a href="/digital-growth/#target-accounts"><b>Target Account Research<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#company-intelligence"><b>Contact &amp; Company Intelligence<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#market-research"><b>Market Research<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Technology &amp; Automation</p><a href="/digital-growth/#crm"><b>CRM &amp; Business Systems<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#automation"><b>AI &amp; Workflow Automation<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div></div><a class="dd-all" href="/digital-growth/">Explore Digital Growth &rarr;</a></div></div></li>
+      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">About<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Who we are and how we work</p><a href="/#about"><b>Our Story<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Construction-only, built on relationships</small></a><a href="/#values"><b>Our Approach<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>The Hallbridge Standard: BRIDGE</small></a><a href="/#track-record"><b>Track Record<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Placements from coast to coast</small></a><a href="/#testimonials"><b>Testimonials<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From clients and placed candidates</small></a><a href="/blog/"><b>Insights<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay data and advice for builders</small></a></div></div></li>
     </ul>
-    <a href="#contact" class="btn btn-copper nav-cta">Start a Search</a>
+    <a href="/#contact" class="btn btn-copper nav-cta">Start a Conversation</a>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
     </button>
@@ -1017,11 +1030,11 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="mm-wrap">
-      <details class="mm-acc"><summary>For Employers</summary><div class="mm-items"><a href="/recruiting/">Search Services</a><a href="/#roles">Roles We Place</a><a href="/#markets">Markets</a><a href="/recruiting/#market-intelligence">Market Intelligence</a><a href="/#process">How It Works</a></div></details>
-      <details class="mm-acc"><summary>Client Services</summary><div class="mm-items"><a href="/#websites">Contractor Websites</a><a href="/#look-better">Branding, Photo &amp; Video</a><a href="/#grow">Business Development Research</a></div></details>
+      <details class="mm-acc"><summary>For Employers</summary><div class="mm-items"><a href="/recruiting/#executive-search">Executive Search</a><a href="/recruiting/#contingency">Contingency Recruiting</a><a href="/recruiting/#retained">Retained Search</a><a href="/#roles">Positions We Fill</a><a href="/#markets">Industries We Serve</a><a href="/recruiting/#market-intelligence">Market Intelligence</a></div></details>
       <details class="mm-acc"><summary>For Candidates</summary><div class="mm-items"><a href="/candidates/">Work With Us</a><a href="/candidates/#resume-review">Free Resume Review</a><a href="/salary-guide/">2026 Salary Guide</a><a href="/candidates/#submit">Submit Your Resume</a></div></details>
-      <details class="mm-acc"><summary>About</summary><div class="mm-items"><a href="/#about">Our Story</a><a href="/#values">Our Values</a><a href="/#track-record">Track Record</a><a href="/#testimonials">Testimonials</a><a href="/blog/">Insights</a></div></details>
-      <a class="btn btn-copper mm-cta" href="/#contact">Start a Search</a>
+      <details class="mm-acc"><summary>Digital Growth</summary><div class="mm-items"><p class="mm-sub">Websites &amp; Digital Presence</p><a href="/digital-growth/#contractor-websites">Contractor Websites</a><a href="/digital-growth/#website-redesign">Website Redesign</a><a href="/digital-growth/#website-maintenance">Website Maintenance</a><p class="mm-sub">Branding &amp; Creative</p><a href="/digital-growth/#branding">Branding &amp; Logo Design</a><a href="/digital-growth/#photography">Photography &amp; Drone</a><a href="/digital-growth/#video">Video &amp; Content</a><a href="/digital-growth/on-site/">On-Site Content Days</a><p class="mm-sub">Business Development</p><a href="/digital-growth/#target-accounts">Target Account Research</a><a href="/digital-growth/#company-intelligence">Contact &amp; Company Intelligence</a><a href="/digital-growth/#market-research">Market Research</a><p class="mm-sub">Technology &amp; Automation</p><a href="/digital-growth/#crm">CRM &amp; Business Systems</a><a href="/digital-growth/#automation">AI &amp; Workflow Automation</a><a href="/digital-growth/">All Digital Growth</a></div></details>
+      <details class="mm-acc"><summary>About</summary><div class="mm-items"><a href="/#about">Our Story</a><a href="/#values">Our Approach</a><a href="/#track-record">Track Record</a><a href="/#testimonials">Testimonials</a><a href="/blog/">Insights</a></div></details>
+      <a class="btn btn-copper mm-cta" href="/#contact">Start a Conversation</a>
       <div class="mm-foot"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a></div>
     </div>
   </div>
@@ -1220,7 +1233,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
     <div class="cs-inner">
       <div class="section-head">
         <div>
-          <p class="eyebrow reveal">Client Services</p>
+          <p class="eyebrow reveal">Two Divisions</p>
           <h2 class="title reveal">More than recruiting.<br><em>Built for builders.</em></h2>
         </div>
         <p class="body reveal">Recruiting is still the core of what we do. Our clients kept asking for help with the rest: how they show up online, who to go after next and the systems behind it. Now we help with that too, for construction companies only.</p>
@@ -1231,21 +1244,21 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
           <h3>Hire <em>better</em></h3>
           <p>Construction recruiting and executive search, from field leadership to the C-suite.</p>
           <ul><li>PMs, superintendents and estimators</li><li>Preconstruction and executive search</li><li>Talent mapping and comp research</li></ul>
-          <a class="pillar-link" href="#services">Recruiting services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+          <a class="pillar-link" href="/recruiting/">Recruiting services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         </div>
         <div class="pillar reveal" id="look-better">
           <div class="pillar-num">02</div>
           <h3>Look <em>better</em></h3>
           <p>Branding and websites that show what you have built, to owners, developers and the people you want to hire.</p>
           <ul><li>Branding and logo refreshes</li><li>Websites and redesigns</li><li>Project portfolios and careers pages</li><li>Photography, drone and video</li></ul>
-          <a class="pillar-link" href="#websites">Builder websites <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+          <a class="pillar-link" href="/digital-growth/#websites">Digital Growth <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         </div>
         <div class="pillar reveal" id="grow">
           <div class="pillar-num">03</div>
           <h3>Grow</h3>
           <p>The research and setup behind business development, so your team knows who to call next.</p>
           <ul><li>Market and target-account research</li><li>Contact databases</li><li>CRM setup</li></ul>
-          <a class="pillar-link" href="mailto:info@hallbridge.co?subject=Client%20Services">Start a conversation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+          <a class="pillar-link" href="/digital-growth/#business-development">Business development <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         </div>
       </div>
     </div>
@@ -1272,7 +1285,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <p class="web-concept reveal"><b>Photo and video.</b> We also offer on-site photography, drone and video for your team and your projects.</p>
         <div class="web-actions reveal">
           <a href="mailto:info@hallbridge.co?subject=Website%20Concept" class="btn btn-copper">Request a Concept <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-          <a href="#client-services" class="btn btn-line">All Client Services</a>
+          <a href="/digital-growth/" class="btn btn-line">Explore Digital Growth</a>
         </div>
       </div>
       <div class="mock reveal" role="img" aria-label="Example of a contractor website on a laptop and phone, with a project portfolio and careers page">
@@ -1340,7 +1353,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <p class="eyebrow reveal">Our Founder</p>
         <h2 class="title reveal" id="founder-title">Alex Hall</h2>
         <p class="founder-role reveal">Founder &amp; Head of Recruiting</p>
-        <p class="body reveal">Alex founded The Hallbridge Company and leads its recruiting and client services work. He is the point of contact on every search and every website, so clients work with the person doing the work from the first call to the finished hire or launch.</p>
+        <p class="body reveal">Alex founded The Hallbridge Company and leads its recruiting and digital growth work. He is the point of contact on every search and every website, so clients work with the person doing the work from the first call to the finished hire or launch.</p>
         <a class="link-arrow reveal" href="https://www.linkedin.com/in/hallbridge" target="_blank" rel="noopener">Connect on LinkedIn &rarr;</a>
       </div>
     </div>
@@ -1584,22 +1597,23 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <div class="foot-brand">
           <img class="mono" src="/assets/monogram-footer.svg" alt="Hallbridge bridge monogram" width="64" height="64">
           <img class="word" src="/assets/thc-wordmark-on-dark.png" alt="The Hallbridge Company" width="320" height="95">
+          <p class="foot-connect"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a><br><a href="https://www.linkedin.com/company/thehallbridgecompany" target="_blank" rel="noopener">LinkedIn</a></p>
         </div>
         <div>
           <h3>Company</h3>
-          <ul><li><a href="/#about">Our Story</a></li><li><a href="/#values">Our Values</a></li><li><a href="/#track-record">Track Record</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/blog/">Insights</a></li><li><a href="/#faq">FAQ</a></li></ul>
+          <ul><li><a href="/#about">Our Story</a></li><li><a href="/#values">Our Approach</a></li><li><a href="/#track-record">Track Record</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/blog/">Insights</a></li><li><a href="/#contact">Contact</a></li></ul>
         </div>
         <div>
           <h3>Employers</h3>
-          <ul><li><a href="/recruiting/">Search Services</a></li><li><a href="/#roles">Roles We Place</a></li><li><a href="/#markets">Markets</a></li><li><a href="/recruiting/#market-intelligence">Market Intelligence</a></li><li><a href="/#websites">Contractor Websites</a></li><li><a href="/#look-better">Branding, Photo &amp; Video</a></li></ul>
+          <ul><li><a href="/recruiting/#executive-search">Executive Search</a></li><li><a href="/recruiting/#contingency">Contingency Recruiting</a></li><li><a href="/recruiting/#retained">Retained Search</a></li><li><a href="/#roles">Positions We Fill</a></li><li><a href="/#markets">Industries We Serve</a></li><li><a href="/recruiting/#market-intelligence">Market Intelligence</a></li></ul>
         </div>
         <div>
           <h3>Candidates</h3>
           <ul><li><a href="/candidates/">Work With Us</a></li><li><a href="/candidates/#resume-review">Free Resume Review</a></li><li><a href="/salary-guide/">2026 Salary Guide</a></li><li><a href="/candidates/#submit">Submit Your Resume</a></li></ul>
         </div>
         <div>
-          <h3>Connect</h3>
-          <ul><li><a href="/#contact">Start a Search</a></li><li><a href="mailto:info@hallbridge.co">info@hallbridge.co</a></li><li><a href="tel:+18138500583">(813) 850-0583</a></li><li><a href="https://www.linkedin.com/company/thehallbridgecompany">LinkedIn</a></li></ul>
+          <h3>Digital Growth</h3>
+          <ul><li><a href="/digital-growth/#websites">Contractor Websites</a></li><li><a href="/digital-growth/#creative">Branding &amp; Creative</a></li><li><a href="/digital-growth/#business-development">Business Development</a></li><li><a href="/digital-growth/#technology">Technology &amp; Automation</a></li></ul>
         </div>
       </div>
       <div class="foot-bottom">

@@ -26,6 +26,7 @@ Every design is saved as a git tag, so any version can be restored.
 | `v3.4-intro-3d` | 3D intro on the home page: copper wireframe bridge assembles beam by beam, camera flies across it to a crane skyline at dawn, THE HALLBRIDGE COMPANY lands; opt-in generated sound; once per session, skippable, off for reduced motion. Hero line adds recruiting |
 | `v3.6-bridge-insights` | BRIDGE values (The Hallbridge Standard), nav dropdowns (About / Hiring Managers / Client Services / Candidates), founder section with headshot, 2026 Salary Guide email signup (Netlify form + thank-you page), Insights blog with 5 posts, hero website link removed, Who We Are points folded in, privacy updated for the form |
 | `v3.7-ia` | Nav: For Employers / Client Services / For Candidates / About with dark dropdown panels; new pages /recruiting/, /candidates/ (resume form + upload), /salary-guide/ (email-only guide form); phone accordion menu; 4-column footer; blog on the shared nav; guide details and old "Talent Partners" cover removed |
+| `v3.8-two-divisions` | Final architecture: Recruiting & Executive Search + Digital Growth. Nav For Employers / For Candidates / Digital Growth (4-column mega menu) / About + Start a Conversation; /digital-growth/ and /digital-growth/on-site/ pages; dark color-matched section photos; longer resume form; no prices or packages on site |
 
 ## Revert the live site to an older version
 
