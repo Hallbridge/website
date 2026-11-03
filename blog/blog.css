@@ -42,3 +42,8 @@ footer{border-top:1px solid var(--pale);padding:28px var(--gutter);display:flex;
 footer a{text-decoration:none}
 @media(max-width:860px){.cards{grid-template-columns:1fr}.bnav .links a:not(.cta){display:none}}
 @media(max-width:600px){table{font-size:13px}td,th{padding:9px 5px}td.n{white-space:nowrap}}
+/* inside the main site shell */
+body.sub{background:var(--cream)}
+.sub .wrap{padding-top:clamp(140px,14vw,180px)}
+.sub footer{display:block;border-top:1px solid rgba(184,115,51,0.3);padding:80px var(--gutter) 40px;font-size:inherit}
+.sub .bnav{display:none}
