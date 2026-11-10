@@ -884,3 +884,18 @@ body.sub { background: var(--cream); }
   .mfg-hero::before { background: linear-gradient(180deg, rgba(21,16,12,.88) 0%, rgba(21,16,12,.9) 100%); }
 }
 @media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
+
+/* sections moved off the home page (11/10): markets, process and FAQ on /recruiting/, statement, values and founder on /about/.
+   Their base rules are above (shared with the home page); these only align them to the 1100px inner-page grid. */
+.sub .process-inner, .sub .faq-inner, .sub .values-inner, .sub .founder-inner { max-width: 1100px; }
+.sub .markets > .section-head, .sub .markets-row { max-width: calc(1100px + 2 * var(--gutter)); }
+.title, .page-hero h1, .cta-band h2, .statement blockquote, .value h3 { text-wrap: balance; }
+.body, .page-hero .lede, .founder .body { text-wrap: pretty; }
+
+/* About page: a calm, editorial sequence */
+.about-page .statement { justify-content: center; text-align: center; border-top: 1px solid rgba(184,115,51,0.3); }
+.about-page .statement::after { background: radial-gradient(ellipse at center, rgba(21,16,12,0.6) 0%, rgba(21,16,12,0.88) 70%); }
+.about-page .statement-inner { margin: 0 auto; max-width: 1000px; }
+.about-page .founder { padding: clamp(96px, 12vw, 160px) var(--gutter); }
+/* inner pages run the markets row on a narrower grid: let long labels wrap instead of clipping */
+.sub .market-text h3 { white-space: normal; font-size: clamp(17px, 1.5vw, 22px); line-height: 1.15; }

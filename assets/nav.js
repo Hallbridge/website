@@ -42,7 +42,21 @@
       if (u.pathname === location.pathname && u.hash === location.hash) setTimeout(landOnSection, 0);
     });
   });
-  var els = document.querySelectorAll('.reveal, .reveal-img');
+  /* Parallax on the statement band (About page), same motion as the home page used. */
+  var par = document.querySelector('[data-parallax]');
+  if (par && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        var r = par.parentElement.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < innerHeight) { var p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; par.style.transform = 'translate3d(0,' + (p * -60) + 'px,0)'; }
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+  /* .steps (the search process timeline) draws its line when it gets .in */
+  var els = document.querySelectorAll('.reveal, .reveal-img, .steps');
   if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
   var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
   els.forEach(function (el) { io.observe(el); });
