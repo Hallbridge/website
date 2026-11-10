@@ -473,6 +473,9 @@
 
     /* ── WEBSITES FOR BUILDERS ── */
     .web { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream-dark); border-top: 1px solid var(--taupe-pale); overflow: hidden; }
+    /* hairlines where two like backgrounds meet in the page order */
+    .about + .cs { border-top: 1px solid var(--taupe-pale); }
+    .candidates + .contact { border-top: 1px solid rgba(184,115,51,0.3); }
     .web-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.08fr; gap: clamp(48px, 6vw, 110px); align-items: center; }
     .web-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; margin-top: 40px; border-top: 1px solid var(--taupe-pale); }
     .web-list li { font-size: 14px; line-height: 1.5; color: var(--charcoal); padding: 14px 0; border-bottom: 1px solid var(--taupe-pale); display: flex; gap: 12px; align-items: baseline; }
@@ -516,6 +519,13 @@
     .mock-screen .ph-row { white-space: nowrap; gap: 6px; align-items: baseline; letter-spacing: .3px; margin-left: 8%; margin-right: 8%; font-size: clamp(5.5px, .5vw, 7.5px); }
     .mock-tag { position: absolute; left: -10px; bottom: 18%; background: var(--black); color: var(--cream); font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
     .mock-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--copper-light); }
+    .mock-live { padding: 0; }
+    .mock-live .mock-hero { aspect-ratio: 16 / 10; }
+    .mock-live .mock-hero::after { display: none; }
+    .mock-live .mock-strip figure { aspect-ratio: 16 / 10; }
+    .mock-live video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mock-note { margin-top: 22px; font-size: 14px; line-height: 1.7; color: #5B5048; }
+    .mock-note .link-arrow { display: inline; margin: 0 0 0 6px; padding: 0; white-space: nowrap; }
 
     /* ── ROLES ── */
     .roles { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
@@ -817,10 +827,10 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       <img class="mono on-light" src="assets/monogram.svg" alt="Hallbridge" width="46" height="46">
     </a>
     <ul class="nav-links">
-      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">For Employers<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Recruiting and executive search</p><a href="/recruiting/#executive-search"><b>Executive Search<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Leadership for the people who run the business</small></a><a href="/recruiting/#contingency"><b>Contingency Recruiting<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>No upfront cost, pay only when we place</small></a><a href="/recruiting/#retained"><b>Retained Search<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Dedicated focus for critical hires</small></a><a href="/#roles"><b>Positions We Fill<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From the field to the executive suite</small></a><a href="/recruiting/#markets"><b>Industries We Serve<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>High-rise, multifamily, student housing</small></a><a href="/recruiting/#market-intelligence"><b>Market Intelligence<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay benchmarks and talent mapping</small></a></div></div></li>
-      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">For Candidates<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Your next build, confidentially</p><a href="/candidates/"><b>Work With Us<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Confidential, and never a fee</small></a><a href="/candidates/#resume-review"><b>Free Resume Review<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Honest feedback from a construction recruiter</small></a><a href="/salary-guide/"><b>2026 Salary Guide<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>What builders are paying this year</small></a><a href="/candidates/#submit"><b>Submit Your Resume<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Start a confidential conversation</small></a></div></div></li>
-      <li class="dd dd-mega"><button type="button" class="dd-btn" aria-expanded="false">Digital Growth<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Websites, brand and business development for builders and manufacturers</p><div class="dd-cols"><div class="dd-col"><p class="dd-h">Websites &amp; Digital Presence</p><a href="/digital-growth/websites/"><b>Contractor Websites<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/manufacturing/"><b>Manufacturer Websites<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#website-redesign"><b>Website Redesign<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#website-maintenance"><b>Website Maintenance<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Branding &amp; Creative</p><a href="/digital-growth/#branding"><b>Branding &amp; Logo Design<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#photography"><b>Photography &amp; Drone<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#video"><b>Video &amp; Content<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/on-site/"><b>On-Site Content Days<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Business Development</p><a href="/digital-growth/#target-accounts"><b>Target Account Research<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#company-intelligence"><b>Contact &amp; Company Intelligence<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#market-research"><b>Market Research<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Technology &amp; Automation</p><a href="/digital-growth/#crm"><b>CRM &amp; Business Systems<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#automation"><b>AI &amp; Workflow Automation<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div></div><a class="dd-all" href="/digital-growth/">Explore Digital Growth &rarr;</a></div></div></li>
-      <li class="dd"><button type="button" class="dd-btn" aria-expanded="false">About<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Who we are and how we work</p><a href="/about/"><b>Our Story<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Construction-only, built on relationships</small></a><a href="/about/#values"><b>Our Approach<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>The Hallbridge Standard: BRIDGE</small></a><a href="/#track-record"><b>Track Record<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Placements from coast to coast</small></a><a href="/#testimonials"><b>Testimonials<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From clients and placed candidates</small></a><a href="/blog/"><b>Insights<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay data and hiring advice</small></a></div></div></li>
+      <li class="dd"><a class="dd-btn" href="/recruiting/" aria-expanded="false">For Companies<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Recruiting and executive search</p><a href="/recruiting/#executive-search"><b>Executive Search<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Leadership for the people who run the business</small></a><a href="/recruiting/#contingency"><b>Contingency Recruiting<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>No upfront cost, pay only when we place</small></a><a href="/recruiting/#retained"><b>Retained Search<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Dedicated focus for critical hires</small></a><a href="/#roles"><b>Positions We Fill<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From the field to the executive suite</small></a><a href="/recruiting/#markets"><b>Industries We Serve<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>High-rise, multifamily, student housing</small></a><a href="/recruiting/#market-intelligence"><b>Market Intelligence<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay benchmarks and talent mapping</small></a></div></div></li>
+      <li class="dd"><a class="dd-btn" href="/candidates/" aria-expanded="false">For Candidates<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Your next build, confidentially</p><a href="/candidates/"><b>Work With Us<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Confidential, and never a fee</small></a><a href="/candidates/#resume-review"><b>Free Resume Review<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Honest feedback from a construction recruiter</small></a><a href="/salary-guide/"><b>2026 Salary Guide<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>What builders are paying this year</small></a><a href="/candidates/#submit"><b>Submit Your Resume<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Start a confidential conversation</small></a></div></div></li>
+      <li class="dd dd-mega"><a class="dd-btn" href="/digital-growth/" aria-expanded="false">Digital Growth<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Websites, brand and business development for builders and manufacturers</p><div class="dd-cols"><div class="dd-col"><p class="dd-h">Websites &amp; Digital Presence</p><a href="/digital-growth/websites/"><b>Contractor Websites<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/manufacturing/"><b>Manufacturer Websites<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#website-redesign"><b>Website Redesign<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#website-maintenance"><b>Website Maintenance<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Branding &amp; Creative</p><a href="/digital-growth/#branding"><b>Branding &amp; Logo Design<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#photography"><b>Photography &amp; Drone<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#video"><b>Video &amp; Content<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/on-site/"><b>On-Site Content Days<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Business Development</p><a href="/digital-growth/#target-accounts"><b>Target Account Research<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#company-intelligence"><b>Contact &amp; Company Intelligence<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#market-research"><b>Market Research<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div><div class="dd-col"><p class="dd-h">Technology &amp; Automation</p><a href="/digital-growth/#crm"><b>CRM &amp; Business Systems<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a><a href="/digital-growth/#automation"><b>AI &amp; Workflow Automation<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b></a></div></div><a class="dd-all" href="/digital-growth/">Explore Digital Growth &rarr;</a></div></div></li>
+      <li class="dd"><a class="dd-btn" href="/about/" aria-expanded="false">About<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a><div class="dd-menu"><div class="dd-panel"><p class="dd-lead">Who we are and how we work</p><a href="/about/"><b>Our Story<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Construction-only, built on relationships</small></a><a href="/about/#values"><b>Our Approach<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>The Hallbridge Standard: BRIDGE</small></a><a href="/#track-record"><b>Track Record<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Placements from coast to coast</small></a><a href="/#testimonials"><b>Testimonials<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>From clients and placed candidates</small></a><a href="/blog/"><b>Insights<svg class="dd-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></b><small>Pay data and hiring advice</small></a></div></div></li>
     </ul>
     <a href="/#contact" class="btn btn-copper nav-cta">Start a Conversation</a>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -830,7 +840,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="mm-wrap">
-      <details class="mm-acc"><summary>For Employers</summary><div class="mm-items"><a href="/recruiting/#executive-search">Executive Search</a><a href="/recruiting/#contingency">Contingency Recruiting</a><a href="/recruiting/#retained">Retained Search</a><a href="/#roles">Positions We Fill</a><a href="/recruiting/#markets">Industries We Serve</a><a href="/recruiting/#market-intelligence">Market Intelligence</a></div></details>
+      <details class="mm-acc"><summary>For Companies</summary><div class="mm-items"><a href="/recruiting/">All Search Services</a><a href="/recruiting/#executive-search">Executive Search</a><a href="/recruiting/#contingency">Contingency Recruiting</a><a href="/recruiting/#retained">Retained Search</a><a href="/#roles">Positions We Fill</a><a href="/recruiting/#markets">Industries We Serve</a><a href="/recruiting/#market-intelligence">Market Intelligence</a></div></details>
       <details class="mm-acc"><summary>For Candidates</summary><div class="mm-items"><a href="/candidates/">Work With Us</a><a href="/candidates/#resume-review">Free Resume Review</a><a href="/salary-guide/">2026 Salary Guide</a><a href="/candidates/#submit">Submit Your Resume</a></div></details>
       <details class="mm-acc"><summary>Digital Growth</summary><div class="mm-items"><p class="mm-sub">Websites &amp; Digital Presence</p><a href="/digital-growth/websites/">Contractor Websites</a><a href="/digital-growth/manufacturing/">Manufacturer Websites</a><a href="/digital-growth/#website-redesign">Website Redesign</a><a href="/digital-growth/#website-maintenance">Website Maintenance</a><p class="mm-sub">Branding &amp; Creative</p><a href="/digital-growth/#branding">Branding &amp; Logo Design</a><a href="/digital-growth/#photography">Photography &amp; Drone</a><a href="/digital-growth/#video">Video &amp; Content</a><a href="/digital-growth/on-site/">On-Site Content Days</a><p class="mm-sub">Business Development</p><a href="/digital-growth/#target-accounts">Target Account Research</a><a href="/digital-growth/#company-intelligence">Contact &amp; Company Intelligence</a><a href="/digital-growth/#market-research">Market Research</a><p class="mm-sub">Technology &amp; Automation</p><a href="/digital-growth/#crm">CRM &amp; Business Systems</a><a href="/digital-growth/#automation">AI &amp; Workflow Automation</a><a href="/digital-growth/">All Digital Growth</a></div></details>
       <details class="mm-acc"><summary>About</summary><div class="mm-items"><a href="/about/">Our Story</a><a href="/about/#values">Our Approach</a><a href="/#track-record">Track Record</a><a href="/#testimonials">Testimonials</a><a href="/blog/">Insights</a></div></details>
@@ -864,31 +874,57 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
     <div class="scroll-cue" aria-hidden="true">Scroll</div>
   </section>
 
-  <!-- ROLES -->
-  <section class="roles" id="roles">
-    <div class="roles-media rs" id="fieldSuite" style="--x:90%">
-      <img class="rs-base" src="assets/img/field-hardhat-v3-1280.webp" srcset="assets/img/field-hardhat-v3-640.webp 640w, assets/img/field-hardhat-v3-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction superintendent in a red hard hat on a concrete jobsite" loading="lazy" decoding="async">
-      <div class="rs-top"><img src="assets/img/exec-office-v3-1280.webp" srcset="assets/img/exec-office-v3-640.webp 640w, assets/img/exec-office-v3-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction executive in a suit in his office" loading="lazy" decoding="async"></div>
-      <span class="rs-label rs-l">The Field</span><span class="rs-label rs-r">The Executive Suite</span>
-      <div class="rs-line" aria-hidden="true"><span class="rs-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
-      <input class="rs-range" type="range" min="0" max="100" value="90" aria-label="Slide to compare the field and the executive suite">
-      <p class="cap">From the field to the executive suite.</p>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-media">
+      <div class="frame" aria-hidden="true"></div>
+      <img class="main reveal-img" src="assets/img/crew-deck-v3-1280.webp" srcset="assets/img/crew-deck-v3-640.webp 640w, assets/img/crew-deck-v3-1280.webp 1280w" sizes="(max-width: 960px) 90vw, 45vw" alt="Construction project team standing together on a new concrete deck" decoding="async">
+      <img class="inset reveal-img" src="assets/img/jobsite-handshake-v2-900.webp" alt="Two construction leaders in hard hats shaking hands on a jobsite" decoding="async">
     </div>
-    <div class="roles-body">
-      <p class="eyebrow reveal">Specialties</p>
-      <h2 class="title reveal">The roles we<br><em>place best.</em></h2>
-      <p class="body reveal">Experienced professionals across every phase of construction, for commercial, residential, industrial and civil builders nationwide.</p>
-      <div class="roles-cols">
-        <div class="reveal">
-          <h3>Field Leadership</h3>
-          <ul><li>Superintendent</li><li>Field Operations Manager</li><li>Project Manager</li><li>Project Engineer</li><li>Assistant Field Staff</li></ul>
+    <div>
+      <p class="eyebrow reveal">Who We Are</p>
+      <h2 class="title reveal">Recruiting built on <em>relationships.</em></h2>
+      <p class="body reveal">The Hallbridge Company is an executive search firm focused only on construction. Over ten years in the industry means we know the timelines, the culture and the people who thrive on a jobsite.</p>
+      <p class="body reveal">We partner with general contractors, multifamily developers and engineering firms building $10M to $100M+ projects, and we find the leaders with the exact experience to drive them forward.</p>
+      <p class="body reveal">We're AI-powered behind the scenes, so research and market mapping move fast, leaving our time for a real conversation with every client and every candidate.</p>
+      <p class="body reveal">The best superintendents aren&rsquo;t on job boards. We already know them.</p>
+      <a class="link-arrow reveal" href="/about/">More about Hallbridge &rarr;</a>
+    </div>
+  </section>
+
+  <!-- CLIENT SERVICES -->
+  <section class="cs" id="client-services">
+    <div class="cs-inner">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Two Divisions</p>
+          <h2 class="title reveal">More than recruiting.<br><em>Built for builders.</em></h2>
         </div>
-        <div class="reveal">
-          <h3>Office &amp; Executive</h3>
-          <ul><li>Vice President</li><li>Director / Project Executive</li><li>Preconstruction Manager</li><li>Estimator</li><li>Civil Engineer</li></ul>
+        <p class="body reveal">Recruiting is still our core. Clients asked for help with the rest: how they show up online, who to call next and the systems behind it. Now we do that too, for construction companies only.</p>
+      </div>
+      <div class="cs-grid">
+        <div class="pillar reveal">
+          <div class="pillar-num">01</div>
+          <h3>Hire <em>better</em></h3>
+          <p>Construction recruiting and executive search, from field leadership to the C-suite.</p>
+          <ul><li>PMs, superintendents and estimators</li><li>Preconstruction and executive search</li><li>Talent mapping and comp research</li></ul>
+          <a class="pillar-link" href="/recruiting/">Recruiting services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        </div>
+        <div class="pillar reveal" id="look-better">
+          <div class="pillar-num">02</div>
+          <h3>Look <em>better</em></h3>
+          <p>Branding and websites that show what you have built, to owners, developers and the people you want to hire.</p>
+          <ul><li>Branding and logo refreshes</li><li>Websites and redesigns</li><li>Project portfolios and careers pages</li><li>Photography, drone and video</li></ul>
+          <a class="pillar-link" href="/digital-growth/#websites">Digital Growth <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        </div>
+        <div class="pillar reveal" id="grow">
+          <div class="pillar-num">03</div>
+          <h3>Grow</h3>
+          <p>The research and setup behind business development, so your team knows who to call next.</p>
+          <ul><li>Market and target-account research</li><li>Contact databases</li><li>CRM setup</li></ul>
+          <a class="pillar-link" href="/digital-growth/#business-development">Business development <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         </div>
       </div>
-      <p class="roles-note reveal">Need something else? <a href="#contact">Tell us the seat.</a></p>
     </div>
   </section>
 
@@ -925,6 +961,34 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
           <ul><li>Salary and bonus benchmarks</li><li>Competitor org mapping</li><li>New-market entry planning</li></ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="roles" id="roles">
+    <div class="roles-media rs" id="fieldSuite" style="--x:90%">
+      <img class="rs-base" src="assets/img/field-hardhat-v3-1280.webp" srcset="assets/img/field-hardhat-v3-640.webp 640w, assets/img/field-hardhat-v3-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction superintendent in a red hard hat on a concrete jobsite" loading="lazy" decoding="async">
+      <div class="rs-top"><img src="assets/img/exec-office-v3-1280.webp" srcset="assets/img/exec-office-v3-640.webp 640w, assets/img/exec-office-v3-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction executive in a suit in his office" loading="lazy" decoding="async"></div>
+      <span class="rs-label rs-l">The Field</span><span class="rs-label rs-r">The Executive Suite</span>
+      <div class="rs-line" aria-hidden="true"><span class="rs-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+      <input class="rs-range" type="range" min="0" max="100" value="90" aria-label="Slide to compare the field and the executive suite">
+      <p class="cap">From the field to the executive suite.</p>
+    </div>
+    <div class="roles-body">
+      <p class="eyebrow reveal">Specialties</p>
+      <h2 class="title reveal">The roles we<br><em>place best.</em></h2>
+      <p class="body reveal">Experienced professionals across every phase of construction, for commercial, residential, industrial and civil builders nationwide.</p>
+      <div class="roles-cols">
+        <div class="reveal">
+          <h3>Field Leadership</h3>
+          <ul><li>Superintendent</li><li>Field Operations Manager</li><li>Project Manager</li><li>Project Engineer</li><li>Assistant Field Staff</li></ul>
+        </div>
+        <div class="reveal">
+          <h3>Office &amp; Executive</h3>
+          <ul><li>Vice President</li><li>Director / Project Executive</li><li>Preconstruction Manager</li><li>Estimator</li><li>Civil Engineer</li></ul>
+        </div>
+      </div>
+      <p class="roles-note reveal">Need something else? <a href="#contact">Tell us the seat.</a></p>
     </div>
   </section>
 
@@ -1073,60 +1137,6 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
     </div>
   </section>
 
-  <!-- CANDIDATES -->
-  <section class="candidates dark" id="candidates">
-    <div class="cand-media">
-      <img class="reveal-img" src="assets/img/exec-rooftop-1600.webp" srcset="assets/img/exec-rooftop-800.webp 800w, assets/img/exec-rooftop-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 55vw" alt="Construction executive on a rooftop looking out over the city skyline at dusk" loading="lazy" decoding="async">
-    </div>
-    <div class="cand-body">
-      <p class="eyebrow reveal">For Candidates</p>
-      <h2 class="title reveal">Looking for your<br><em>next build?</em></h2>
-      <p class="body reveal">Hallbridge works for hiring companies, so we never charge candidates or post open roles. If you're an experienced builder open to the right move, we should already know your name.</p>
-      <ul class="cand-list reveal">
-        <li>Confidential. Your current employer never hears from us.</li>
-        <li>Straight answers on compensation, culture and the project pipeline.</li>
-        <li>An advocate through offers, negotiation and your first day.</li>
-      </ul>
-      <a href="/candidates/#submit" class="btn btn-copper reveal">Submit Your Resume <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-    </div>
-  </section>
-
-  <!-- CLIENT SERVICES -->
-  <section class="cs" id="client-services">
-    <div class="cs-inner">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow reveal">Two Divisions</p>
-          <h2 class="title reveal">More than recruiting.<br><em>Built for builders.</em></h2>
-        </div>
-        <p class="body reveal">Recruiting is still our core. Clients asked for help with the rest: how they show up online, who to call next and the systems behind it. Now we do that too, for construction companies only.</p>
-      </div>
-      <div class="cs-grid">
-        <div class="pillar reveal">
-          <div class="pillar-num">01</div>
-          <h3>Hire <em>better</em></h3>
-          <p>Construction recruiting and executive search, from field leadership to the C-suite.</p>
-          <ul><li>PMs, superintendents and estimators</li><li>Preconstruction and executive search</li><li>Talent mapping and comp research</li></ul>
-          <a class="pillar-link" href="/recruiting/">Recruiting services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-        </div>
-        <div class="pillar reveal" id="look-better">
-          <div class="pillar-num">02</div>
-          <h3>Look <em>better</em></h3>
-          <p>Branding and websites that show what you have built, to owners, developers and the people you want to hire.</p>
-          <ul><li>Branding and logo refreshes</li><li>Websites and redesigns</li><li>Project portfolios and careers pages</li><li>Photography, drone and video</li></ul>
-          <a class="pillar-link" href="/digital-growth/#websites">Digital Growth <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-        </div>
-        <div class="pillar reveal" id="grow">
-          <div class="pillar-num">03</div>
-          <h3>Grow</h3>
-          <p>The research and setup behind business development, so your team knows who to call next.</p>
-          <ul><li>Market and target-account research</li><li>Contact databases</li><li>CRM setup</li></ul>
-          <a class="pillar-link" href="/digital-growth/#business-development">Business development <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- WEBSITES FOR BUILDERS -->
   <section class="web" id="websites">
     <div class="web-inner">
@@ -1150,48 +1160,36 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
           <a href="mailto:info@hallbridge.co?subject=Website%20Concept" class="btn btn-copper">Request a Concept <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
         </div>
       </div>
-      <div class="mock reveal" role="img" aria-label="Example of a contractor website on a laptop and phone, with a project portfolio and careers page">
-        <div class="mock-browser" aria-hidden="true">
-          <div class="mock-bar"><i></i><i></i><i></i><span>yourcompany.com</span></div>
-          <div class="mock-hero">
-            <img src="assets/img/mock-glass-towers-800.webp" srcset="assets/img/mock-glass-towers-800.webp 800w, assets/img/mock-glass-towers-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw" alt="Glass office towers on an example contractor website" loading="lazy" decoding="async">
-            <div class="mock-nav"><b>YOUR COMPANY</b><span><span>Projects</span><span>Services</span><span>Careers</span><span>Contact</span></span></div>
-            <div class="mock-copy"><small>General Contractor &middot; Since 1998</small><strong>Built right.<br>Built on schedule.</strong><em>View Projects</em></div>
-          </div>
+      <div class="mock mock-live reveal">
+        <div class="mock-browser">
+          <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><span>concept site</span></div>
+          <div class="mock-hero"><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-frame-up-poster-1200.webp" data-src="/assets/video/lab-frame-up.mp4" aria-label="A three-story apartment building framing up in 3D on a concept site for a fictional framing contractor"></video></div>
           <div class="mock-strip">
-            <figure><img src="assets/img/mock-brick-multifamily-800.webp" srcset="assets/img/mock-brick-multifamily-800.webp 800w, assets/img/mock-brick-multifamily-1600.webp 1600w" sizes="16vw" alt="Brick multifamily building in a sample project portfolio" loading="lazy" decoding="async"><figcaption>Multifamily</figcaption></figure>
-            <figure><img src="assets/img/mock-glass-midrise-800.webp" srcset="assets/img/mock-glass-midrise-800.webp 800w, assets/img/mock-glass-midrise-1600.webp 1600w" sizes="16vw" alt="Glass mid-rise building in a sample project portfolio" loading="lazy" decoding="async"><figcaption>Mixed-Use</figcaption></figure>
-            <figure><img src="assets/img/mock-residential-tower-800.webp" srcset="assets/img/mock-residential-tower-800.webp 800w, assets/img/mock-residential-tower-1600.webp 1600w" sizes="16vw" alt="Residential tower in a sample project portfolio" loading="lazy" decoding="async"><figcaption>Student Housing</figcaption></figure>
+            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-stadium-poster-1200.webp" data-src="/assets/video/lab-stadium.mp4" aria-label="A stadium structure rising in 3D on a concept site for a fictional concrete contractor"></video></figure>
+            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-pour-poster-1200.webp" data-src="/assets/video/lab-pour.mp4" aria-label="Concrete being poured into a form on a concept site for a fictional flatwork contractor"></video></figure>
+            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-hand-drawn-poster-1200.webp" data-src="/assets/video/lab-hand-drawn.mp4" aria-label="Line drawings sketching themselves on a concept site for a fictional masonry contractor"></video></figure>
           </div>
         </div>
-        <div class="mock-phone" aria-hidden="true">
-          <div class="mock-screen">
-            <div class="ph-hero"><img src="assets/img/mock-crew-rebar-800.webp" srcset="assets/img/mock-crew-rebar-800.webp 800w, assets/img/mock-crew-rebar-1600.webp 1600w" sizes="170px" alt="Crew tying rebar on a sample careers page" loading="lazy" decoding="async"><b>Join a team that builds.</b></div>
-            <div class="ph-row"><span>Superintendent</span><i>Apply</i></div>
-            <div class="ph-row"><span>Project Manager</span><i>Apply</i></div>
-            <div class="ph-row"><span>Estimator</span><i>Apply</i></div>
-          </div>
-        </div>
-        <div class="mock-tag" aria-hidden="true">Desktop + Mobile</div>
+        <p class="mock-note">Working concept sites, built for fictional companies. <a class="link-arrow" href="/digital-growth/websites/#concepts">See all six &rarr;</a></p>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-media">
-      <div class="frame" aria-hidden="true"></div>
-      <img class="main reveal-img" src="assets/img/crew-deck-v3-1280.webp" srcset="assets/img/crew-deck-v3-640.webp 640w, assets/img/crew-deck-v3-1280.webp 1280w" sizes="(max-width: 960px) 90vw, 45vw" alt="Construction project team standing together on a new concrete deck" decoding="async">
-      <img class="inset reveal-img" src="assets/img/jobsite-handshake-v2-900.webp" alt="Two construction leaders in hard hats shaking hands on a jobsite" decoding="async">
+  <!-- CANDIDATES -->
+  <section class="candidates dark" id="candidates">
+    <div class="cand-media">
+      <img class="reveal-img" src="assets/img/exec-rooftop-1600.webp" srcset="assets/img/exec-rooftop-800.webp 800w, assets/img/exec-rooftop-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 55vw" alt="Construction executive on a rooftop looking out over the city skyline at dusk" loading="lazy" decoding="async">
     </div>
-    <div>
-      <p class="eyebrow reveal">Who We Are</p>
-      <h2 class="title reveal">Recruiting built on <em>relationships.</em></h2>
-      <p class="body reveal">The Hallbridge Company is an executive search firm focused only on construction. Over ten years in the industry means we know the timelines, the culture and the people who thrive on a jobsite.</p>
-      <p class="body reveal">We partner with general contractors, multifamily developers and engineering firms building $10M to $100M+ projects, and we find the leaders with the exact experience to drive them forward.</p>
-      <p class="body reveal">We're AI-powered behind the scenes, so research and market mapping move fast, leaving our time for a real conversation with every client and every candidate.</p>
-      <p class="body reveal">The best superintendents aren&rsquo;t on job boards. We already know them.</p>
-      <a class="link-arrow reveal" href="/about/">More about Hallbridge &rarr;</a>
+    <div class="cand-body">
+      <p class="eyebrow reveal">For Candidates</p>
+      <h2 class="title reveal">Looking for your<br><em>next build?</em></h2>
+      <p class="body reveal">Hallbridge works for hiring companies, so we never charge candidates or post open roles. If you're an experienced builder open to the right move, we should already know your name.</p>
+      <ul class="cand-list reveal">
+        <li>Confidential. Your current employer never hears from us.</li>
+        <li>Straight answers on compensation, culture and the project pipeline.</li>
+        <li>An advocate through offers, negotiation and your first day.</li>
+      </ul>
+      <a href="/candidates/#submit" class="btn btn-copper reveal">Submit Your Resume <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
     </div>
   </section>
 
@@ -1222,11 +1220,11 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
           <a class="li-btn" href="https://www.linkedin.com/company/thehallbridgecompany" target="_blank" rel="noopener" aria-label="The Hallbridge Company on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a>
         </div>
         <div>
-          <h3>Company</h3>
+          <h3>About</h3>
           <ul><li><a href="/about/">Our Story</a></li><li><a href="/about/#values">Our Approach</a></li><li><a href="/#track-record">Track Record</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/blog/">Insights</a></li><li><a href="/#contact">Contact</a></li></ul>
         </div>
         <div>
-          <h3>Employers</h3>
+          <h3>Companies</h3>
           <ul><li><a href="/recruiting/#executive-search">Executive Search</a></li><li><a href="/recruiting/#contingency">Contingency Recruiting</a></li><li><a href="/recruiting/#retained">Retained Search</a></li><li><a href="/#roles">Positions We Fill</a></li><li><a href="/recruiting/#markets">Industries We Serve</a></li><li><a href="/recruiting/#market-intelligence">Market Intelligence</a></li></ul>
         </div>
         <div>
@@ -1255,12 +1253,13 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
 
-      // nav dropdowns: click/tap toggles, Escape and outside click close
+      // nav dropdowns: headers are links; hover opens, first tap on touch opens, Escape and outside click close
       document.querySelectorAll('.dd-btn').forEach(function (b) {
         b.addEventListener('click', function (e) {
-          var li = b.parentElement, open = !li.classList.contains('open');
-          document.querySelectorAll('.dd.open').forEach(function (x) { x.classList.remove('open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); });
-          if (open) { li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+          var li = b.parentElement, touch = window.matchMedia('(hover: none)').matches;
+          if (touch && !li.classList.contains('open')) { e.preventDefault();
+            document.querySelectorAll('.dd.open').forEach(function (x) { x.classList.remove('open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); });
+            li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
           e.stopPropagation();
         });
       });
@@ -1394,5 +1393,12 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
     })();
   </script>
 
+<script>
+  (function(){var v=document.querySelectorAll('.lab-vid');if(!v.length)return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){var el=e.target;
+      if(e.isIntersecting){if(!el.src){el.src=el.dataset.src;}var p=el.play();if(p&&p.catch)p.catch(function(){});}else{el.pause();}});},{threshold:.35});
+    v.forEach(function(el){io.observe(el);});})();
+</script>
 </body>
 </html>

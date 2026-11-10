@@ -5,8 +5,10 @@
   function closeAll() { document.querySelectorAll('.dd.open').forEach(function (x) { x.classList.remove('open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); }); }
   document.querySelectorAll('.dd-btn').forEach(function (b) {
     b.addEventListener('click', function (e) {
-      var li = b.parentElement, open = !li.classList.contains('open');
-      closeAll(); if (open) { li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+      // The header is a link. With a mouse, hover opens the menu and a click follows the link.
+      // On touch screens the first tap opens the menu and a second tap follows the link.
+      var li = b.parentElement, touch = window.matchMedia('(hover: none)').matches;
+      if (touch && !li.classList.contains('open')) { e.preventDefault(); closeAll(); li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
       e.stopPropagation();
     });
   });
@@ -61,3 +63,10 @@
   var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
   els.forEach(function (el) { io.observe(el); });
 })();
+
+/* concept previews: play only while on screen */
+(function(){var v=document.querySelectorAll('.lab-vid');if(!v.length)return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){var el=e.target;
+      if(e.isIntersecting){if(!el.src){el.src=el.dataset.src;}var p=el.play();if(p&&p.catch)p.catch(function(){});}else{el.pause();}});},{threshold:.35});
+    v.forEach(function(el){io.observe(el);});})();
