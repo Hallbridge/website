@@ -504,6 +504,24 @@
     .pillar li { font-size: 13px; color: var(--taupe); padding: 10px 0; border-bottom: 1px solid var(--taupe-pale); display: flex; gap: 12px; align-items: center; }
     .pillar li::before { content: ''; width: 5px; height: 5px; background: var(--copper); transform: rotate(45deg); flex: none; }
     .pillar-link { margin-top: auto; padding-top: 26px; font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--copper); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+    /* "Start a Search" chooser: company or candidate */
+    .pick { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(12,9,7,0.82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
+    .pick.on { opacity: 1; visibility: visible; }
+    .pick-box { position: relative; width: min(860px, 100%); background: var(--ink); border: 1px solid rgba(217,160,102,0.35); padding: clamp(34px, 5vw, 60px) clamp(22px, 4vw, 56px) clamp(26px, 4vw, 50px); color: var(--cream); transform: translateY(14px); transition: transform .45s var(--ease); max-height: calc(100svh - 48px); overflow: auto; }
+    .pick.on .pick-box { transform: none; }
+    .pick-box h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.08; text-align: center; }
+    .pick-box h2 em { font-style: italic; color: var(--copper-light); }
+    .pick-x { position: absolute; top: 12px; right: 14px; width: 44px; height: 44px; background: none; border: 0; color: var(--cream); font-size: 30px; line-height: 1; cursor: pointer; opacity: .75; }
+    .pick-x:hover, .pick-x:focus-visible { opacity: 1; }
+    .pick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 24px); margin-top: clamp(26px, 3.6vw, 42px); }
+    .pick-card { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: clamp(22px, 2.8vw, 34px); border: 1px solid rgba(242,236,226,0.16); color: inherit; text-decoration: none; transition: border-color .35s, background .35s, transform .35s var(--ease); }
+    .pick-card:hover, .pick-card:focus-visible { border-color: var(--copper-light); background: rgba(217,160,102,0.08); transform: translateY(-3px); outline: none; }
+    .pick-card svg { width: 54px; height: 46px; color: var(--copper-light); margin-bottom: 8px; }
+    .pick-card b { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; }
+    .pick-card span { font-size: 15px; line-height: 1.6; color: rgba(242,236,226,0.72); }
+    .pick-card i { margin-top: 10px; font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--copper-light); }
+    html.pick-open, html.pick-open body { overflow: hidden; }
+    @media (max-width: 640px) { .pick-grid { grid-template-columns: 1fr; } }
     /* Two Divisions as two cards: recruiting on ink, digital on paper, each with a small line drawing */
     .cs-grid { gap: clamp(18px, 2vw, 30px); }
     .cs .pillar { border: 1px solid rgba(60,45,35,0.14); padding: clamp(30px, 3.2vw, 52px); background: rgba(255,255,255,0.5); transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
@@ -658,7 +676,10 @@
     .menu-open .mm-acc summary { opacity: 1; }
     .mm-acc summary::-webkit-details-marker { display: none; }
     .mm-acc summary::after { content: '+'; font-family: var(--sans); font-size: 22px; font-weight: 300; color: var(--copper-light); transition: transform .3s var(--ease); }
-    .mm-acc[open] summary::after { transform: rotate(45deg); }
+    /* mobile menu: the section name is a link, the plus sign opens the list */
+    .mm-acc summary .mm-head { color: inherit; text-decoration: none; flex: 0 1 auto; padding: 4px 18px 4px 0; }
+    .mm-acc summary::after { flex: 1 1 auto; text-align: right; padding: 6px 2px 6px 24px; }
+    .mm-acc[open] summary::after { content: '\2212'; }
     .mm-items { padding: 0 0 16px 2px; }
     .mobile-menu .mm-items a { display: block; font-family: var(--sans); font-size: 16px; line-height: 1.4; padding: 9px 0; color: rgba(242,236,226,.82); }
     .mobile-menu .mm-cta { display: flex; justify-content: center; margin-top: 30px; font-family: var(--sans); font-size: 12px; line-height: 1; color: #fff; }
@@ -934,10 +955,10 @@ setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="mm-wrap">
-      <details class="mm-acc"><summary>For Companies</summary><div class="mm-items"><a href="/recruiting/">All Search Services</a><a href="/recruiting/#executive-search">Executive Search</a><a href="/recruiting/#contingency">Contingency Recruiting</a><a href="/recruiting/#retained">Retained Search</a><a href="/#roles">Positions We Fill</a><a href="/recruiting/#markets">Industries We Serve</a><a href="/recruiting/#market-intelligence">Market Intelligence</a></div></details>
-      <details class="mm-acc"><summary>For Candidates</summary><div class="mm-items"><a href="/candidates/">Work With Us</a><a href="/candidates/#resume-review">Free Resume Review</a><a href="/salary-guide/">2026 Salary Guide</a><a href="/candidates/#submit">Submit Your Resume</a></div></details>
-      <details class="mm-acc"><summary>Digital Growth</summary><div class="mm-items"><p class="mm-sub">Websites &amp; Digital Presence</p><a href="/digital-growth/websites/">Contractor Websites</a><a href="/digital-growth/manufacturing/">Manufacturer Websites</a><a href="/digital-growth/#website-redesign">Website Redesign</a><a href="/digital-growth/#website-maintenance">Website Maintenance</a><p class="mm-sub">Branding &amp; Creative</p><a href="/digital-growth/#branding">Branding &amp; Logo Design</a><a href="/digital-growth/#photography">Photography &amp; Drone</a><a href="/digital-growth/#video">Video &amp; Content</a><a href="/digital-growth/on-site/">On-Site Content Days</a><a href="/digital-growth/">All Digital Growth</a></div></details>
-      <details class="mm-acc"><summary>About</summary><div class="mm-items"><a href="/about/">Our Story</a><a href="/about/#values">Our Approach</a><a href="/#track-record">Track Record</a><a href="/#testimonials">Testimonials</a><a href="/blog/">Insights</a></div></details>
+      <details class="mm-acc"><summary><a class="mm-head" href="/recruiting/">For Companies</a></summary><div class="mm-items"><a href="/recruiting/">All Search Services</a><a href="/recruiting/#executive-search">Executive Search</a><a href="/recruiting/#contingency">Contingency Recruiting</a><a href="/recruiting/#retained">Retained Search</a><a href="/#roles">Positions We Fill</a><a href="/recruiting/#markets">Industries We Serve</a><a href="/recruiting/#market-intelligence">Market Intelligence</a></div></details>
+      <details class="mm-acc"><summary><a class="mm-head" href="/candidates/">For Candidates</a></summary><div class="mm-items"><a href="/candidates/">Work With Us</a><a href="/candidates/#resume-review">Free Resume Review</a><a href="/salary-guide/">2026 Salary Guide</a><a href="/candidates/#submit">Submit Your Resume</a></div></details>
+      <details class="mm-acc"><summary><a class="mm-head" href="/digital-growth/">Digital Growth</a></summary><div class="mm-items"><p class="mm-sub">Websites &amp; Digital Presence</p><a href="/digital-growth/websites/">Contractor Websites</a><a href="/digital-growth/manufacturing/">Manufacturer Websites</a><a href="/digital-growth/#website-redesign">Website Redesign</a><a href="/digital-growth/#website-maintenance">Website Maintenance</a><p class="mm-sub">Branding &amp; Creative</p><a href="/digital-growth/#branding">Branding &amp; Logo Design</a><a href="/digital-growth/#photography">Photography &amp; Drone</a><a href="/digital-growth/#video">Video &amp; Content</a><a href="/digital-growth/on-site/">On-Site Content Days</a><a href="/digital-growth/">All Digital Growth</a></div></details>
+      <details class="mm-acc"><summary><a class="mm-head" href="/about/">About</a></summary><div class="mm-items"><a href="/about/">Our Story</a><a href="/about/#values">Our Approach</a><a href="/#track-record">Track Record</a><a href="/#testimonials">Testimonials</a><a href="/blog/">Insights</a></div></details>
       <a class="btn btn-copper mm-cta" href="/#contact">Start a Conversation</a>
       <div class="mm-foot"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a></div>
     </div>
@@ -960,8 +981,7 @@ setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();
       </h1>
       <p class="hero-sub">A recruiting-first company built on relationships. We find the leaders who run your projects, then help your company look as strong online as it does on the&nbsp;jobsite.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-copper">Hire With Us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-        <a href="#candidates" class="btn btn-ghost">I'm a Candidate</a>
+        <a href="#contact" class="btn btn-copper" id="startSearch">Start a Search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
       </div>
     </div>
     <div class="hero-tail" aria-hidden="true"></div>
@@ -1298,7 +1318,7 @@ setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();
       <h2 class="reveal">Ready to find your<br><em>next key hire?</em></h2>
       <p class="reveal">Whether you have a seat to fill today or just want to know who's out there, the conversation is free and confidential.</p>
       <div class="contact-actions reveal">
-        <a href="mailto:info@hallbridge.co?subject=New%20Search" class="btn btn-copper">Start a Search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        <a href="mailto:info@hallbridge.co?subject=New%20Search" class="btn btn-copper">Send Us the Role <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
       </div>
       <div class="contact-lines reveal"><a href="mailto:info@hallbridge.co" class="contact-mail">info@hallbridge.co</a><a href="tel:+18138500583" class="contact-mail contact-phone">(813) 850-0583</a></div>
     </div>
@@ -1563,6 +1583,37 @@ setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();
   if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { near = es[0].isIntersecting; if (near) onScroll(); }, { rootMargin: '200px 0px' }).observe(box); else near = true;
   window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll);
   draw(0); update();
+})();
+</script>
+<div class="pick" id="pick" role="dialog" aria-modal="true" aria-labelledby="pickTitle" aria-hidden="true">
+  <div class="pick-box">
+    <button class="pick-x" type="button" aria-label="Close">&times;</button>
+    <h2 id="pickTitle">Who is <em>searching?</em></h2>
+    <div class="pick-grid">
+      <a class="pick-card" href="#contact" data-stay>
+        <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 92V30l32-18v80M46 44l30-10v58M76 52l30 8v32M6 92h108M24 44v8M24 62v8M34 38v8M34 58v8M58 54v8M58 72v8M90 70v8"/></svg>
+        <b>A company</b><span>Hiring a leader for a project or your team.</span><i>Talk to us &rarr;</i>
+      </a>
+      <a class="pick-card" href="/candidates/">
+        <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M30 52a30 30 0 0 1 60 0M22 52h76v10H22zM60 22v12M44 26l4 11M76 26l-4 11M36 62c2 18 12 28 24 28s22-10 24-28"/></svg>
+        <b>A candidate</b><span>Looking for your next build.</span><i>How it works &rarr;</i>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+/* "Start a Search": ask who is searching, then send them to the right place */
+(function () {
+  var btn = document.getElementById('startSearch'), pick = document.getElementById('pick'); if (!btn || !pick) return;
+  var root = document.documentElement, last = null;
+  function open(e) { e.preventDefault(); last = document.activeElement; pick.classList.add('on'); pick.setAttribute('aria-hidden', 'false'); root.classList.add('pick-open'); setTimeout(function () { var c = pick.querySelector('.pick-card'); if (c) c.focus(); }, 60); }
+  function close() { pick.classList.remove('on'); pick.setAttribute('aria-hidden', 'true'); root.classList.remove('pick-open'); if (last && last.focus) last.focus(); }
+  btn.addEventListener('click', open);
+  pick.querySelector('.pick-x').addEventListener('click', close);
+  pick.addEventListener('click', function (e) { if (e.target === pick) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && pick.classList.contains('on')) close(); });
+  var stay = pick.querySelector('[data-stay]');
+  if (stay) stay.addEventListener('click', function (e) { e.preventDefault(); close(); var t = document.getElementById('contact'); if (t) setTimeout(function () { t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80); });
 })();
 </script>
 </body>
