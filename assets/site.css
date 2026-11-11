@@ -4,7 +4,7 @@
 @font-face{font-family:"Inter Fallback";src:local("Arial");size-adjust:107%}
 
     :root {
-      --taupe: #8C7B6B;
+      --taupe: #75665A;
       --taupe-light: #B5A898;
       --taupe-pale: #E2D9CF;
       --cream: #F9F6F1;
@@ -14,7 +14,7 @@
       --charcoal: #2D2420;
       --copper: #B87333;
       --copper-light: #D39A5E;
-      --muted: #7A7568;
+      --muted: #6B6659;
       --serif: 'Cormorant Garamond', 'Cormorant Fallback', Georgia, serif;
       --sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
       --ease: cubic-bezier(.2,.65,.2,1);
@@ -661,8 +661,8 @@
     footer li { margin-bottom: 12px; font-size: 14px; }
     footer a { color: var(--taupe-light); text-decoration: none; transition: color .2s; }
     footer a:hover { color: var(--copper-light); }
-    .foot-bottom { margin-top: 64px; padding-top: 28px; border-top: 1px solid rgba(242,236,226,0.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--muted); }
-    .foot-bottom a { color: var(--muted); }
+    .foot-bottom { margin-top: 64px; padding-top: 28px; border-top: 1px solid rgba(242,236,226,0.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: #8F897C; }
+    .foot-bottom a { color: #8F897C; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1360px) {
@@ -990,3 +990,7 @@ body.sub { background: var(--cream); }
 /* typography polish: no lone last words, balanced headings (shared by every page) */
 h1, h2, h3, h4, summary, .btn, .eyebrow, label { text-wrap: balance; }
 p, li, figcaption, dd, blockquote { text-wrap: pretty; }
+
+/* "Bridging the gap" slogan line on inner pages (matches the home page .about-gap) */
+.gap-line { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(20px, 1.7vw, 26px); line-height: 1.35; color: var(--copper); margin: 18px 0 0; max-width: 30ch; text-wrap: balance; }
+.dark .gap-line { color: var(--copper-light); }
