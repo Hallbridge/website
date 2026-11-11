@@ -802,6 +802,15 @@
       .cs-grid { grid-template-columns: 1fr; gap: 44px; }
       .mock { max-width: 640px; }
       .about-media { max-width: 680px; padding-bottom: 22px; }
+      /* phones and tablets: heading and slogan first, then the drawing, then the body copy, so it does not sit right under the hero bridge */
+      .about { row-gap: 0; }
+      .about > div:last-child { display: contents; }
+      .about > div:last-child > .eyebrow { order: 1; }
+      .about > div:last-child > .title { order: 2; }
+      .about > div:last-child > .about-gap { order: 3; }
+      .about-media { order: 4; margin: 10px 0 38px; }
+      .about > div:last-child > .body, .about > div:last-child > .link-arrow { order: 5; }
+      .about > div:last-child > .link-arrow { justify-self: start; }
       .about-media .main { aspect-ratio: 3/2; object-position: 50% 55%; }
       .roles, .candidates { grid-template-columns: 1fr; }
       .roles { min-height: 0; }
@@ -1318,7 +1327,7 @@ setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();
       <h2 class="reveal">Ready to find your<br><em>next key hire?</em></h2>
       <p class="reveal">Whether you have a seat to fill today or just want to know who's out there, the conversation is free and confidential.</p>
       <div class="contact-actions reveal">
-        <a href="mailto:info@hallbridge.co?subject=New%20Search" class="btn btn-copper">Send Us the Role <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        <a href="mailto:info@hallbridge.co?subject=New%20Search" class="btn btn-copper">Let&rsquo;s Talk <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
       </div>
       <div class="contact-lines reveal"><a href="mailto:info@hallbridge.co" class="contact-mail">info@hallbridge.co</a><a href="tel:+18138500583" class="contact-mail contact-phone">(813) 850-0583</a></div>
     </div>
