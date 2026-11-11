@@ -30,7 +30,6 @@
   <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-  <link rel="preload" as="image" href="assets/img/hero-towers-sunset-2400.webp" imagesrcset="assets/img/hero-towers-sunset-1200.webp 1200w, assets/img/hero-towers-sunset-2400.webp 2400w" imagesizes="100vw">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -148,6 +147,11 @@
   </script>
 
   <style>
+/* metric-matched fallbacks so text does not re-wrap (and the page does not jump) when the web fonts arrive */
+@font-face{font-family:"Cormorant Fallback";src:local("Georgia");size-adjust:87%;font-style:normal}
+@font-face{font-family:"Cormorant Fallback";src:local("Georgia Italic"),local("Georgia-Italic");size-adjust:77.5%;font-style:italic}
+@font-face{font-family:"Inter Fallback";src:local("Arial");size-adjust:107%}
+
     :root {
       --taupe: #8C7B6B;
       --taupe-light: #B5A898;
@@ -160,8 +164,8 @@
       --copper: #B87333;
       --copper-light: #D39A5E;
       --muted: #7A7568;
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --serif: 'Cormorant Garamond', 'Cormorant Fallback', Georgia, serif;
+      --sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
       --ease: cubic-bezier(.2,.65,.2,1);
       --gutter: clamp(20px, 5vw, 72px);
     }
@@ -176,7 +180,7 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-    img { display: block; max-width: 100%; }
+    img { display: block; max-width: 100%; height: auto; }
     ::selection { background: var(--copper); color: var(--cream); }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
     section[id] { scroll-margin-top: 80px; }
@@ -212,12 +216,13 @@
     .btn-copper:hover { background: #A2622A; }
     .btn-ghost { border-color: rgba(242,236,226,0.45); color: var(--cream); }
     .btn-ghost:hover { background: var(--cream); color: var(--black); border-color: var(--cream); }
+    .hero .btn-ghost { background: rgba(21,16,12,0.55); }
+    .hero .btn-ghost:hover { background: var(--cream); }
 
     /* shared photo grade: warm, slightly muted, matches the copper/charcoal palette */
     .about-media img, .roles-media img, .cand-media img, .contact .bg img {
       filter: saturate(.78) contrast(1.06) brightness(.92) sepia(.12);
     }
-    .hero-media img { filter: saturate(.86) contrast(1.04) sepia(.08); }
 
     /* scroll reveal */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
@@ -241,10 +246,11 @@
     .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; position: relative; z-index: 2; }
     .brand .mono { width: 52px; height: 52px; transition: width .4s var(--ease), height .4s var(--ease); }
     nav.scrolled .brand .mono { width: 42px; height: 42px; }
-    .on-dark { display: block; }
-    .on-light { display: none; }
-    nav.scrolled .on-dark { display: none; }
-    nav.scrolled .on-light { display: block; }
+    /* the two logo colours cross-fade with the bar, so there is no flash when the nav leaves the hero */
+    .brand .mono { transition: width .4s var(--ease), height .4s var(--ease), opacity .4s var(--ease); }
+    .brand .on-light { position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; }
+    nav.scrolled .on-dark { opacity: 0; }
+    nav.scrolled .on-light { opacity: 1; }
 
     .nav-links { display: flex; gap: 38px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); }
     .nav-links a {
@@ -288,8 +294,10 @@
     }
     .mobile-menu::before {
       content: ''; position: absolute; inset: 0; opacity: .18;
-      background: url(assets/img/cranes-blue-hour-800.webp) center/cover;
+      background: center/cover;
     }
+    /* the menu photo only downloads once the menu is opened */
+    .menu-open .mobile-menu::before { background-image: url(assets/img/cranes-blue-hour-800.webp); }
     .menu-open .mobile-menu { opacity: 1; visibility: visible; }
     .mobile-menu a {
       position: relative; font-family: var(--serif); font-size: 42px; line-height: 1.35; color: var(--cream); text-decoration: none;
@@ -305,39 +313,66 @@
     .mobile-menu .mm-foot { position: relative; margin-top: 48px; }
     .mobile-menu .mm-foot a { font-family: var(--sans); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper-light); }
     .menu-open nav { background: transparent !important; box-shadow: none !important; backdrop-filter: none; -webkit-backdrop-filter: none; }
-    .menu-open nav .on-dark { display: block; }
-    .menu-open nav .on-light { display: none; }
+    .menu-open nav .on-dark { opacity: 1; }
+    .menu-open nav .on-light { opacity: 0; }
 
-    /* ── HERO ── */
-    .hero {
-      position: relative; min-height: 100vh; min-height: 100svh; color: var(--cream);
-      display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: var(--ink);
-    }
-    .hero-media { position: absolute; inset: 0; }
-    .hero-media img {
-      width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%;
-      transform: scale(1.12); animation: heroZoom 14s var(--ease) forwards;
-    }
-    @keyframes heroZoom { to { transform: scale(1); } }
-    .hero::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
+    /* ── HERO: a suspension bridge that builds as the visitor scrolls (assets/bridge.js) ── */
+    .hero { position: relative; color: var(--cream); background: var(--ink); }
+    .hero-stage { position: absolute; inset: 0; overflow: hidden; background: #0C0907; }
+    .hero-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .hero-scene .hs-ln { stroke-width: 1.2; }
+    .hero-scene .hs-cb { stroke-width: 2.2; stroke-linecap: round; }
+    .hero-scene .hs-hg { stroke-width: 1; }
+    .hero-scene .hs-guide { opacity: 0; }
+    .hero-scene .hs-sg, .hero-scene .hs-tw { transform-box: fill-box; }
+    .hero-scene.narrow .hs-ln { stroke-width: 2.6; }
+    .hero-scene.narrow .hs-cb { stroke-width: 4.6; }
+    .hero-scene.narrow .hs-hg { stroke-width: 2.2; }
+    .hero-scrim {
+      position: absolute; inset: 0; pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(21,16,12,0.6) 0%, rgba(21,16,12,0.25) 35%, rgba(21,16,12,0.35) 60%, rgba(21,16,12,0.92) 100%),
-        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(21,16,12,0.45), rgba(21,16,12,0) 75%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5;
-      background-image: linear-gradient(rgba(242,236,226,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(242,236,226,0.06) 1px, transparent 1px);
-      background-size: 120px 120px;
-      mask-image: linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%);
-      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%);
+        linear-gradient(180deg, rgba(21,16,12,0.6) 0%, rgba(21,16,12,0) 26%),
+        radial-gradient(ellipse 62% 50% at 50% 50%, rgba(21,16,12,0.7), rgba(21,16,12,0) 74%);
     }
     .hero-content {
-      position: relative; z-index: 2; flex: 1; width: 100%; max-width: 1200px; margin: 0 auto;
+      position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto;
+      min-height: 100vh; min-height: 100svh;
       padding: 130px var(--gutter) 110px; text-align: center;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
-    .hero-brand { width: clamp(260px, 54vw, 780px); margin-bottom: clamp(26px, 4vh, 44px); opacity: 0; animation: up 1.2s var(--ease) .1s forwards; }
+    .hero-tail { display: none; }
+    /* motion: the stage pins while the copy scrolls away and the span is built behind it */
+    .bm .hero-stage { position: sticky; top: 0; height: 100vh; height: 100svh; }
+    /* the copy pins with the scene while the span is built, then lifts away (assets/bridge.js) */
+    .bm .hero-content {
+      position: sticky; top: 0; min-height: 0; height: 100vh; height: 100svh;
+      margin-top: -100vh; margin-top: -100svh;
+      padding-top: clamp(84px, 13vh, 130px); padding-bottom: clamp(40px, 16vh, 180px);
+    }
+    .bm .hero-actions { margin-bottom: 0; }
+    .bm .hero-tail { display: block; height: 65vh; }
+    .bm .hero-scene .hs-guide { opacity: 1; }
+    .bm .hero-scene .hs-cb, .bm .hero-scene .hs-hg { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+    .bm .hero-scene .hs-sg, .bm .hero-scene .hs-lt { opacity: 0; }
+
+    /* cable-and-hanger divider (same rules as .bridge-rule in assets/site.css) */
+    .rule-wrap { padding: 0 var(--gutter); }
+    .rule-wrap.rw-gap { padding-top: clamp(80px, 9vw, 128px); }
+    .rule-wrap + .cs, .rule-wrap + .web { padding-top: clamp(64px, 7vw, 104px); }
+    .bridge-rule { display: block; max-width: 1100px; margin: 0 auto; color: var(--copper); }
+    .bridge-rule svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .bridge-rule path { fill: none; stroke: currentColor; }
+    .bridge-rule .cv { stroke-width: 1.3; stroke-linecap: round; }
+    .bridge-rule .tk { stroke-width: 1.3; opacity: .7; }
+    .bridge-rule .hg { stroke-width: .8; opacity: .45; }
+    .bridge-rule .dk { stroke-width: 1; opacity: .35; }
+    .bm .bridge-rule[data-draw] .cv { stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.8s var(--ease); }
+    .bm .bridge-rule[data-draw] .hg { opacity: 0; transition: opacity 1.2s var(--ease) .9s; }
+    .bm .bridge-rule[data-draw].in .cv { stroke-dashoffset: 0; }
+    .bm .bridge-rule[data-draw].in .hg { opacity: .45; }
+    .foot-rule { color: var(--copper-light); opacity: .6; margin-bottom: clamp(48px, 6vw, 72px); }
+
+    .hero-brand { width: clamp(260px, min(54vw, 72vh), 780px); margin-bottom: clamp(26px, 4vh, 44px); opacity: 0; animation: up 1.2s var(--ease) .1s forwards; }
     .hero-brand { display: flex; flex-direction: column; align-items: center; }
     .hero-brand img { width: 100%; height: auto; filter: drop-shadow(0 6px 30px rgba(0,0,0,0.45)); }
     .hero-brand .lk-the, .hero-brand .lk-co { font-family: var(--serif); font-weight: 600; text-transform: uppercase; color: var(--copper-light); line-height: 1; letter-spacing: .62em; margin-right: -.62em; text-shadow: 0 2px 18px rgba(0,0,0,.5); }
@@ -353,8 +388,10 @@
     .hero h1 .line span { display: block; transform: translateY(105%); animation: rise 1.2s var(--ease) forwards; }
     .hero h1 .line:nth-child(2) span { animation-delay: .15s; }
     .hero h1 em { font-style: italic; color: var(--copper-light); }
+    /* keep the copy readable where the cables and hangers pass behind it */
+    .hero h1, .hero-sub { text-shadow: 0 0 26px rgba(14,10,8,.95), 0 0 10px rgba(14,10,8,.9), 0 0 3px rgba(14,10,8,.8); }
     .hero-sub {
-      max-width: 700px; margin: 26px auto 0; text-wrap: pretty; font-size: 17px; line-height: 1.75; color: rgba(242,236,226,0.8);
+      max-width: min(700px, 56vw); margin: 26px auto 0; text-wrap: pretty; font-size: 17px; line-height: 1.75; color: rgba(242,236,226,0.8);
       opacity: 0; animation: up 1s var(--ease) .6s forwards;
     }
     .hero-web { margin: 22px 0 72px; font-size: 13px; letter-spacing: .3px; opacity: 0; animation: up 1s var(--ease) 1s forwards; }
@@ -375,19 +412,18 @@
 
     /* ── ABOUT ── */
     .about { padding: clamp(96px, 12vw, 160px) var(--gutter); display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(48px, 7vw, 110px); align-items: center; max-width: 1440px; margin: 0 auto; }
-    .about-media { position: relative; padding: 18% 0 0 12%; isolation: isolate; }
-    .about-media .main { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
-    .about-media .inset {
-      position: absolute; left: 0; top: 0; width: 46%; aspect-ratio: 1; object-fit: cover;
-      border: 10px solid var(--cream); box-shadow: 0 30px 60px -30px rgba(30,23,18,0.5);
-    }
-    .about-media .frame { position: absolute; bottom: -22px; right: -22px; width: 60%; height: 60%; border: 1px solid var(--copper); z-index: -1; }
-    .about-media .badge {
-      position: absolute; right: -10px; top: calc(18% + 28px); background: var(--black); color: var(--cream);
-      padding: 24px 26px; max-width: 220px; box-shadow: 0 30px 60px -30px rgba(30,23,18,0.6);
-    }
-    .about-media .badge b { font-family: var(--serif); font-weight: 400; font-size: 44px; color: var(--copper-light); line-height: 1; display: block; }
-    .about-media .badge span { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--taupe-light); line-height: 1.6; }
+    /* Who We Are: the crew photo with the founder's portrait offset over its lower-left corner */
+    .about-media { position: relative; isolation: isolate; padding: 0 22px 120px 8%; }
+    .about-main { position: relative; }
+    .about-media picture { display: block; }
+    .about-media .main { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; object-position: 50% 40%; background: var(--ink); box-shadow: 0 40px 70px -40px rgba(30,23,18,0.55); }
+    .about-media .frame { position: absolute; bottom: -22px; right: -22px; width: 62%; height: 62%; border: 1px solid var(--copper); z-index: -1; }
+    .about-founder { position: absolute; left: 0; bottom: 0; width: 27%; z-index: 1; }
+    .about-founder img { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; object-position: 50% 30%; border: 6px solid var(--cream); outline: 1px solid var(--copper); outline-offset: -1px; box-shadow: 0 30px 50px -24px rgba(21,16,12,0.6); background: var(--ink); }
+    .about-media .about-founder img { filter: none; }
+    .about-founder figcaption { margin-top: 14px; padding-left: 6px; }
+    .about-founder figcaption b { display: block; font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.1; color: var(--black); }
+    .about-founder figcaption span { display: block; margin-top: 6px; font-size: 10.5px; font-weight: 500; letter-spacing: 2.6px; text-transform: uppercase; color: var(--copper); }
     .about-points { margin-top: 38px; border-top: 1px solid var(--taupe-pale); }
     .about-points div { display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--taupe-pale); font-size: 15px; color: var(--charcoal); line-height: 1.6; }
     .about-points i { font-style: normal; font-family: var(--serif); color: var(--copper); font-size: 18px; min-width: 26px; }
@@ -464,7 +500,7 @@
     .pillar-link:hover svg { transform: translateX(4px); }
 
     /* ── WEBSITES FOR BUILDERS ── */
-    .web { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream-dark); border-top: 1px solid var(--taupe-pale); overflow: hidden; }
+    .web { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream); overflow: hidden; }
     /* hairlines where two like backgrounds meet in the page order */
     .about + .cs { border-top: 1px solid var(--taupe-pale); }
     .candidates + .contact { border-top: 1px solid rgba(184,115,51,0.3); }
@@ -472,7 +508,7 @@
     .web-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; margin-top: 40px; border-top: 1px solid var(--taupe-pale); }
     .web-list li { font-size: 14px; line-height: 1.5; color: var(--charcoal); padding: 14px 0; border-bottom: 1px solid var(--taupe-pale); display: flex; gap: 12px; align-items: baseline; }
     .web-list li::before { content: ''; width: 5px; height: 5px; background: var(--copper); transform: rotate(45deg) translateY(-2px); flex: none; }
-    .web-concept { margin-top: 34px; padding: 22px 26px; border-left: 2px solid var(--copper); background: var(--cream); font-size: 15px; line-height: 1.75; color: #5B5048; max-width: 560px; }
+    .web-concept { margin-top: 34px; padding: 22px 26px; border-left: 2px solid var(--copper); background: var(--cream-dark); font-size: 15px; line-height: 1.75; color: #5B5048; max-width: 560px; }
     .web-concept b { font-weight: 600; color: var(--black); }
     .web-concept + .web-concept { margin-top: 14px; }
     .web-actions { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
@@ -524,7 +560,7 @@
     .roles-media { position: relative; overflow: hidden; background: var(--ink); }
     .roles-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .rs { cursor: ew-resize; touch-action: pan-y; }
-    .rs-base { object-position: 50% 30%; }
+    .rs-base { object-position: 60% 38%; }
     .rs-top { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--x)); }
     .rs-top img { object-position: 50% 30%; }
     .rs.anim .rs-top { transition: clip-path .9s var(--ease); }
@@ -563,6 +599,7 @@
     .nav-links .dd { position: relative; }
     .dd-btn { display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; cursor: pointer; font: 500 11px/1 var(--sans); letter-spacing: 2.4px; text-transform: uppercase; color: rgba(242,236,226,0.85); padding: 6px 0; transition: color .25s; }
     .dd-btn svg { width: 9px; height: 6px; transition: transform .3s var(--ease); }
+    nav.over-hero { background: rgba(21,16,12,0.9); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(184,115,51,0.22); }
     nav.scrolled .dd-btn { color: var(--taupe); }
     .dd:hover .dd-btn, .dd:focus-within .dd-btn { color: #fff; }
     nav.scrolled .dd:hover .dd-btn, nav.scrolled .dd:focus-within .dd-btn { color: var(--black); }
@@ -627,7 +664,7 @@
     .nav-links .dd-panel a.dd-all { display: block; margin-top: 10px; padding: 14px; border-top: 1px solid rgba(226,217,207,.12); font-size: 12px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--copper-light); }
     .foot-top { grid-template-columns: 1.3fr repeat(4, 1fr); gap: 40px; }
     /* ── TESTIMONIALS ── */
-    .testimonials { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream); position: relative; overflow: hidden; }
+    .testimonials { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream-dark); border-top: 1px solid var(--taupe-pale); position: relative; overflow: hidden; }
     .testimonials-inner { max-width: 1240px; margin: 0 auto; }
     .t-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
     .t-tabs { display: inline-flex; border: 1px solid var(--taupe-pale); padding: 4px; }
@@ -701,6 +738,10 @@
     .title, .contact h2, .service h3, .pillar h3, .t-card blockquote { text-wrap: balance; }
     .body, .hero-sub, .contact p, .pillar p, .service p, .web-concept, .roles-note { text-wrap: pretty; }
 
+    /* typography polish: no lone last words, balanced headings (same rules as assets/site.css) */
+    h1, h2, h3, h4, summary, .btn, .eyebrow, label { text-wrap: balance; }
+    p, li, figcaption, dd, blockquote { text-wrap: pretty; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1360px) {
       .nav-links { gap: 26px; }
@@ -719,7 +760,9 @@
       .about, .record-inner, .web-inner { grid-template-columns: 1fr; }
       .cs-grid { grid-template-columns: 1fr; gap: 44px; }
       .mock { max-width: 640px; }
-      .about-media { max-width: 560px; }
+      .about-media { max-width: 680px; padding-bottom: 96px; }
+      .about-media .main { aspect-ratio: 3/2; object-position: 50% 55%; }
+      .about-founder { width: 25%; }
       .roles, .candidates { grid-template-columns: 1fr; }
       .roles { min-height: 0; }
       .roles-media { min-height: 62vh; order: 2; }
@@ -737,11 +780,19 @@
       .hero-sub { font-size: 15px; line-height: 1.7; }
       .hero-actions .btn { flex: 1 1 100%; justify-content: center; }
       .scroll-cue { bottom: 18px; }
-      .hero-media img { object-position: 64% 60%; }
-      .about-media { padding: 22% 0 0 8%; }
-      .about-media .badge { padding: 18px 20px; max-width: 170px; right: 0; }
-      .about-media .badge b { font-size: 34px; }
-      .about-media .frame { bottom: -12px; right: -8px; }
+      .bm .hero-tail { height: 40vh; }
+      .hero-sub { max-width: none; }
+      .hero-scrim { background: linear-gradient(180deg, rgba(21,16,12,0.72) 0%, rgba(21,16,12,0.55) 52%, rgba(21,16,12,0) 72%); }
+      .bridge-rule .cv, .bridge-rule .tk { stroke-width: 3.2; }
+      .bridge-rule .hg { stroke-width: 2; }
+      .bridge-rule .dk { stroke-width: 2.4; }
+      .about-media { padding: 0 12px 84px 6%; }
+      .about-media .frame { bottom: -12px; right: -12px; }
+      .about-founder { width: 25%; }
+      .about-founder img { border-width: 4px; }
+      .about-founder figcaption { margin-top: 10px; padding-left: 4px; }
+      .about-founder figcaption b { font-size: 18px; }
+      .about-founder figcaption span { font-size: 9.5px; letter-spacing: 2px; }
       .stat { padding: 26px 16px 26px 0; }
       .stat:nth-child(even) { padding-left: 18px; }
       .stat-label { font-size: 10.5px; letter-spacing: 1px; }
@@ -765,6 +816,23 @@
       .foot-top > div { text-align: center; }
       .foot-bottom { justify-content: center; text-align: center; }
     }
+    /* short laptop screens: a more compact copy block so the sub line stays above the deck and clear of the nav */
+    @media (max-height: 820px) and (min-aspect-ratio: 23/20) {
+      .hero-brand { width: clamp(260px, min(54vw, 58vh), 780px); margin-bottom: 18px; }
+      .hero h1 { font-size: clamp(34px, min(4.6vw, 7vh), 70px); margin-top: 14px; }
+      .hero-sub { margin-top: 18px; font-size: 16px; line-height: 1.65; }
+      .hero-actions { margin-top: 28px; }
+      .bm .hero-content { padding-top: 104px; padding-bottom: clamp(120px, 21vh, 180px); }
+    }
+    /* tall screens: the copy sits in the upper part and the span stands below it (bridge.js frames the scene to match) */
+    @media (max-aspect-ratio: 23/20) {
+      .hero-content, .bm .hero-content { justify-content: flex-start; padding-top: clamp(96px, 14vh, 170px); }
+      .scroll-cue { display: none; } /* it would sit on the deck; the span below the copy already invites the scroll */
+    }
+    /* short landscape phones: the copy scrolls normally while the scene pins */
+    @media (max-height: 520px) and (orientation: landscape) {
+      .bm .hero-content { position: relative; height: auto; min-height: 100vh; min-height: 100svh; padding-top: 96px; padding-bottom: 48px; }
+    }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
@@ -772,16 +840,14 @@
       .hero h1 .line span { transform: none; }
     }
   </style>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&sessionStorage.getItem('hb-intro')!=='1')document.documentElement.classList.add('intro-on')}catch(e){}
-// Safety net: if the 3D intro has not started within 4s (old browser, blocked script), show the site.
-setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.remove('intro-on');var i=document.getElementById('intro');if(i)i.remove();}},4000);</script>
+<script>(function(){var r=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;r.classList.add('bm');if(sessionStorage.getItem('hb-intro')!=='1')r.classList.add('intro-on')}catch(e){}
+// Safety net: if assets/bridge.js has not run within 5s, show the bridge finished.
+setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();</script>
 <style>
 #intro{display:none}
 .intro-on #intro{display:block;position:fixed;inset:0;z-index:9999;background:#15100C;transition:opacity 1.1s ease,visibility 1.1s}
 .intro-on body{overflow:hidden}
 #intro.out{opacity:0;visibility:hidden}
-#intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 #intro .intro-mark{position:absolute;left:50%;top:50%;width:min(72vw,620px);transform:translate(-50%,-40%) scale(.96);opacity:0;filter:blur(8px);transition:opacity 1.2s ease,transform 1.6s cubic-bezier(.16,1,.3,1),filter 1.2s ease;pointer-events:none;text-align:center}
 #intro .intro-mark.in{opacity:1;transform:translate(-50%,-50%) scale(1);filter:blur(0)}
 #intro .intro-mark img{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 30px rgba(0,0,0,.6))}
@@ -791,26 +857,32 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
 #intro .intro-mark .lk-the,#intro .intro-mark .lk-co{position:relative;font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;text-transform:uppercase;color:#EFCDA6;line-height:1;letter-spacing:.6em;margin-right:-.6em;text-shadow:0 2px 14px rgba(0,0,0,.9),0 0 2px rgba(0,0,0,.8)}
 #intro .intro-mark .lk-the{font-size:clamp(19px,2.9vw,40px);margin-bottom:clamp(10px,1.8vw,26px)}
 #intro .intro-mark .lk-co{font-size:clamp(21px,3.2vw,46px);margin-top:clamp(11px,2.1vw,30px)}
-#intro .intro-ui{position:absolute;right:22px;bottom:20px;display:flex;gap:10px}
-#intro button{font:500 11px/1 Inter,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#E2D9CF;background:rgba(21,16,12,.55);border:1px solid rgba(211,154,94,.35);padding:11px 14px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;backdrop-filter:blur(6px)}
-#intro button:hover{border-color:#D39A5E;color:#fff}
-#intro .intro-sound i{display:inline-flex;gap:2px;align-items:flex-end;height:10px}
-#intro .intro-sound i b{width:2px;background:#D39A5E;height:3px;border-radius:1px}
-#intro .intro-sound.on i b{animation:eq .9s ease-in-out infinite}
-#intro .intro-sound.on i b:nth-child(2){animation-delay:.2s}#intro .intro-sound.on i b:nth-child(3){animation-delay:.4s}
-@keyframes eq{0%,100%{height:3px}50%{height:10px}}
 </style>
 </head>
 <body>
   <div id="intro" aria-hidden="true">
-    <canvas></canvas>
     <div class="intro-mark" role="img" aria-label="The Hallbridge Company"><span class="lk-the">The</span><img src="assets/hallbridge-word-light.svg" alt="Hallbridge"><span class="lk-co">Company</span></div>
-    <div class="intro-ui">
-      <button class="intro-sound" type="button"><i><b></b><b></b><b></b></i><span>Sound on</span></button>
-      <button class="intro-skip" type="button">Skip</button>
-    </div>
   </div>
-  <script type="module" src="assets/intro.js"></script>
+  <script>
+    // Intro: the wordmark fades in on ink, then the page fades up to the bridge. Once per session; any input skips it.
+    (function () {
+      var r = document.documentElement, el = document.getElementById('intro');
+      if (!el) return;
+      if (!r.classList.contains('intro-on')) { el.remove(); return; }
+      try { sessionStorage.setItem('hb-intro', '1'); } catch (e) {}
+      var mark = el.querySelector('.intro-mark'), done = false;
+      function end() {
+        if (done) return;
+        done = true;
+        el.classList.add('out');
+        r.classList.remove('intro-on');
+        setTimeout(function () { el.remove(); }, 1200);
+      }
+      requestAnimationFrame(function () { requestAnimationFrame(function () { mark.classList.add('in'); }); });
+      setTimeout(end, 2100);
+      ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, end, { once: true, passive: true }); });
+    })();
+  </script>
 
   <!-- NAV -->
   <nav id="nav" aria-label="Main navigation">
@@ -843,14 +915,13 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
 
   <main id="top">
 
-  <!-- HERO -->
+  <!-- HERO: the bridge builds as the visitor scrolls -->
   <section class="hero">
-    <div class="hero-media">
-      <img src="assets/img/hero-towers-sunset-2400.webp"
-           srcset="assets/img/hero-towers-sunset-1200.webp 1200w, assets/img/hero-towers-sunset-2400.webp 2400w"
-           sizes="100vw" alt="High-rise towers under construction with tower cranes at sunset" fetchpriority="high">
+    <div class="hero-stage">
+      <svg class="hero-scene" id="heroScene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false"><defs><linearGradient id="hbSky" gradientUnits="userSpaceOnUse" x1="0" y1="-900" x2="0" y2="720"><stop offset="0" stop-color="#0C0907"/><stop offset=".55" stop-color="#17110D"/><stop offset=".82" stop-color="#2A1E17"/><stop offset=".94" stop-color="#4A3222"/><stop offset="1" stop-color="#6A4429"/></linearGradient><radialGradient id="hbGlow" gradientUnits="userSpaceOnUse" cx="800" cy="720" r="900" gradientTransform="translate(0 720) scale(1 .2) translate(0 -720)"><stop offset="0" stop-color="#D39A5E" stop-opacity=".34"/><stop offset=".55" stop-color="#B87333" stop-opacity=".1"/><stop offset="1" stop-color="#B87333" stop-opacity="0"/></radialGradient></defs><rect x="-1200" y="-2400" width="4000" height="3120" fill="url(#hbSky)"/><rect x="-1200" y="400" width="4000" height="320" fill="url(#hbGlow)"/><g class="hs-stars" fill="#F2ECE2"><circle cx="-299.9" cy="262.7" r="0.8" opacity="0.2"/><circle cx="1304.6" cy="-311.6" r="0.8" opacity="0.3"/><circle cx="1361.2" cy="-296.6" r="1.1" opacity="0.3"/><circle cx="1496.9" cy="-741.8" r="0.9" opacity="0.3"/><circle cx="1235.7" cy="-1020.2" r="1.1" opacity="0.2"/><circle cx="1729.3" cy="95" r="0.7" opacity="0.3"/><circle cx="1731" cy="-81" r="1.1" opacity="0.3"/><circle cx="1706.4" cy="244.3" r="0.9" opacity="0.2"/><circle cx="1541.8" cy="-608.3" r="0.7" opacity="0.2"/><circle cx="642.6" cy="-663.6" r="1.3" opacity="0.3"/><circle cx="1304.4" cy="199.2" r="0.6" opacity="0.2"/><circle cx="933.4" cy="-347" r="0.9" opacity="0.2"/><circle cx="1699.7" cy="-1018.8" r="0.9" opacity="0.2"/><circle cx="1161.7" cy="268" r="1" opacity="0.2"/><circle cx="592.4" cy="-680.3" r="0.9" opacity="0.2"/><circle cx="431.7" cy="-313.1" r="1" opacity="0.2"/><circle cx="1694.3" cy="-422.4" r="1.2" opacity="0.3"/><circle cx="1095.6" cy="-336" r="1" opacity="0.3"/><circle cx="1767.1" cy="-512.9" r="1.1" opacity="0.2"/><circle cx="991.1" cy="-581.1" r="0.8" opacity="0.2"/><circle cx="1448.4" cy="198.8" r="0.7" opacity="0.3"/><circle cx="-129" cy="-497.9" r="0.7" opacity="0.1"/><circle cx="1891.7" cy="-774.4" r="1" opacity="0.2"/><circle cx="705.6" cy="-222.5" r="0.7" opacity="0.4"/><circle cx="1646" cy="218.1" r="1.2" opacity="0.4"/><circle cx="1374.5" cy="-692.4" r="0.6" opacity="0.2"/><circle cx="-132.7" cy="-1097.7" r="1" opacity="0.2"/><circle cx="1330.5" cy="-375.7" r="1.1" opacity="0.2"/><circle cx="1640.6" cy="-752" r="0.9" opacity="0.4"/><circle cx="-39.6" cy="-375.9" r="0.6" opacity="0.4"/><circle cx="1101.3" cy="264.7" r="0.6" opacity="0.4"/><circle cx="113.9" cy="333.7" r="1" opacity="0.3"/><circle cx="285.8" cy="-770.3" r="0.7" opacity="0.3"/><circle cx="-184.8" cy="38.7" r="1.1" opacity="0.3"/><circle cx="796" cy="-1051.6" r="0.7" opacity="0.4"/><circle cx="-12.3" cy="-82" r="1.2" opacity="0.1"/><circle cx="1642.9" cy="174.8" r="1.3" opacity="0.4"/><circle cx="1382.7" cy="-479" r="0.8" opacity="0.3"/><circle cx="1640.9" cy="-510.5" r="0.8" opacity="0.2"/><circle cx="1651.4" cy="-273" r="0.8" opacity="0.3"/><circle cx="1316.8" cy="-604.2" r="1.1" opacity="0.2"/><circle cx="137" cy="-638.7" r="1.3" opacity="0.4"/><circle cx="1091.3" cy="190.8" r="1.2" opacity="0.2"/><circle cx="1119.5" cy="-899.6" r="0.9" opacity="0.3"/><circle cx="1397.1" cy="299.7" r="0.9" opacity="0.2"/><circle cx="682.7" cy="-854.2" r="1.1" opacity="0.3"/></g><path class="hs-city" fill="#1E1612" fill-opacity=".9" d="M-700 720V704H-675.4V708.5H-645.7V714H-616.2V702.7H-598.4V695H-583.2V711.5H-565.6V706.6H-538.4V692.6H-526.5V685H-495.1V697H-461.4V714H-426.5V700.4H-396.7V686H-367.9V713.1H-356.9V713.4H-344.8V714H-332.6V683.2H-306.9V713.1H-291.9V697.2H-276.6V705.7H-260.3V706.8H-224.5V692.5H-196.9V707H-176.6V711.6H-165V681.6H-134V684.4H-120.1V713.2H-96.8V700.3H-81.4V713.7H-66.9V698.5H-49.8V704.9H-25.4V713.7H10.4V709.8H31.2V714H41.3V713.5H62.1V684.5H78.1V693.1H108.4V688.4H129.7V691.2H164.7V701.6H191.9V707.3H211V704.4H233.9V695.1H250V720Z M900 720V688.3H927.3V668.7H956.2V659.1H988.2V697.2H1009.6V660.4H1044.5V711.4H1063.8V668.9H1082.7V680.7H1111.1V676.9H1146V707.9H1161.3V711.1H1192.1V675.8H1225.9V682.7H1240V720Z M1360 720V705.2H1383.9V700.5H1416.6V710.4H1449.3V705.5H1477.2V712.1H1497.4V711.3H1522.8V687.3H1556.1V694.9H1574.9V713.2H1607.7V681.2H1625.7V713H1635.8V714H1656.1V682.7H1684.1V711.7H1698.6V694H1733.2V713.2H1747.8V714H1774.1V699.2H1805.2V713.1H1834.7V693.2H1853.3V701.1H1888.2V689.8H1913.5V692.2H1941.7V713.4H1967.3V698.2H1978.4V699.7H1994.3V711.4H2010.8V697.5H2036.9V711.1H2068.1V713.8H2101.6V706.5H2129.6V696H2160.2V713.3H2191.1V703.1H2225V705.9H2256.4V689.1H2288.9V682.1H2300V720Z"/><g class="hs-crane" fill="none" stroke="#D39A5E" stroke-opacity=".32"><path d="M1470 690V594M1444 598H1544M1470 580L1444 598M1470 580L1514.4 598M1536 598V628"/><path d="M140 694V610M80 614H162M140 596L80 614M140 596L153.2 614M154 614V644"/></g><rect x="-1200" y="720" width="4000" height="2400" fill="#100C09"/><path class="hs-ln" d="M-1200 720H2800" stroke="#D39A5E" stroke-opacity=".38" fill="none"/><g class="hs-ln" stroke="#D39A5E" fill="none"><path d="M180.5 862.7h116.4" stroke-opacity="0.1"/><path d="M1697.3 752.8h144.6" stroke-opacity="0.1"/><path d="M323.9 745.5h142.9" stroke-opacity="0.2"/><path d="M354.1 877.5h53.8" stroke-opacity="0.1"/><path d="M918.8 804.5h47" stroke-opacity="0.1"/><path d="M253.5 806.1h36.6" stroke-opacity="0.1"/><path d="M1058.7 748h86.2" stroke-opacity="0.2"/><path d="M821.6 843.2h114" stroke-opacity="0.1"/><path d="M1730.5 826h122.5" stroke-opacity="0.2"/><path d="M1006.7 840.7h126.3" stroke-opacity="0.1"/><path d="M1253.2 743.8h107.6" stroke-opacity="0.1"/><path d="M573.9 815.7h89.3" stroke-opacity="0.1"/><path d="M-41.7 744h72.5" stroke-opacity="0.1"/><path d="M1079.8 764h45.1" stroke-opacity="0.1"/><path d="M1471.5 734.2h134.3" stroke-opacity="0.1"/><path d="M436.4 849.2h78.3" stroke-opacity="0.2"/></g><g class="hs-ln" stroke="#D39A5E" stroke-opacity=".16" stroke-dasharray="18 10" fill="none"><path d="M284 730V910M316 730V890"/><path d="M1284 730V910M1316 730V890"/></g><g class="hs-approach"><rect x="-1200" y="636" width="1240" height="4" fill="#D39A5E"/><path class="hs-ln" d="M-1200 648H40" stroke="#B87333" stroke-opacity=".7" fill="none"/><path class="hs-ln" d="M-1160 648V720M-1050 648V720M-940 648V720M-830 648V720M-720 648V720M-610 648V720M-500 648V720M-390 648V720M-280 648V720M-170 648V720M-60 648V720" stroke="#D39A5E" stroke-opacity=".35" fill="none"/><rect x="1560" y="636" width="1240" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1560 648H2800" stroke="#B87333" stroke-opacity=".7" fill="none"/><path class="hs-ln" d="M1600 648V720M1710 648V720M1820 648V720M1930 648V720M2040 648V720M2150 648V720M2260 648V720M2370 648V720M2480 648V720M2590 648V720M2700 648V720" stroke="#D39A5E" stroke-opacity=".35" fill="none"/></g><g class="hs-ln" fill="#15100C" stroke="#D39A5E" stroke-opacity=".7"><rect x="20" y="620" width="40" height="44"/><rect x="1540" y="620" width="40" height="44"/></g><g class="hs-guide" fill="none" stroke="#D39A5E" stroke-opacity=".5" stroke-dasharray="4 9"><path class="hs-guide-c hs-ln" d="M300 136Q800 1064 1300 136M300 136Q175 430 40 626M1300 136Q1425 430 1560 626"/><path class="hs-guide-d hs-ln" d="M40 638H1560"/></g><g class="hs-tw hs-ln" fill="#15100C" stroke="#D39A5E"><rect x="262" y="712" width="76" height="20" stroke-opacity=".6"/><path d="M275 720L285 150L293 150L287 720Z"/><path d="M325 720L315 150L307 150L313 720Z"/><rect x="285.4" y="190" width="29.2" height="9"/><rect x="287.8" y="420" width="24.3" height="9"/><rect x="290.3" y="650" width="19.5" height="12"/><rect x="281" y="138" width="38" height="12"/><rect x="294" y="132" width="12" height="6"/></g><g class="hs-tw hs-ln" fill="#15100C" stroke="#D39A5E"><rect x="1262" y="712" width="76" height="20" stroke-opacity=".6"/><path d="M1275 720L1285 150L1293 150L1287 720Z"/><path d="M1325 720L1315 150L1307 150L1313 720Z"/><rect x="1285.4" y="190" width="29.2" height="9"/><rect x="1287.8" y="420" width="24.3" height="9"/><rect x="1290.3" y="650" width="19.5" height="12"/><rect x="1281" y="138" width="38" height="12"/><rect x="1294" y="132" width="12" height="6"/></g><g class="hs-hgs" stroke="#D39A5E" stroke-opacity=".62" fill="none"><path class="hs-hg" pathLength="1" data-o="0.08" d="M340 207.3V636"/><path class="hs-hg" pathLength="1" data-o="0.16" d="M380 272.6V636"/><path class="hs-hg" pathLength="1" data-o="0.24" d="M420 332V636"/><path class="hs-hg" pathLength="1" data-o="0.32" d="M460 385.4V636"/><path class="hs-hg" pathLength="1" data-o="0.4" d="M500 433V636"/><path class="hs-hg" pathLength="1" data-o="0.48" d="M540 474.5V636"/><path class="hs-hg" pathLength="1" data-o="0.5599999999999999" d="M580 510.2V636"/><path class="hs-hg" pathLength="1" data-o="0.64" d="M620 539.9V636"/><path class="hs-hg" pathLength="1" data-o="0.72" d="M660 563.6V636"/><path class="hs-hg" pathLength="1" data-o="0.8" d="M700 581.4V636"/><path class="hs-hg" pathLength="1" data-o="0.8800000000000001" d="M740 593.3V636"/><path class="hs-hg" pathLength="1" data-o="0.96" d="M780 599.3V636"/><path class="hs-hg" pathLength="1" data-o="0.96" d="M820 599.3V636"/><path class="hs-hg" pathLength="1" data-o="0.8800000000000001" d="M860 593.3V636"/><path class="hs-hg" pathLength="1" data-o="0.8" d="M900 581.4V636"/><path class="hs-hg" pathLength="1" data-o="0.72" d="M940 563.6V636"/><path class="hs-hg" pathLength="1" data-o="0.64" d="M980 539.9V636"/><path class="hs-hg" pathLength="1" data-o="0.5599999999999999" d="M1020 510.2V636"/><path class="hs-hg" pathLength="1" data-o="0.48" d="M1060 474.5V636"/><path class="hs-hg" pathLength="1" data-o="0.4" d="M1100 433V636"/><path class="hs-hg" pathLength="1" data-o="0.32" d="M1140 385.4V636"/><path class="hs-hg" pathLength="1" data-o="0.24" d="M1180 332V636"/><path class="hs-hg" pathLength="1" data-o="0.16" d="M1220 272.6V636"/><path class="hs-hg" pathLength="1" data-o="0.08" d="M1260 207.3V636"/><path class="hs-hg" pathLength="1" data-o="0.2" d="M255 238V636"/><path class="hs-hg" pathLength="1" data-o="0.3" d="M210 332.4V636"/><path class="hs-hg" pathLength="1" data-o="0.5" d="M165 419.5V636"/><path class="hs-hg" pathLength="1" data-o="0.7" d="M120 499.8V636"/><path class="hs-hg" pathLength="1" data-o="0.8" d="M75 573.3V636"/><path class="hs-hg" pathLength="1" data-o="0.2" d="M1345 238V636"/><path class="hs-hg" pathLength="1" data-o="0.3" d="M1390 332.4V636"/><path class="hs-hg" pathLength="1" data-o="0.5" d="M1435 419.5V636"/><path class="hs-hg" pathLength="1" data-o="0.7" d="M1480 499.8V636"/><path class="hs-hg" pathLength="1" data-o="0.8" d="M1525 573.3V636"/></g><g class="hs-cbs" fill="none" stroke="#D39A5E"><path class="hs-cb" data-k="m" pathLength="1" d="M300 136Q550 600 800 600"/><path class="hs-cb" data-k="m" pathLength="1" d="M1300 136Q1050 600 800 600"/><path class="hs-cb" data-k="s" pathLength="1" d="M300 136Q175 430 40 626"/><path class="hs-cb" data-k="s" pathLength="1" d="M1300 136Q1425 430 1560 626"/></g><g class="hs-sg" data-o="0.1" data-dx="-26"><rect x="300" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M300 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.1" data-dx="-26"><rect x="350" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M350 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.3" data-dx="-26"><rect x="400" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M400 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.3" data-dx="-26"><rect x="450" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M450 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.5" data-dx="-26"><rect x="500" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M500 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.6" data-dx="-26"><rect x="550" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M550 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.7" data-dx="-26"><rect x="600" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M600 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.8" data-dx="-26"><rect x="650" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M650 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.8" data-dx="-26"><rect x="700" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M700 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.9" data-dx="-26"><rect x="750" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M750 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.9" data-dx="26"><rect x="800" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M800 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.8" data-dx="26"><rect x="850" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M850 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.8" data-dx="26"><rect x="900" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M900 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.7" data-dx="26"><rect x="950" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M950 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.6" data-dx="26"><rect x="1000" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1000 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.5" data-dx="26"><rect x="1050" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1050 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.3" data-dx="26"><rect x="1100" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1100 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.3" data-dx="26"><rect x="1150" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1150 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.1" data-dx="26"><rect x="1200" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1200 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.1" data-dx="26"><rect x="1250" y="636" width="50.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1250 648h50.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.1" data-dx="26"><rect x="248" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M248 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.1" data-dx="-26"><rect x="1300" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1300 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.3" data-dx="26"><rect x="196" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M196 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.3" data-dx="-26"><rect x="1352" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1352 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.5" data-dx="26"><rect x="144" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M144 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.5" data-dx="-26"><rect x="1404" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1404 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.7" data-dx="26"><rect x="92" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M92 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.7" data-dx="-26"><rect x="1456" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1456 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.9" data-dx="26"><rect x="40" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M40 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-sg" data-o="0.9" data-dx="-26"><rect x="1508" y="636" width="52.6" height="4" fill="#D39A5E"/><path class="hs-ln" d="M1508 648h52.6" stroke="#B87333" stroke-opacity=".7" fill="none"/></g><g class="hs-lts" fill="#F2ECE2"><circle class="hs-lt" data-o="0" cx="350" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.2" cx="450" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.4" cx="550" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.7" cx="650" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.9" cx="750" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.9" cx="850" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.7" cx="950" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.4" cx="1050" cy="632" r="1.8"/><circle class="hs-lt" data-o="0.2" cx="1150" cy="632" r="1.8"/><circle class="hs-lt" data-o="0" cx="1250" cy="632" r="1.8"/></g></svg>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="scroll-cue" aria-hidden="true">Scroll</div>
     </div>
-    <div class="hero-grid"></div>
     <div class="hero-content">
       <div class="hero-brand" role="img" aria-label="The Hallbridge Company"><span class="lk-the">The</span><img src="assets/hallbridge-word-light.svg" alt="Hallbridge" width="1240" height="118"><span class="lk-co">Company</span></div>
       <h1>
@@ -863,15 +934,23 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
         <a href="#candidates" class="btn btn-ghost">I'm a Candidate</a>
       </div>
     </div>
-    <div class="scroll-cue" aria-hidden="true">Scroll</div>
+    <div class="hero-tail" aria-hidden="true"></div>
   </section>
 
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-media">
-      <div class="frame" aria-hidden="true"></div>
-      <img class="main reveal-img" src="assets/img/crew-deck-v3-1280.webp" srcset="assets/img/crew-deck-v3-640.webp 640w, assets/img/crew-deck-v3-1280.webp 1280w" sizes="(max-width: 960px) 90vw, 45vw" alt="Construction project team standing together on a new concrete deck" decoding="async">
-      <img class="inset reveal-img" src="assets/img/jobsite-handshake-v2-900.webp" alt="Two construction leaders in hard hats shaking hands on a jobsite" decoding="async">
+      <div class="about-main">
+        <div class="frame" aria-hidden="true"></div>
+        <picture>
+          <source media="(max-width: 960px)" srcset="assets/img/crew-sunset-wide-800.webp 800w, assets/img/crew-sunset-wide-1600.webp 1600w" sizes="(max-width: 700px) 92vw, 600px" width="1600" height="1067">
+          <img class="main reveal-img" src="assets/img/crew-sunset-1280.webp" srcset="assets/img/crew-sunset-640.webp 640w, assets/img/crew-sunset-1280.webp 1280w" sizes="42vw" width="1280" height="1600" alt="Two ironworkers on steel at sunset" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <figure class="about-founder">
+        <img class="reveal-img" src="assets/img/alex-hall-portrait-400.webp" srcset="assets/img/alex-hall-portrait-400.webp 400w, assets/img/alex-hall-portrait-800.webp 800w" sizes="(max-width: 700px) 30vw, (max-width: 960px) 170px, 13vw" width="400" height="500" alt="Alex Hall, founder of Hallbridge" loading="lazy" decoding="async">
+        <figcaption><b>Alex Hall</b><span>Founder</span></figcaption>
+      </figure>
     </div>
     <div>
       <p class="eyebrow reveal">Who We Are</p>
@@ -883,6 +962,8 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       <a class="link-arrow reveal" href="/about/">More about Hallbridge &rarr;</a>
     </div>
   </section>
+
+  <div class="rule-wrap"><div class="bridge-rule" data-draw aria-hidden="true"><svg viewBox="0 0 1100 56" focusable="false"><path class="dk" d="M0 50H1100"/><path class="tk" d="M4 0V56M1096 0V56"/><path class="hg" d="M59 12V50M113.6 19.2V50M168.2 25.5V50M222.8 30.9V50M277.4 35.5V50M332 39.3V50M386.6 42.2V50M441.2 44.3V50M495.8 45.6V50M550.4 46V50M605 45.6V50M659.6 44.3V50M714.2 42.2V50M768.8 39.3V50M823.4 35.5V50M878 30.8V50M932.6 25.4V50M987.2 19.1V50"/><path class="cv" pathLength="1" d="M4 4Q550 88 1096 4"/></svg></div></div>
 
   <!-- CLIENT SERVICES -->
   <section class="cs" id="client-services">
@@ -952,8 +1033,8 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
   <!-- ROLES -->
   <section class="roles" id="roles">
     <div class="roles-media rs" id="fieldSuite" style="--x:90%">
-      <img class="rs-base" src="assets/img/field-hardhat-v3-1280.webp" srcset="assets/img/field-hardhat-v3-640.webp 640w, assets/img/field-hardhat-v3-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction superintendent in a red hard hat on a concrete jobsite" loading="lazy" decoding="async">
-      <div class="rs-top"><img src="assets/img/exec-office-v3-1280.webp" srcset="assets/img/exec-office-v3-640.webp 640w, assets/img/exec-office-v3-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction executive in a suit in his office" loading="lazy" decoding="async"></div>
+      <img class="rs-base" src="assets/img/field-portrait-1280.webp" srcset="assets/img/field-portrait-640.webp 640w, assets/img/field-portrait-1280.webp 1280w" width="1280" height="1707" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction worker in a yellow hard hat and safety harness" loading="lazy" decoding="async">
+      <div class="rs-top"><img src="assets/img/exec-office-v3-1280.webp" width="1280" height="1706" srcset="assets/img/exec-office-v3-640.webp 640w, assets/img/exec-office-v3-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" alt="Construction executive in a suit in his office" loading="lazy" decoding="async"></div>
       <span class="rs-label rs-l">The Field</span><span class="rs-label rs-r">The Executive Suite</span>
       <div class="rs-line" aria-hidden="true"><span class="rs-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
       <input class="rs-range" type="range" min="0" max="100" value="90" aria-label="Slide to compare the field and the executive suite">
@@ -1049,6 +1130,46 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
     </div>
   </section>
 
+  <div class="rule-wrap rw-gap"><div class="bridge-rule" data-draw aria-hidden="true"><svg viewBox="0 0 1100 56" focusable="false"><path class="dk" d="M0 50H1100"/><path class="tk" d="M4 0V56M1096 0V56"/><path class="hg" d="M59 12V50M113.6 19.2V50M168.2 25.5V50M222.8 30.9V50M277.4 35.5V50M332 39.3V50M386.6 42.2V50M441.2 44.3V50M495.8 45.6V50M550.4 46V50M605 45.6V50M659.6 44.3V50M714.2 42.2V50M768.8 39.3V50M823.4 35.5V50M878 30.8V50M932.6 25.4V50M987.2 19.1V50"/><path class="cv" pathLength="1" d="M4 4Q550 88 1096 4"/></svg></div></div>
+
+  <!-- WEBSITES FOR BUILDERS -->
+  <section class="web" id="websites">
+    <div class="web-inner">
+      <div class="web-body">
+        <p class="eyebrow reveal">Digital Growth</p>
+        <h2 class="title reveal">A website that shows<br><em>what you've built.</em></h2>
+        <p class="body reveal">Owners, developers and the superintendents you want to hire all look at your website before they call. We design, build and run contractor sites that put your projects and people up front, on every phone.</p>
+        <ul class="web-list reveal">
+          <li>Custom design around your projects</li>
+          <li>Project portfolio and case studies</li>
+          <li>Careers page that helps you hire</li>
+          <li>Bid and contact forms that reach the right person</li>
+          <li>Fast and built for mobile</li>
+          <li>Google Search Console, analytics and clear structure for AI search</li>
+          <li>Hosting, security and backups</li>
+          <li>Text, photo and project updates handled for you</li>
+        </ul>
+        <p class="web-concept reveal"><b>Start with a concept.</b> We mock up what a modern version of your site could look like before you commit to anything.</p>
+        <p class="web-concept reveal"><b>Photo and video.</b> We also offer on-site photography, drone and video for your team and your projects.</p>
+        <div class="web-actions reveal">
+          <a href="mailto:info@hallbridge.co?subject=Website%20Concept" class="btn btn-copper">Request a Concept <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <div class="mock mock-live reveal">
+        <div class="mock-browser">
+          <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><span>concept site</span></div>
+          <div class="mock-hero"><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-frame-up-poster-1200.webp" data-src="/assets/video/lab-frame-up.mp4" aria-label="A three-story apartment building framing up in 3D on a concept site for a framing contractor"></video></div>
+          <div class="mock-strip">
+            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-stadium-poster-1200.webp" data-src="/assets/video/lab-stadium.mp4" aria-label="A stadium structure rising in 3D on a concept site for a concrete contractor"></video></figure>
+            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-pour-poster-1200.webp" data-src="/assets/video/lab-pour.mp4" aria-label="Concrete being poured into a form on a concept site for a flatwork contractor"></video></figure>
+            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-hand-drawn-poster-1200.webp" data-src="/assets/video/lab-hand-drawn.mp4" aria-label="Line drawings sketching themselves on a concept site for a masonry contractor"></video></figure>
+          </div>
+        </div>
+        <p class="mock-note">Working concept sites. <a class="link-arrow" href="/digital-growth/websites/#concepts">See all six &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
   <!-- TESTIMONIALS -->
   <section class="testimonials" id="testimonials">
     <div class="testimonials-inner">
@@ -1122,48 +1243,10 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
     </div>
   </section>
 
-  <!-- WEBSITES FOR BUILDERS -->
-  <section class="web" id="websites">
-    <div class="web-inner">
-      <div class="web-body">
-        <p class="eyebrow reveal">Websites for Builders</p>
-        <h2 class="title reveal">A website that shows<br><em>what you've built.</em></h2>
-        <p class="body reveal">Owners, developers and the superintendents you want to hire all look at your website before they call. We design, build and run contractor sites that put your projects and people up front, on every phone.</p>
-        <ul class="web-list reveal">
-          <li>Custom design around your projects</li>
-          <li>Project portfolio and case studies</li>
-          <li>Careers page that helps you hire</li>
-          <li>Bid and contact forms that reach the right person</li>
-          <li>Fast and built for mobile</li>
-          <li>Google Search Console, analytics and clear structure for AI search</li>
-          <li>Hosting, security and backups</li>
-          <li>Text, photo and project updates handled for you</li>
-        </ul>
-        <p class="web-concept reveal"><b>Start with a concept.</b> We mock up what a modern version of your site could look like before you commit to anything.</p>
-        <p class="web-concept reveal"><b>Photo and video.</b> We also offer on-site photography, drone and video for your team and your projects.</p>
-        <div class="web-actions reveal">
-          <a href="mailto:info@hallbridge.co?subject=Website%20Concept" class="btn btn-copper">Request a Concept <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-        </div>
-      </div>
-      <div class="mock mock-live reveal">
-        <div class="mock-browser">
-          <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><span>concept site</span></div>
-          <div class="mock-hero"><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-frame-up-poster-1200.webp" data-src="/assets/video/lab-frame-up.mp4" aria-label="A three-story apartment building framing up in 3D on a concept site for a framing contractor"></video></div>
-          <div class="mock-strip">
-            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-stadium-poster-1200.webp" data-src="/assets/video/lab-stadium.mp4" aria-label="A stadium structure rising in 3D on a concept site for a concrete contractor"></video></figure>
-            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-pour-poster-1200.webp" data-src="/assets/video/lab-pour.mp4" aria-label="Concrete being poured into a form on a concept site for a flatwork contractor"></video></figure>
-            <figure><video class="lab-vid" muted loop playsinline preload="none" width="1200" height="750" poster="/assets/img/lab-hand-drawn-poster-1200.webp" data-src="/assets/video/lab-hand-drawn.mp4" aria-label="Line drawings sketching themselves on a concept site for a masonry contractor"></video></figure>
-          </div>
-        </div>
-        <p class="mock-note">Working concept sites. <a class="link-arrow" href="/digital-growth/websites/#concepts">See all six &rarr;</a></p>
-      </div>
-    </div>
-  </section>
-
   <!-- CANDIDATES -->
   <section class="candidates dark" id="candidates">
     <div class="cand-media">
-      <img class="reveal-img" src="assets/img/exec-rooftop-1600.webp" srcset="assets/img/exec-rooftop-800.webp 800w, assets/img/exec-rooftop-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 55vw" alt="Construction executive on a rooftop looking out over the city skyline at dusk" loading="lazy" decoding="async">
+      <img class="reveal-img" src="assets/img/exec-rooftop-1600.webp" srcset="assets/img/exec-rooftop-800.webp 800w, assets/img/exec-rooftop-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 55vw" alt="Construction executive on a rooftop looking out over the city skyline at dusk" loading="lazy" decoding="async" width="1600" height="1067">
     </div>
     <div class="cand-body">
       <p class="eyebrow reveal">For Candidates</p>
@@ -1180,7 +1263,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
 
   <!-- CONTACT -->
   <section class="contact" id="contact">
-    <div class="bg"><img src="assets/img/cranes-blue-hour-1600.webp" srcset="assets/img/cranes-blue-hour-800.webp 800w, assets/img/cranes-blue-hour-1600.webp 1600w" sizes="100vw" alt="Tower cranes over a city jobsite at dusk" loading="lazy" decoding="async"></div>
+    <div class="bg"><img src="assets/img/cranes-blue-hour-1600.webp" srcset="assets/img/cranes-blue-hour-800.webp 800w, assets/img/cranes-blue-hour-1600.webp 1600w" sizes="100vw" alt="Tower cranes over a city jobsite at dusk" loading="lazy" decoding="async" width="1600" height="1068"></div>
     <div class="contact-inner">
       <p class="eyebrow reveal">Get In Touch</p>
       <h2 class="reveal">Ready to find your<br><em>next key hire?</em></h2>
@@ -1197,6 +1280,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
   <!-- FOOTER -->
   <footer>
     <div class="foot-inner">
+      <div class="bridge-rule foot-rule" aria-hidden="true"><svg viewBox="0 0 1100 56" focusable="false"><path class="dk" d="M0 50H1100"/><path class="tk" d="M4 0V56M1096 0V56"/><path class="hg" d="M59 12V50M113.6 19.2V50M168.2 25.5V50M222.8 30.9V50M277.4 35.5V50M332 39.3V50M386.6 42.2V50M441.2 44.3V50M495.8 45.6V50M550.4 46V50M605 45.6V50M659.6 44.3V50M714.2 42.2V50M768.8 39.3V50M823.4 35.5V50M878 30.8V50M932.6 25.4V50M987.2 19.1V50"/><path class="cv" pathLength="1" d="M4 4Q550 88 1096 4"/></svg></div>
       <div class="foot-top">
         <div class="foot-brand">
           <img class="mono" src="/assets/monogram-footer.svg" alt="Hallbridge bridge monogram" width="64" height="64">
@@ -1234,7 +1318,7 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // nav state
-      function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 60); }
+      function onScroll() { var hero = document.querySelector('.hero'); var edge = hero ? Math.max(60, hero.offsetHeight - 90) : 60; nav.classList.toggle('scrolled', window.scrollY > edge); nav.classList.toggle('over-hero', window.scrollY > 40 && window.scrollY <= edge); } /* the bar stays dark while the bridge hero is on screen */
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
 
@@ -1385,5 +1469,6 @@ setTimeout(function(){if(!window.__hbIntro){document.documentElement.classList.r
       if(e.isIntersecting){if(!el.src){el.src=el.dataset.src;}var p=el.play();if(p&&p.catch)p.catch(function(){});}else{el.pause();}});},{threshold:.35});
     v.forEach(function(el){io.observe(el);});})();
 </script>
+<script src="assets/bridge.js" defer></script>
 </body>
 </html>
