@@ -586,6 +586,101 @@ html.intro-on body{overflow:hidden}
 
 .nav .nav-sep{width:1px;height:16px;background:var(--line-2);margin:0 6px}
 .sent-msg{margin-top:16px;padding:14px 16px;border-radius:12px;border:1px solid var(--a2);color:var(--text);font-size:16px;box-shadow:0 0 24px -8px var(--glow)}
+
+/* ===== forms v2: estimate, bid and job forms that fill in, then the lead card ===== */
+.forms .wrap{display:block}
+.fx-head{max-width:760px}
+.fx-tabs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);width:min(560px,100%);margin:clamp(30px,4vw,44px) 0 22px;padding:5px;border-radius:999px;background:#111214;border:1px solid var(--line)}
+.fx-tabs button{position:relative;z-index:1;border:0;background:none;color:var(--muted);font:600 15px/1 'Sora',sans-serif;padding:13px 8px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .3s}
+.fx-tabs button.q{font-weight:400}
+.fx-tabs button[aria-selected=true]{color:var(--on)}
+.fx-ind{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/3);border-radius:999px;background:var(--solid);box-shadow:0 0 20px -4px var(--glow);transform:translate3d(calc(var(--t,0)*100%),0,0);transition:transform .45s var(--ease)}
+.fx-stage{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:22px;align-items:stretch}
+.fx-form{display:grid}
+.fx-panel{grid-area:1/1;background:#f5f5f7;color:#111;border-radius:24px;padding:26px;box-shadow:0 40px 100px -40px rgba(0,0,0,.9);opacity:0;transform:translate3d(0,8px,0);transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none}
+.fx-panel.on{opacity:1;transform:none}
+.fx-h{font-weight:600;font-size:19px;letter-spacing:-.01em;margin-bottom:16px}
+.fx-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.fx-f{background:#fff;border:1px solid #dcdce0;border-radius:12px;padding:10px 12px;margin-bottom:10px;min-height:64px}
+.fx-l{display:block;font-size:12px;color:#6e6e73;font-weight:600;margin-bottom:6px}
+.fx-t{display:block;font-weight:500;font-size:15.5px;height:24px;line-height:24px;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.fx-t::after{content:'';display:inline-block;width:1.5px;height:16px;background:#111;margin-left:2px;vertical-align:-3px;opacity:0}
+.fx-f.typing .fx-t::after{opacity:1;animation:blink .8s step-end infinite}
+.fx-chips{display:flex;flex-wrap:wrap;gap:6px}
+.fx-c{font-size:13.5px;font-weight:500;padding:6px 11px;border-radius:999px;border:1px solid #d2d2d7;background:#fff;color:#333;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.fx-c.sel{background:#111;color:#fff;border-color:#111;transform:scale(1.03)}
+.fx-range{display:flex;align-items:center;gap:12px}
+.fx-track{position:relative;flex:1;height:6px;border-radius:3px;background:#e3e3e8}
+.fx-fill{position:absolute;inset:0;border-radius:3px;background:var(--a2);transform-origin:0 50%;transform:scaleX(var(--v,0));transition:transform .9s var(--ease)}
+.fx-thumb{position:absolute;top:50%;left:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.35);transform:translate3d(calc(var(--px,0) * 1px),0,0);transition:transform .9s var(--ease)}
+.fx-rv{min-width:6.6em;text-align:right;font-weight:600;font-size:14.5px;height:20px;line-height:20px}
+.fx-files{display:flex;flex-wrap:wrap;gap:8px}
+.fx-file{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;font-style:normal;font-size:13.5px;font-weight:600;background:#f0f0f3;border-radius:8px;padding:6px 10px;opacity:0;transform:translate3d(0,6px,0);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.fx-file.on{opacity:1;transform:none}
+.fx-file i{width:13px;height:16px;border-radius:2px;background:#111}
+.fx-file u{text-decoration:none}
+.fx-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:#dcdce0;text-decoration:none}
+.fx-prog s{position:absolute;inset:0;background:var(--a2);transform-origin:0 50%;transform:scaleX(0);transition:transform 1s var(--ease)}
+.fx-file.up .fx-prog s{transform:scaleX(1)}
+.fx-date{display:inline-flex;align-items:center;gap:8px}
+.fx-date i{width:16px;height:16px;border-radius:4px;border:1.5px solid #111;position:relative;flex-shrink:0}
+.fx-date i::before{content:'';position:absolute;left:2px;right:2px;top:3px;height:1.5px;background:#111}
+.fx-togs{display:flex;flex-wrap:wrap;gap:8px 16px}
+.fx-tog{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
+.fx-tog i{position:relative;width:34px;height:20px;border-radius:999px;background:#d2d2d7;transition:background .3s}
+.fx-tog i::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .3s var(--ease)}
+.fx-tog.on i{background:var(--a2)}.fx-tog.on i::after{transform:translate3d(14px,0,0)}
+.fx-send{position:relative;overflow:hidden;margin-top:6px;height:48px;border-radius:999px;background:#111;color:#fff;display:grid;place-items:center;font-weight:600;font-size:15px;transition:background .3s,transform .3s var(--ease)}
+.fx-send .ok{position:absolute;width:22px;height:22px;fill:none;stroke:#050506;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .5s var(--ease) .1s}
+.fx-send .lbl{transition:opacity .2s}
+.fx-send.go{transform:scale(.98);background:#333}
+.fx-send.done{background:var(--solid)}.fx-send.done .lbl{opacity:0}.fx-send.done .ok{stroke-dashoffset:0}
+.fx-side{display:grid;grid-template-rows:auto 1fr;gap:14px}
+.fx-note{min-height:66px;display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:rgba(22,23,26,.92);border:1px solid var(--line-2);box-shadow:0 20px 50px -10px rgba(0,0,0,.8),0 0 30px -8px var(--glow);opacity:0;transform:translate3d(0,-10px,0);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.fx-note.on{opacity:1;transform:none}
+.fx-note.buzz{animation:buzz .42s linear}
+.fx-note .dot{width:36px;height:36px;border-radius:10px;background:var(--solid);flex-shrink:0;display:grid;place-items:center;color:#050506}
+.fx-note .dot svg{width:18px;height:18px}
+.fx-note b{display:block;font-size:15px}.fx-note span{display:block;font-size:13.5px;color:var(--muted)}
+.fx-lead{border-radius:24px;padding:24px;background:linear-gradient(180deg,#16171a,#0e0f12);border:1px solid var(--line);transition:border-color .6s var(--ease),box-shadow .6s var(--ease)}
+.fx-lead.on{border-color:var(--a2);box-shadow:0 0 0 1px var(--a2),0 30px 80px -30px var(--glow)}
+.fx-lh{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line);min-height:44px}
+.fx-live{width:9px;height:9px;border-radius:50%;background:var(--line-2);flex-shrink:0;transition:background .4s}
+.fx-lead.on .fx-live{background:#4dff9a;box-shadow:0 0 10px rgba(77,255,154,.7)}
+.fx-lt{font-size:16.5px;font-weight:600;line-height:1.3}
+.fx-facts{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:16px 0 14px;font-size:14.5px;min-height:132px;align-content:start}
+.fx-facts dt{color:var(--muted)}.fx-facts dd{margin:0;color:var(--text);font-weight:500}
+.fx-facts dt,.fx-facts dd{opacity:0;transform:translate3d(0,6px,0);transition:opacity .4s var(--ease),transform .4s var(--ease);transition-delay:var(--d,0s)}
+.fx-lead.on .fx-facts dt,.fx-lead.on .fx-facts dd{opacity:1;transform:none}
+.fx-att{display:flex;flex-wrap:wrap;gap:8px;min-height:30px}
+.fx-att em{font-style:normal;font-size:13px;font-weight:600;padding:5px 10px;border-radius:8px;border:1px solid var(--line-2);color:var(--text);opacity:0;transition:opacity .4s var(--ease) var(--d,0s)}
+.fx-lead.on .fx-att em{opacity:1}
+.fx-steps{list-style:none;margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:grid;gap:12px}
+.fx-steps li{display:flex;align-items:center;gap:12px;font-size:14.5px;color:var(--muted);transition:color .4s var(--ease)}
+.fx-steps li::before{content:'';width:22px;height:22px;border-radius:50%;flex-shrink:0;border:1.5px solid var(--line-2);background:transparent center/12px no-repeat;transition:background-color .4s var(--ease),border-color .4s var(--ease)}
+.fx-steps li.ok{color:var(--text)}
+.fx-steps li.ok::before{border-color:var(--a2);background-color:var(--solid);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23050506' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.fx-why{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(40px,5vw,60px)}
+.fx-why>div{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:start}
+.fx-why svg{grid-row:span 2;width:26px;height:26px;fill:none;stroke:var(--a1);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.fx-why h3{font-size:18px}
+.fx-why p{color:var(--muted);font-size:15.5px;margin-top:4px}
+.fx-cta{margin-top:clamp(34px,4vw,48px)}
+@media (max-width:1100px){.fx-stage{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}.fx-facts{grid-template-columns:1fr;gap:2px}.fx-facts dd{margin-bottom:8px}}
+@media (max-width:860px){
+  .fx-stage{grid-template-columns:minmax(0,1fr)}
+  .fx-why{grid-template-columns:1fr;gap:16px}
+  .fx-panel{padding:20px}
+  .fx-tabs button{font-size:13.5px;padding:12px 4px}
+  .fx-facts{grid-template-columns:auto 1fr;gap:8px 14px;min-height:124px}.fx-facts dd{margin-bottom:0}.fx-lh{min-height:64px}
+}
+@media (max-width:420px){.fx-row{grid-template-columns:minmax(0,1fr)}.fx-tabs button{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.fx-note.buzz{animation:none}}
+
+@media (min-width:861px){.steps{grid-auto-rows:auto;row-gap:0}.step{display:grid;grid-row:span 3;grid-template-rows:subgrid;align-content:start}.step .n{align-self:start}.step h3{align-self:start}.step p{align-self:start}}
+@media (min-width:861px) and (max-width:1180px){.step{margin-bottom:14px}}
+@media (min-width:1181px){.step{padding:32px 12px}.step h3{white-space:nowrap;font-size:16.5px}}
+@media (max-width:420px){.hdr .wrap .logo{--mg:36px}}
 /* review switcher */
 .review{display:none;position:fixed;right:16px;bottom:16px;z-index:80;background:rgba(12,12,14,.94);border:1px solid var(--line-2);border-radius:999px;padding:6px;gap:4px;align-items:center}
 [data-review] .review{display:flex}
@@ -631,7 +726,7 @@ html.intro-on body{overflow:hidden}
 .step p{font-size:16px}
 .plan .sub{color:var(--muted);font-size:15.5px;margin-top:6px}
 .plan .amt{margin-top:18px}
-@media (max-width:1080px){.hdr .wrap{position:relative;min-height:64px}.hdr .logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}.hdr-right{margin-left:auto}.hdr-right .btn{display:none}}
+@media (max-width:1080px){.hdr .wrap{position:relative;min-height:64px}.hdr .logo{position:absolute;left:50%;top:50%;--mg:45px;transform:translate(calc(-50% - var(--mg) / 2),-50%)}.hdr-right{margin-left:auto}.hdr-right .btn{display:none}}
 @media (min-width:861px){.ways{grid-template-rows:auto auto auto auto;row-gap:0}.way{display:grid;grid-row:span 4;grid-template-rows:subgrid;align-content:start}.way p.online{align-self:start}}
 @media (min-width:861px){.plans{grid-template-rows:auto auto auto 1fr;row-gap:0}.plan{display:grid;grid-row:span 4;grid-template-rows:subgrid}}
 </style>
@@ -948,7 +1043,7 @@ html.intro-on body{overflow:hidden}
     </div>
     <div class="get set">
       <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path class="pen" d="M4 20l4-1 11-11-3-3L5 16z"/><path class="pen" d="M14 7l3 3"/><path class="ink" d="M3 22.5h12"/></svg></div><h3>Custom design</h3></div>
-      <div class="card rv" style="--d:80ms"><div class="ic"><svg viewBox="0 0 24 24"><g class="rot"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></g></svg></div><h3>Built for phones</h3></div>
+      <div class="card rv" style="--d:80ms"><div class="ic"><svg viewBox="0 0 24 24"><g class="rot"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></g></svg></div><h3>Built for mobile and all devices</h3></div>
       <div class="card rv" style="--d:160ms"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path class="needle" d="M12 17l-4-5"/><circle cx="12" cy="17" r="1.2"/></svg></div><h3>Fast-loading pages</h3></div>
       <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="1.5"/><g class="crop"><path d="M3 9V5h4M21 9V5h-4M3 16v4h4M21 16v4h-4"/></g></svg></div><h3>Photos edited for you</h3></div>
       <div class="card rv" style="--d:80ms"><div class="ic"><svg viewBox="0 0 24 24"><path class="wl w1" d="M4 7h16"/><path class="wl w2" d="M4 12h16"/><path class="wl w3" d="M4 17h10"/></svg></div><h3>Copywriting help</h3></div>
@@ -1024,19 +1119,21 @@ html.intro-on body{overflow:hidden}
 
 <section class="floor forms" id="forms" aria-labelledby="forms-h">
   <div class="wrap">
-    <div class="rv">
+    <div class="fx-head rv">
       <h2 id="forms-h">Forms that win work.</h2>
-      <p class="lead">Clear estimate, bid and job application forms that bring the details straight to your inbox.</p>
+      <p class="lead">Requests for estimates and bids that arrive complete, with the scope, the files and a way to reach them.</p>
     </div>
-    <div class="fdemo rv set" aria-hidden="true">
-      <div class="fpanel">
-        <div class="ttl"><span class="ttl-t">Request an estimate</span></div>
-        <div class="frow"><div class="ff f1"><span>Project type</span><b></b></div><div class="ff f2"><span>Location</span><b></b></div></div>
-        <div class="frow"><div class="ff f3"><span>Timeline</span><b></b></div><div class="ff f4"><span>Drawings</span><b><em class="chip"><i></i><u>plans.pdf</u><s class="prog"><s></s></s></em></b></div></div>
-        <div class="fsend"><span class="lbl">Send</span><svg class="ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-      </div>
-      <div class="phone2"><div class="notif"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></div><div><b class="nt">New estimate request</b><span class="ns">Clinic addition, next spring</span></div></div></div>
+    <div class="fx-tabs rv" role="tablist" aria-label="Form examples"><span class="fx-ind" aria-hidden="true"></span><button role="tab" aria-selected="true" data-t="0">Estimate request</button><button role="tab" aria-selected="false" data-t="1">Bid request</button><button role="tab" aria-selected="false" data-t="2" class="q">Job application</button></div>
+    <div class="fx-stage rv set" aria-hidden="true">
+      <div class="fx-form"><div class="fx-panel" data-m="0"><div class="fx-h">Request an estimate</div><div class="fx-f "><span class="fx-l">Project type</span><div class="fx-chips"><span class="fx-c" data-c="0">Driveway</span><span class="fx-c" data-c="1">Parking lot</span><span class="fx-c" data-c="2">Addition</span><span class="fx-c" data-c="3">Remodel</span></div></div><div class="fx-row"><div class="fx-f fx-half"><span class="fx-l">Location</span><b class="fx-t"></b></div><div class="fx-f fx-half"><span class="fx-l">Size or scope</span><b class="fx-t"></b></div></div><div class="fx-f "><span class="fx-l">Timeline</span><div class="fx-chips"><span class="fx-c" data-c="0">As soon as possible</span><span class="fx-c" data-c="1">This season</span><span class="fx-c" data-c="2">Next spring</span></div></div><div class="fx-f "><span class="fx-l">Budget range</span><div class="fx-range"><span class="fx-track"><span class="fx-fill"></span><span class="fx-thumb"></span></span><b class="fx-rv"></b></div></div><div class="fx-f "><span class="fx-l">Photos and plans</span><div class="fx-files"><em class="fx-file"><i></i><u>site-photo.jpg</u><s class="fx-prog"><s></s></s></em><em class="fx-file"><i></i><u>plans.pdf</u><s class="fx-prog"><s></s></s></em></div></div><div class="fx-f "><span class="fx-l">Best way to reach you</span><div class="fx-chips"><span class="fx-c" data-c="0">Phone</span><span class="fx-c" data-c="1">Email</span><span class="fx-c" data-c="2">Text</span></div></div><div class="fx-send"><span class="lbl">Send request</span><svg class="ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div><div class="fx-panel" data-m="1"><div class="fx-h">Invite us to bid</div><div class="fx-row"><div class="fx-f fx-half"><span class="fx-l">Project name</span><b class="fx-t"></b></div><div class="fx-f fx-half"><span class="fx-l">Owner or GC</span><b class="fx-t"></b></div></div><div class="fx-row"><div class="fx-f fx-half"><span class="fx-l">Bids due</span><span class="fx-date"><i></i><b class="fx-t"></b></span></div><div class="fx-f fx-half"><span class="fx-l">Site walk</span><span class="fx-date"><i></i><b class="fx-t"></b></span></div></div><div class="fx-f "><span class="fx-l">Trade or scope</span><div class="fx-chips"><span class="fx-c" data-c="0">Sitework</span><span class="fx-c" data-c="1">Concrete</span><span class="fx-c" data-c="2">Paving</span><span class="fx-c" data-c="3">Utilities</span></div></div><div class="fx-f "><span class="fx-l">Plans and specs</span><div class="fx-files"><em class="fx-file"><i></i><u>plans.pdf</u><s class="fx-prog"><s></s></s></em><em class="fx-file"><i></i><u>specs.pdf</u><s class="fx-prog"><s></s></s></em></div></div><div class="fx-f "><span class="fx-l">Requirements</span><div class="fx-togs"><span class="fx-tog"><i></i>Bonding required</span><span class="fx-tog"><i></i>Insurance certificate</span></div></div><div class="fx-send"><span class="lbl">Send invitation</span><svg class="ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div><div class="fx-panel" data-m="2"><div class="fx-h">Apply for a role</div><div class="fx-row"><div class="fx-f fx-half"><span class="fx-l">Name</span><b class="fx-t"></b></div><div class="fx-f fx-half"><span class="fx-l">Role</span><b class="fx-t"></b></div></div><div class="fx-f "><span class="fx-l">Years in the trade</span><div class="fx-chips"><span class="fx-c" data-c="0">Under 2</span><span class="fx-c" data-c="1">2 to 5</span><span class="fx-c" data-c="2">5 to 10</span><span class="fx-c" data-c="3">10 plus</span></div></div><div class="fx-f "><span class="fx-l">Certifications</span><div class="fx-chips"><span class="fx-c" data-c="0">OSHA 30</span><span class="fx-c" data-c="1">CDL Class A</span><span class="fx-c" data-c="2">First aid</span><span class="fx-c" data-c="3">Forklift</span></div></div><div class="fx-f "><span class="fx-l">Resume</span><div class="fx-files"><em class="fx-file"><i></i><u>resume.pdf</u><s class="fx-prog"><s></s></s></em></div></div><div class="fx-send"><span class="lbl">Submit application</span><svg class="ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div></div>
+      <div class="fx-side"><div class="fx-note"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></div><div><b class="fx-nt"></b><span class="fx-ns"></span></div></div><div class="fx-lead"><div class="fx-lh"><span class="fx-live"></span><b class="fx-lt"></b></div><dl class="fx-facts"></dl><div class="fx-att"></div><ol class="fx-steps"><li></li><li></li><li></li></ol></div></div>
     </div>
+    <div class="fx-why">
+      <div class="rv"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 3 3v2"/><circle cx="12" cy="18" r=".6"/><circle cx="12" cy="12" r="10"/></svg><h3>The right questions, up front</h3><p>Scope, timeline and budget before the first call.</p></div>
+      <div class="rv" style="--d:100ms"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><h3>Plans and photos attached</h3><p>Files come in with the request, ready to review.</p></div>
+      <div class="rv" style="--d:200ms"><svg viewBox="0 0 24 24"><path d="M4 12h12M12 6l6 6-6 6"/><path d="M20 5v14"/></svg><h3>Straight to the right person</h3><p>Estimates, bids and applications each land in their own inbox.</p></div>
+    </div>
+    <div class="fx-cta rv"><a class="btn" href="#contact" data-need="forms">Get forms like these <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
   </div>
 </section>
 
@@ -1049,10 +1146,10 @@ html.intro-on body{overflow:hidden}
     <div class="steps set">
       <div class="line" aria-hidden="true"></div>
       <div class="card step rv"><div class="n">1</div><h3>Start with a call</h3><p>A short consultation, then we design a free concept of your new site before you commit.</p></div>
-      <div class="card step rv" style="--d:120ms"><div class="n">2</div><h3>Send the basics</h3><p>Your logo, photos, services and past projects. Phone photos are fine, and we help with the wording.</p></div>
+      <div class="card step rv" style="--d:120ms"><div class="n">2</div><h3>Send the basics</h3><p>Your logo, photos, services and projects. Phone photos are fine, and we help with the wording.</p></div>
       <div class="card step rv" style="--d:240ms"><div class="n">3</div><h3>Review it together</h3><p>You see every page and we adjust until it is right.</p></div>
-      <div class="card step rv" style="--d:360ms"><div class="n">4</div><h3>Launch</h3><p>It goes live on your own domain.</p></div>
-      <div class="card step rv" style="--d:480ms"><div class="n">5</div><h3>We stay with you</h3><p>The care plan keeps it secure, current and updated whenever you need a change.</p></div>
+      <div class="card step rv" style="--d:360ms"><div class="n">4</div><h3>Launch</h3><p>We connect your domain, test every page on every device and go live when you give the word.</p></div>
+      <div class="card step rv" style="--d:480ms"><div class="n">5</div><h3>We stay with you</h3><p>The annual care plan keeps it secure, current and updated whenever you need a change.</p></div>
     </div>
   </div>
 </section>
@@ -1062,7 +1159,7 @@ html.intro-on body{overflow:hidden}
   <div class="wrap">
     <div class="head center rv">
       <h2 id="pr-h"><span class="ln">Agency quality.</span><span class="ln g">Not agency prices.</span></h2>
-      <p class="ways-lead">Three packages, one clear price each.</p>
+      <p class="ways-lead">Three packages, one transparent price each.</p>
     </div>
     <div class="plans set">
       <article class="card plan rv"><h3>Foundation</h3><p class="sub">The essentials, done right.</p><p class="amt">$1,500</p><ul><li>Up to five pages</li><li>Projects page</li><li>Estimate request form</li></ul></article>
@@ -1079,11 +1176,11 @@ html.intro-on body{overflow:hidden}
   <div class="wrap">
     <div class="head center rv"><h2 id="faq-h">Questions</h2></div>
     <div class="faq rv set">
-      <details><summary>How long does it take?<i></i></summary><p>It moves as fast as your photos and approvals, and launches the day you sign off.</p></details>
-      <details><summary>What do you need from us?<i></i></summary><p>Your logo, your best project photos and a short call. We handle the rest.</p></details>
+      <details><summary>How long does it take?<i></i></summary><p>Two days to two weeks, depending on how fast we get your photos and approvals.</p></details>
+      <details><summary>What do you need from us?<i></i></summary><p>Send your logo, pictures of your work, a list of what you do and anything else you want on the site. Pictures from your phone work. To start the build we also need the deposit, which is half the package price.</p></details>
       <details><summary>Can you fix the site we have?<i></i></summary><p>Yes. Many projects start by renovating what you already have.</p></details>
-      <details><summary>How do I pay?<i></i></summary><p>You get a secure online invoice. Pay by bank transfer (ACH), debit card or credit card. Credit cards carry a 3% processing fee. Half is due to start the build and the balance at launch.</p></details>
-      <details><summary>Why Hallbridge?<i></i></summary><p>We only work with builders, manufacturers, engineers and trade contractors, so we know how they win work.</p></details>
+      <details><summary>How do I pay?<i></i></summary><p>You get a secure online invoice. Pay by bank transfer (ACH), debit card or credit card. Credit cards carry a 3% processing fee. The balance is due at launch.</p></details>
+      <details><summary>Why Hallbridge?<i></i></summary><p>We have worked with builders for over 10 years and only serve companies in the building world, so we know how they win work. Your satisfaction is our biggest priority.</p></details>
     </div>
   </div>
 </section>
@@ -1112,6 +1209,7 @@ html.intro-on body{overflow:hidden}
           <label><input type="checkbox" name="need" value="Search and SEO" data-k="search"><span>Search and SEO</span></label>
           <label><input type="checkbox" name="need" value="Google profile" data-k="profile"><span>Google profile</span></label>
           <label><input type="checkbox" name="need" value="Company email" data-k="email"><span>Company email</span></label>
+          <label><input type="checkbox" name="need" value="Estimate and bid forms" data-k="forms"><span>Estimate and bid forms</span></label>
         </fieldset>
         <div class="field full"><label for="f-time">Best time to reach you</label><select id="f-time" name="best-time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
         <div class="field full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Your current website, if you have one, and the work you want more of."></textarea></div>
@@ -1138,10 +1236,10 @@ html.intro-on body{overflow:hidden}
 <footer class="ftr">
   <div class="wrap">
     <div class="top">
-      <div><a class="logo" href="#top" aria-label="Hallbridge Digital"><span class="neo"><svg class="nmark" aria-hidden="true"><use href="#n1h"/></svg><span class="nwm"><b>HALLBRIDGE</b><span class="dg"><i></i>DIGITAL<i></i></span></span></span><svg class="mark" aria-hidden="true"><use href="#m1"/></svg><span class="wm">hallbridge <b>digital</b></span><span class="dom">hallbridge<b>.digital</b></span></a><p class="tag">Connecting the people who build America.</p></div>
+      <div><a class="logo" href="#top" aria-label="Hallbridge Digital"><span class="neo"><svg class="nmark" aria-hidden="true"><use href="#n1h"/></svg><span class="nwm"><b>HALLBRIDGE</b><span class="dg"><i></i>DIGITAL<i></i></span></span></span><svg class="mark" aria-hidden="true"><use href="#m1"/></svg><span class="wm">hallbridge <b>digital</b></span><span class="dom">hallbridge<b>.digital</b></span></a><p class="tag">A division of <a href="/">The Hallbridge Company</a>.</p></div>
       <nav aria-label="Footer"><a href="#work">Concepts</a><a href="#get">Services</a><a href="#pricing">Pricing</a><a href="#faq">Questions</a><a href="/">Recruiting</a></nav>
     </div>
-    <div class="bottom"><span>© 2026 The Hallbridge Company. All rights reserved.</span><span>info@hallbridge.co · (813) 850-0583</span></div>
+    <div class="bottom"><span>© 2026. All rights reserved.</span><span>info@hallbridge.co · (813) 850-0583</span></div>
   </div>
 </footer>
 
@@ -1256,33 +1354,67 @@ html.intro-on body{overflow:hidden}
     setTimeout(() => requestAnimationFrame(st), 500); }, .55);
 
 
-  // forms floor: estimate request and job application, typed in, uploaded, sent, landing as a lead
-  const fd = $('.fdemo'), FF = [1, 2, 3, 4].map(i => $('.f' + i, fd)), chip = $('.chip', fd), send = $('.fsend', fd), note = $('.notif', fd), ph = $('.phone2', fd), ttl = $('.ttl-t', fd);
-  const MODES = [
-    { t: 'Request an estimate', l: ['Project type', 'Location', 'Timeline', 'Drawings'], v: ['Clinic addition', 'Twin Falls, ID', 'Next spring'], file: 'plans.pdf', nt: 'New estimate request', ns: 'Clinic addition, next spring' },
-    { t: 'Apply for a role', l: ['Name', 'Role', 'Experience', 'Resume'], v: ['Jordan Reyes', 'Superintendent', 'Ground-up multifamily'], file: 'resume.pdf', nt: 'New job application', ns: 'Superintendent, ground-up multifamily' }
+  {
+  // forms floor v2: estimate, bid and job forms fill in, send, and a complete lead card assembles
+  const fx = $('.fx-stage'), tabs = $$('.fx-tabs button'), ind = $('.fx-ind'), panels = $$('.fx-panel', fx);
+  const note = $('.fx-note', fx), leadC = $('.fx-lead', fx), lt = $('.fx-lt', leadC), facts = $('.fx-facts', leadC), att = $('.fx-att', leadC), steps = $$('.fx-steps li', leadC);
+  const D = [
+    { text: ['Twin Falls, ID', 'Small commercial lot'], chips: [[1], [2], [2]], range: [.55, 'Mid range'], files: 2,
+      nt: 'New estimate request', ns: 'Parking lot, Twin Falls, ID', lt: 'Parking lot paving, Twin Falls, ID',
+      facts: [['Scope', 'Small commercial lot'], ['Timeline', 'Next spring'], ['Budget', 'Mid range'], ['Reply by', 'Text']],
+      steps: ["Sent to your estimator's inbox", 'Customer gets a confirmation', 'Saved to your leads list'] },
+    { text: ['Riverside clinic addition', 'Example Builders Co.', 'Mar 14, 2 PM', 'Mar 3, 9 AM'], chips: [[1]], togs: 2, files: 2,
+      nt: 'New bid request', ns: 'Concrete, bids due Mar 14', lt: 'Riverside clinic addition',
+      facts: [['From', 'Example Builders Co.'], ['Scope', 'Concrete'], ['Bids due', 'Mar 14, 2 PM'], ['Needs', 'Bonding and insurance']],
+      steps: ['Sent to your estimating team', 'Bid date flagged for the team', 'Saved to your bid list'] },
+    { text: ['Jordan Reyes', 'Equipment operator'], chips: [[2], [0, 1]], files: 1,
+      nt: 'New job application', ns: 'Equipment operator, 5 to 10 years', lt: 'Jordan Reyes, equipment operator',
+      facts: [['Experience', '5 to 10 years'], ['Certified', 'OSHA 30, CDL Class A'], ['Resume', 'Attached']],
+      steps: ['Sent to your hiring manager', 'Applicant gets a confirmation', 'Saved to your applicants list'] }
   ];
   const wait = ms => new Promise(r => setTimeout(r, ms));
-  const setMode = (m, filled) => { ttl.textContent = m.t; FF.forEach((f, i) => { $('span', f).textContent = m.l[i]; if (i < 3) $('b', f).textContent = filled ? m.v[i] : ''; }); $('u', chip).textContent = m.file; $('.nt', note).textContent = m.nt; $('.ns', note).textContent = m.ns; };
-  const reset = () => { chip.classList.remove('on', 'up'); send.classList.remove('go', 'done'); note.classList.remove('on'); ph.classList.remove('on', 'buzz'); };
-  if (RM) { setMode(MODES[0], true); chip.classList.add('on', 'up'); send.classList.add('done'); note.classList.add('on'); ph.classList.add('on'); }
-  else {
-    let running = false, loopOn = false, k = 0;
-    const type = async (f, v) => { const bEl = $('b', f); f.classList.add('typing'); for (let c = 1; c <= v.length; c++) { if (!running) return; bEl.textContent = v.slice(0, c); await wait(48); } f.classList.remove('typing'); await wait(220); };
-    const cycle = async () => {
-      if (loopOn) return; loopOn = true;
-      while (running) {
-        const m = MODES[k++ % 2]; reset(); fd.classList.add('swap'); await wait(260); setMode(m, false); fd.classList.remove('swap'); await wait(400);
-        for (let i = 0; i < 3 && running; i++) await type(FF[i], m.v[i]);
-        if (!running) break;
-        chip.classList.add('on'); await wait(150); chip.classList.add('up'); await wait(1100);
-        send.classList.add('go'); await wait(380); send.classList.remove('go'); send.classList.add('done'); await wait(600);
-        ph.classList.add('on'); await wait(350); note.classList.add('on'); ph.classList.add('buzz'); await wait(500); ph.classList.remove('buzz');
-        await wait(3200);
-      }
-      loopOn = false;
-    };
-    new IntersectionObserver(es => es.forEach(e => { running = e.isIntersecting; if (running) cycle(); }), { threshold: .35 }).observe(fd);
+  let mode = 0, run = 0;
+  const showTab = m => { tabs.forEach((t, i) => t.setAttribute('aria-selected', i === m)); ind.style.setProperty('--t', m); panels.forEach((p, i) => p.classList.toggle('on', i === m)); };
+  const parts = p => ({ t: $$('.fx-t', p), chips: $$('.fx-chips', p), range: $('.fx-range', p), files: $$('.fx-file', p), togs: $$('.fx-tog', p), send: $('.fx-send', p) });
+  const clear = m => { const p = parts(panels[m]); p.t.forEach(t => t.textContent = ''); $$('.fx-c', panels[m]).forEach(c => c.classList.remove('sel')); p.files.forEach(f => f.classList.remove('on', 'up')); p.togs.forEach(t => t.classList.remove('on'));
+    if (p.range) { $('.fx-fill', p.range).style.setProperty('--v', 0); $('.fx-thumb', p.range).style.setProperty('--px', 0); $('.fx-rv', p.range).textContent = ''; } p.send.classList.remove('go', 'done');
+    note.classList.remove('on', 'buzz'); leadC.classList.remove('on'); steps.forEach(li => li.classList.remove('ok')); };
+  const setRange = (p, v, txt) => { const tr = $('.fx-track', p.range); p.range.style.setProperty('--v', v); $('.fx-fill', tr).style.setProperty('--v', v); $('.fx-thumb', tr).style.setProperty('--px', (tr.clientWidth * v).toFixed(1)); $('.fx-rv', p.range).textContent = txt; };
+  const fillLead = m => { const d = D[m]; $('.fx-nt', note).textContent = d.nt; $('.fx-ns', note).textContent = d.ns; lt.textContent = d.lt;
+    facts.innerHTML = d.facts.map((f, i) => `<dt style="--d:${(.15 + i * .12).toFixed(2)}s">${f[0]}</dt><dd style="--d:${(.15 + i * .12).toFixed(2)}s">${f[1]}</dd>`).join('');
+    att.innerHTML = $$('.fx-file u', panels[m]).map((u, i) => `<em style="--d:${(.7 + i * .12).toFixed(2)}s">${u.textContent}</em>`).join('');
+    steps.forEach((li, i) => li.textContent = d.steps[i]); };
+  const finish = m => { const p = parts(panels[m]), d = D[m]; d.text.forEach((v, i) => p.t[i].textContent = v); (d.chips || []).forEach((sel, i) => sel.forEach(c => $$('.fx-c', p.chips[i])[c].classList.add('sel')));
+    if (d.range) setRange(p, d.range[0], d.range[1]); p.files.forEach(f => f.classList.add('on', 'up')); p.togs.forEach(t => t.classList.add('on')); p.send.classList.add('done');
+    fillLead(m); note.classList.add('on'); leadC.classList.add('on'); steps.forEach(li => li.classList.add('ok')); };
+  const play = async (m, id) => {
+    const ok = () => id === run; const p = parts(panels[m]), d = D[m];
+    clear(m); fillLead(m); showTab(m); await wait(500);
+    const typeInto = async el => { const f = el.closest('.fx-f'), v = el.dataset.v; f.classList.add('typing'); for (let c = 1; c <= v.length; c++) { if (!ok()) return; el.textContent = v.slice(0, c); await wait(42); } f.classList.remove('typing'); await wait(180); };
+    p.t.forEach((t, i) => t.dataset.v = d.text[i]);
+    const order = $$('.fx-f, .fx-row > .fx-f', panels[m]).filter((x, i, arr) => arr.indexOf(x) === i);
+    let ti = 0, ci = 0;
+    for (const fld of $$('.fx-f', panels[m])) {
+      if (!ok()) return;
+      if ($('.fx-t', fld)) { await typeInto(p.t[ti++]); continue; }
+      if ($('.fx-chips', fld)) { const sel = (d.chips || [])[ci++] || []; for (const c of sel) { $$('.fx-c', fld)[c].classList.add('sel'); await wait(260); } await wait(200); continue; }
+      if ($('.fx-range', fld)) { setRange(p, d.range[0], d.range[1]); await wait(900); continue; }
+      if ($('.fx-files', fld)) { for (const fe of $$('.fx-file', fld)) { fe.classList.add('on'); await wait(120); fe.classList.add('up'); await wait(700); } continue; }
+      if ($('.fx-togs', fld)) { for (const tg of $$('.fx-tog', fld)) { tg.classList.add('on'); await wait(350); } continue; }
+    }
+    if (!ok()) return;
+    p.send.classList.add('go'); await wait(320); p.send.classList.remove('go'); p.send.classList.add('done'); await wait(500);
+    if (!ok()) return;
+    note.classList.add('on', 'buzz'); await wait(450); note.classList.remove('buzz');
+    leadC.classList.add('on'); await wait(900);
+    for (const li of steps) { if (!ok()) return; li.classList.add('ok'); await wait(450); }
+    await wait(3800);
+  };
+  let visible = false, looping = false;
+  const loop = async () => { if (looping) return; looping = true; while (visible) { const id = ++run; await play(mode, id); if (id !== run || !visible) continue; mode = (mode + 1) % 3; } looping = false; };
+  tabs.forEach((t, i) => t.addEventListener('click', () => { mode = i; if (RM) { panels.forEach((_, j) => clear(j)); showTab(i); finish(i); return; } run++; showTab(i); if (visible) loop(); }));
+  if (RM || !io) { showTab(0); finish(0); }
+  else { showTab(0); fillLead(0); new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; if (visible) loop(); else run++; }), { threshold: .3 }).observe(fx); }
   }
 
   // contact form: progress sweep on send (local prototype only, nothing is posted)
