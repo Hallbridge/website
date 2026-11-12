@@ -103,7 +103,7 @@ h3{font-size:20px;letter-spacing:-.01em;line-height:1.3}
 .mmenu a.active{color:var(--a1)}
 .mmenu .foot{margin-top:auto;padding-bottom:24px;font-size:16px;color:var(--muted);line-height:2.2}
 .mmenu .foot a{font-size:16px;font-weight:400;border:0;padding:0;display:inline;color:var(--text)}
-@media (max-width:980px){.nav{display:none}.burger{display:inline-flex}}
+@media (max-width:1080px){.nav{display:none}.burger{display:inline-flex}}
 @media (max-width:420px){.logo .mark{width:26px;height:26px}.logo .wm,.logo .dom{font-size:16px}.logo{gap:7px}.hdr .btn{padding:0 14px;font-size:13.5px;min-height:42px}.hdr .wrap{gap:6px}.burger{width:44px;height:44px}.hdr-right{gap:6px}}
 
 /* hero */
@@ -600,6 +600,25 @@ html.intro-on body{overflow:hidden}
   .cursor-glow,.scan{display:none}
   *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation-duration:.01ms!important}
 }
+.btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,122,26,.65);transition:background .25s,color .25s,box-shadow .25s}
+.btn.ghost::before,.btn.ghost::after{display:none}
+.btn.ghost:hover{background:rgba(255,106,0,.14);box-shadow:inset 0 0 0 1.5px #ff7a1a,0 0 18px -6px rgba(255,106,0,.7)}
+.field select{width:100%;appearance:none;-webkit-appearance:none;background:#0d0e11 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ff7a1a' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center/12px;border:1px solid #2a2c32;border-radius:12px;color:#fff;font:400 16px/1.2 'Sora',sans-serif;padding:14px 40px 14px 16px;min-height:50px}
+.field select:focus{outline:none;border-color:#ff7a1a;box-shadow:0 0 0 3px rgba(255,106,0,.18)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.plan{padding:34px 30px 32px;position:relative}
+.plan h3{font-size:21px;font-weight:600}
+.plan .amt{font-size:clamp(40px,4.4vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1;margin:14px 0 22px;color:var(--text)}
+.plan.best .amt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.plan ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.plan li{padding:13px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:16px}
+.plan li:last-child{border-bottom:0;padding-bottom:0}
+.plan.best{border-color:var(--a2);box-shadow:0 0 0 1px var(--a2),0 20px 60px -20px var(--glow)}
+.care{text-align:center;max-width:760px;margin:38px auto 0;color:var(--muted);font-size:17px;line-height:1.55}
+.care b{color:var(--text);font-weight:600}
+@media (max-width:860px){.plans{grid-template-columns:1fr;gap:16px;max-width:460px;margin-left:auto;margin-right:auto}.plan{padding:26px 22px}}
+.nav a{white-space:nowrap}
+@media (max-width:1180px){.nav a{padding:9px 10px;font-size:15px}}
 </style>
 </head>
 <body>
@@ -641,12 +660,12 @@ html.intro-on body{overflow:hidden}
 <header class="hdr">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Hallbridge Digital, back to top"><span class="neo"><svg class="nmark" aria-hidden="true"><use href="#n1h"/></svg><span class="nwm"><b>HALLBRIDGE</b><span class="dg"><i></i>DIGITAL<i></i></span></span></span><svg class="mark" aria-hidden="true"><use href="#m1"/></svg><span class="wm">hallbridge <b>digital</b></span><span class="dom">hallbridge<b>.digital</b></span></a>
-    <nav class="nav" aria-label="Main"><a href="#renovate">Renovate</a><a href="#work">Work</a><a href="#get">What you get</a><a href="#how">How it works</a><a href="#contact">Contact</a><span class="nav-sep" aria-hidden="true"></span><a href="/">Recruiting</a></nav>
-    <div class="hdr-right"><a class="btn" href="#contact">Start a project</a><button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><span></span></button></div>
+    <nav class="nav" aria-label="Main"><a href="#renovate">Renovate</a><a href="#work">Work</a><a href="#get">What you get</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><span class="nav-sep" aria-hidden="true"></span><a href="/">Recruiting</a></nav>
+    <div class="hdr-right"><a class="btn ghost" href="#contact">Book a call</a><button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><span></span></button></div>
   </div>
 </header>
 <nav class="mmenu" id="mmenu" aria-label="Mobile menu">
-  <a href="#renovate">Renovate</a><a href="#work">Work</a><a href="#get">What you get</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+  <a href="#renovate">Renovate</a><a href="#work">Work</a><a href="#get">What you get</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
   <div class="foot"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><br><a href="tel:+18138500583">(813) 850-0583</a><br><a href="/">Hallbridge recruiting</a></div>
 </nav>
 
@@ -664,7 +683,7 @@ html.intro-on body{overflow:hidden}
       <h1 id="h1" aria-label="Building your company's future."><span class="ln" aria-hidden="true"><span class="w"><span style="--i:0">Building</span></span> <span class="w"><span style="--i:1">your</span></span></span><span class="ln nowrap" aria-hidden="true"><span class="w"><span class="g" style="--i:2">company's</span></span> <span class="w"><span class="g" style="--i:3">future.</span></span></span></h1>
       <p class="lead fade-up" style="--d:600ms">New websites and full renovations for construction, manufacturing and engineering companies and the trades.</p>
       <div class="cta-row fade-up" style="--d:780ms">
-        <a class="btn" href="#contact">Get a free mock-up <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a class="btn" href="#contact">Schedule a consultation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
         <a class="tlink" href="#work">See our work <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2v11M4 9l4 4 4-4"/></svg></a>
       </div>
     </div>
@@ -1015,11 +1034,27 @@ html.intro-on body{overflow:hidden}
     </div>
     <div class="steps set">
       <div class="line" aria-hidden="true"></div>
-      <div class="card step rv"><div class="n">1</div><h3>See it first</h3><p>We design a preview of your new site, at no cost, before you commit.</p></div>
+      <div class="card step rv"><div class="n">1</div><h3>Start with a call</h3><p>A short consultation, then we design a free concept of your new site before you commit.</p></div>
       <div class="card step rv" style="--d:120ms"><div class="n">2</div><h3>Send the basics</h3><p>Your logo, photos, services and past projects. Phone photos are fine, and we help with the wording.</p></div>
       <div class="card step rv" style="--d:240ms"><div class="n">3</div><h3>Review it together</h3><p>You see every page and we adjust until it is right.</p></div>
       <div class="card step rv" style="--d:360ms"><div class="n">4</div><h3>Launch</h3><p>We go live on your domain and keep it running.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="floor" id="pricing" aria-labelledby="pr-h">
+  <div class="wrap">
+    <div class="head center rv">
+      <h2 id="pr-h"><span class="ln">Agency quality.</span><span class="ln g">Not agency prices.</span></h2>
+      <p class="ways-lead">Three packages, one clear price each.</p>
+    </div>
+    <div class="plans set">
+      <article class="card plan rv"><h3>Foundation</h3><p class="amt">$1,500</p><ul><li>Up to five pages</li><li>Projects page</li><li>Estimate request form</li></ul></article>
+      <article class="card plan best rv" style="--d:120ms"><h3>Framework</h3><p class="amt">$2,000</p><ul><li>Seven to fifteen pages</li><li>A page for each key project</li><li>Hiring page and job applications</li><li>Opening animation</li></ul></article>
+      <article class="card plan rv" style="--d:240ms"><h3>Signature</h3><p class="amt">$3,000</p><ul><li>Everything in Framework</li><li>Custom animation throughout</li><li>An interactive centerpiece built around your trade</li></ul></article>
+    </div>
+    <p class="care rv"><b>Care plan, $100 a month, billed annually.</b> Hosting, security, support, your changes and a design refresh every year.</p>
   </div>
 </section>
 
@@ -1041,8 +1076,8 @@ html.intro-on body{overflow:hidden}
 <section class="contact tint floor" id="contact" data-fl="01" aria-labelledby="ct-h">
   <div class="wrap">
     <div class="rv">
-      <h2 id="ct-h"><span class="ln">Let's get</span><span class="ln g">started.</span></h2>
-      <p class="lead">Share a few details and we will send a look at what your site could be, with no obligation.</p>
+      <h2 id="ct-h"><span class="ln">Let's talk about</span><span class="ln g">your site.</span></h2>
+      <p class="lead">Tell us a little about your company and when to reach you. We set up a short conversation, then design your concept at no cost and with no obligation.</p>
       <p class="assure"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Your domain, content and files stay yours, and nothing launches until you are 100% happy.</span></p>
       <div class="meta"><a href="mailto:info@hallbridge.co">info@hallbridge.co</a><a href="tel:+18138500583">(813) 850-0583</a></div>
     </div>
@@ -1054,9 +1089,10 @@ html.intro-on body{overflow:hidden}
         <div class="field"><label for="f-co">Company</label><input id="f-co" name="company" autocomplete="organization" required></div>
         <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
         <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="field full"><label for="f-time">Best time to reach you</label><select id="f-time" name="best-time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
         <div class="field full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Your current website, if you have one, and the work you want more of."></textarea></div>
       </div>
-      <button class="btn" type="submit">Send my request <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+      <button class="btn" type="submit">Request my consultation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
           </form>
   </div>
 </section>
@@ -1079,7 +1115,7 @@ html.intro-on body{overflow:hidden}
   <div class="wrap">
     <div class="top">
       <div><a class="logo" href="#top" aria-label="Hallbridge Digital"><span class="neo"><svg class="nmark" aria-hidden="true"><use href="#n1h"/></svg><span class="nwm"><b>HALLBRIDGE</b><span class="dg"><i></i>DIGITAL<i></i></span></span></span><svg class="mark" aria-hidden="true"><use href="#m1"/></svg><span class="wm">hallbridge <b>digital</b></span><span class="dom">hallbridge<b>.digital</b></span></a><p class="tag">Connecting the people who build America.</p></div>
-      <nav aria-label="Footer"><a href="#renovate">Renovate</a><a href="#work">Work</a><a href="#get">What you get</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="/">Recruiting</a></nav>
+      <nav aria-label="Footer"><a href="#renovate">Renovate</a><a href="#work">Work</a><a href="#get">What you get</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/">Recruiting</a></nav>
     </div>
     <div class="bottom"><span>© 2026 The Hallbridge Company. All rights reserved.</span><span>info@hallbridge.co · (813) 850-0583</span></div>
   </div>
