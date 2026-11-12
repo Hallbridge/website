@@ -327,11 +327,11 @@ h3{font-size:20px;letter-spacing:-.01em;line-height:1.3}
 @media (max-width:600px){.get{grid-template-columns:1fr;gap:10px}.get .card{padding:18px 20px}}
 
 /* steps */
-.steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.steps .line{position:absolute;left:16.6%;right:16.6%;top:63px;height:2px;background:var(--line);overflow:hidden}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.steps .line{position:absolute;left:12.5%;right:12.5%;top:63px;height:2px;background:var(--line);overflow:hidden}
 .steps .line::after{content:'';position:absolute;inset:0;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);transition:transform 1.8s var(--ease) .3s;box-shadow:0 0 12px var(--glow)}
 .steps.in .line::after{transform:scaleX(1)}
-.step{padding:36px 30px;text-align:center}
+.step{padding:34px 22px;text-align:center}
 .step .n{width:54px;height:54px;border-radius:50%;margin:0 auto 22px;display:grid;place-items:center;font-weight:700;font-size:19px;color:var(--on);background:var(--solid);box-shadow:0 0 24px -4px var(--glow);position:relative;z-index:1}
 .step p{color:var(--muted);font-size:17px;margin-top:8px}
 @media (max-width:860px){.steps{grid-template-columns:1fr;gap:12px}.steps .line{display:none}.step{text-align:left;padding:22px;display:grid;grid-template-columns:auto 1fr;column-gap:18px;align-items:center}.step .n{margin:0;grid-row:span 2;width:46px;height:46px;font-size:17px}.step p{margin-top:2px;font-size:16px}}
@@ -529,7 +529,7 @@ h3{font-size:20px;letter-spacing:-.01em;line-height:1.3}
 /* how it works: steps light in order */
 .step .n{background:transparent;color:var(--a1);box-shadow:inset 0 0 0 1.5px var(--a2);transition:background .5s var(--ease),color .5s var(--ease),box-shadow .5s var(--ease)}
 .steps.in .step .n{background:var(--solid);color:var(--on);box-shadow:0 0 24px -4px var(--glow)}
-.steps.in .step:nth-child(2) .n{transition-delay:.3s}.steps.in .step:nth-child(3) .n{transition-delay:1.1s}.steps.in .step:nth-child(4) .n{transition-delay:1.9s}
+.steps.in .step:nth-child(2) .n{transition-delay:.3s}.steps.in .step:nth-child(3) .n{transition-delay:.8s}.steps.in .step:nth-child(4) .n{transition-delay:1.35s}.steps.in .step:nth-child(5) .n{transition-delay:1.9s}
 /* faq */
 .faq details p{overflow:hidden}
 .faq summary i{transition:transform .35s var(--ease),border-color .3s,box-shadow .3s}
@@ -1015,9 +1015,10 @@ html.intro-on body{overflow:hidden}
     </div>
     <div class="steps set">
       <div class="line" aria-hidden="true"></div>
-      <div class="card step rv"><div class="n">1</div><h3>See it first</h3><p>We design a preview before you commit.</p></div>
-      <div class="card step rv" style="--d:150ms"><div class="n">2</div><h3>Send your photos</h3><p>We edit them and build the pages.</p></div>
-      <div class="card step rv" style="--d:300ms"><div class="n">3</div><h3>Launch</h3><p>We go live and keep it running.</p></div>
+      <div class="card step rv"><div class="n">1</div><h3>See it first</h3><p>We design a preview of your new site, at no cost, before you commit.</p></div>
+      <div class="card step rv" style="--d:120ms"><div class="n">2</div><h3>Send the basics</h3><p>Your logo, photos, services and past projects. Phone photos are fine, and we help with the wording.</p></div>
+      <div class="card step rv" style="--d:240ms"><div class="n">3</div><h3>Review it together</h3><p>You see every page and we adjust until it is right.</p></div>
+      <div class="card step rv" style="--d:360ms"><div class="n">4</div><h3>Launch</h3><p>We go live on your domain and keep it running.</p></div>
     </div>
   </div>
 </section>
