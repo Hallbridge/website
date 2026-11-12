@@ -997,3 +997,6 @@ p, li, figcaption, dd, blockquote { text-wrap: pretty; }
 /* "Bridging the gap" slogan line on inner pages (matches the home page .about-gap) */
 .gap-line { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(20px, 1.7vw, 26px); line-height: 1.35; color: var(--copper); margin: 18px 0 0; max-width: 30ch; text-wrap: balance; }
 .dark .gap-line { color: var(--copper-light); }
+
+    /* single header link (Hallbridge Digital) and its one-line mobile entry */
+    .mm-solo summary::after { content: none; }

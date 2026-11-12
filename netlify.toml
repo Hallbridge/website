@@ -22,3 +22,17 @@
   from = "/blog/what-we-found-on-37000-contractor-websites.html"
   to = "/blog/what-contractor-websites-are-missing.html"
   status = 301
+
+# Hallbridge Digital moved to one page at /digital/ (11/12/2026).
+# force = true because the old files are still in the repo.
+[[redirects]]
+  from = "/digital-growth"
+  to = "/digital/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/digital-growth/*"
+  to = "/digital/"
+  status = 301
+  force = true

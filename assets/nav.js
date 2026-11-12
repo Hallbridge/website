@@ -8,7 +8,7 @@
       // The header is a link. With a mouse, hover opens the menu and a click follows the link.
       // On touch screens the first tap opens the menu and a second tap follows the link.
       var li = b.parentElement, touch = window.matchMedia('(hover: none)').matches;
-      if (touch && !li.classList.contains('open')) { e.preventDefault(); closeAll(); li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+      if (touch && li.querySelector('.dd-menu') && !li.classList.contains('open')) { e.preventDefault(); closeAll(); li.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
       e.stopPropagation();
     });
   });
