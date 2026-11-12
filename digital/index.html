@@ -8,7 +8,16 @@
 <meta property="og:title" content="Hallbridge Digital">
 <meta property="og:url" content="https://hallbridge.co/digital/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hallbridge.co/digital/assets/work/00-kestrel-ridge.jpg">
+<meta property="og:description" content="Websites, renovations, branding and search for builders, manufacturers and engineers.">
+<meta property="og:site_name" content="Hallbridge">
+<meta property="og:image" content="https://hallbridge.co/digital/assets/og-hallbridge-digital-20261112.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hallbridge Digital neon logo: Building your company's future.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hallbridge Digital">
+<meta name="twitter:description" content="Websites, renovations, branding and search for builders, manufacturers and engineers.">
+<meta name="twitter:image" content="https://hallbridge.co/digital/assets/og-hallbridge-digital-20261112.jpg">
 <meta name="description" content="Hallbridge Digital designs, builds and renovates websites for companies that build things.">
 <script>(()=>{const q=new URLSearchParams(location.search),t=q.get('theme'),d=document.documentElement;d.dataset.theme=/^[0-6]$/.test(t||'')?t:'0';if(q.has('review'))d.dataset.review='1';if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('intro-on');})();</script>
 <link rel="icon" type="image/svg+xml" href="assets/hd-favicon.svg">
@@ -182,6 +191,9 @@ h3{font-size:20px;letter-spacing:-.01em;line-height:1.3}
 .way svg{width:100%;height:auto;aspect-ratio:240/170;margin-bottom:14px}
 .way h4{font-size:20px;font-weight:600;letter-spacing:-.015em}
 .way p{color:var(--muted);font-size:16px;margin-top:8px}
+.way p.online{color:var(--text);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.way p.online b{color:var(--a1);font-weight:600}
+.ways-lead{text-align:center;font-size:clamp(19px,1.8vw,23px);font-weight:300;color:var(--muted);margin-top:12px}
 .way.best{border-color:var(--a2);box-shadow:0 0 0 1px var(--a2),0 20px 60px -20px var(--glow)}
 .way .pick{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--solid);color:var(--on);padding:5px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 0 18px -2px var(--glow)}
 .ways-cta{display:flex;justify-content:center;margin-top:36px}
@@ -276,7 +288,7 @@ h3{font-size:20px;letter-spacing:-.01em;line-height:1.3}
 /* reassurance + hiring */
 .assure{margin-top:26px;font-size:16px;color:var(--text);display:flex;gap:10px;align-items:flex-start;max-width:30em}
 .assure svg{width:20px;height:20px;flex-shrink:0;margin-top:2px;stroke:var(--a1);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.hire{text-align:center;color:var(--muted);font-size:15.5px;max-width:40em;margin:6px auto 0;padding:0 var(--pad)}
+.hire{text-align:center;color:var(--muted);font-size:15.5px;max-width:40em;margin:34px auto 0;padding:0 var(--pad)}
 .hire a{color:var(--text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--line-2)}
 .hire a:hover{text-decoration-color:var(--a1)}
 
@@ -420,17 +432,16 @@ h3{font-size:20px;letter-spacing:-.01em;line-height:1.3}
 .hook::after{content:'';position:absolute;left:-7px;bottom:-14px;width:16px;height:16px;border:2px solid var(--a1);border-top-color:transparent;border-radius:50%;box-shadow:0 0 10px var(--glow)}
 .hook::before{content:'';position:absolute;left:-5px;bottom:-2px;width:12px;height:4px;background:var(--a1);border-radius:2px}
 /* foundation */
-.base{position:relative;padding:0 0 40px;overflow:hidden}
-.base svg.fnd{display:block;width:100%;height:auto;min-height:150px}
-.fnd .g1{fill:none;stroke:var(--a1);stroke-width:2;filter:drop-shadow(0 0 6px var(--glow))}
-.fnd .g2{fill:none;stroke:var(--a2);stroke-width:1.2;stroke-opacity:.7}
-.fnd .slab{fill:#0e0f12;stroke:var(--a1);stroke-width:2}
-.fnd .earth{stroke:var(--line-2);stroke-width:1}
-.base .mark{position:absolute;left:50%;top:24px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;white-space:nowrap}
-.base .mark svg{width:46px;height:46px;flex-shrink:0;color:#fff;filter:drop-shadow(0 0 10px var(--glow))}
-.base .mark span{font:600 clamp(17px,1.6vw,20px)/1.2 'Sora',sans-serif;letter-spacing:-.01em;color:var(--text)}
-.base .mark span b{color:var(--a1);font-weight:600}
-.base .fd{stroke-dasharray:var(--len,1400);stroke-dashoffset:var(--len,1400);transition:stroke-dashoffset 2.2s var(--ease) var(--d,0s)}
+.base{position:relative;padding:clamp(70px,9vw,110px) 0 48px;text-align:center}
+.fnd-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;padding:0 var(--pad)}
+.base svg.fmark{width:64px;height:64px;overflow:visible}
+.fnd-t{font:600 clamp(18px,1.7vw,21px)/1.2 'Sora',sans-serif;letter-spacing:-.01em;color:var(--text)}
+.fnd-t b{color:var(--a1);font-weight:600}
+.base svg.fnd{width:min(560px,86%);height:auto;margin-top:16px;overflow:visible}
+.fnd .fl{fill:none;stroke:var(--a2);stroke-width:2.5;stroke-linecap:round;filter:drop-shadow(0 0 5px var(--glow))}
+.fnd .ff{fill:none;stroke:var(--a1);stroke-width:1.6;stroke-linecap:round;stroke-opacity:.8}
+.fnd .fg{fill:none;stroke:var(--a1);stroke-width:2.2;stroke-linecap:round}
+.base .fd{stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);transition:stroke-dashoffset 1.8s var(--ease) var(--d,0s)}
 .base.lit .fd{stroke-dashoffset:0}
 /* responsive */
 @media (max-width:1299px){
@@ -544,7 +555,6 @@ h3{font-size:20px;letter-spacing:-.01em;line-height:1.3}
 .nwm .dg{display:flex;align-items:center;gap:6px;margin-top:5px;font:400 7.5px/1 'Michroma',sans-serif;letter-spacing:.62em;padding-left:.62em;color:#ff7a1a;text-shadow:0 0 6px rgba(255,106,0,.7)}
 .nwm .dg i{flex:1;height:1px;background:#ff6a00;box-shadow:0 0 6px #ff6a00;min-width:10px}
 .ftr .nmark{width:40px;height:40px}.ftr .nwm b{font-size:17px}
-.base .mark svg.fmark{width:64px;height:64px;filter:none;overflow:visible}
 @media (max-width:420px){.nmark{width:28px;height:28px}.neo{gap:8px}.nwm b{font-size:12.5px}.nwm .dg{font-size:6.5px;margin-top:4px}}
 /* ===== intro ===== */
 .intro{position:fixed;inset:0;z-index:200;background:#020203;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(22px,4vh,34px);cursor:pointer;transition:opacity .5s var(--ease),transform .6s var(--ease)}
@@ -812,10 +822,10 @@ html.intro-on body{overflow:hidden}
         <button class="knob" role="slider" aria-label="Compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></button>
       </div>
     </div>
-        <p class="reno-line rv">Like a building makeover, we keep what works, fix what is dated and leave you with a place people want to walk into.</p>
 
     <div class="ways-wrap">
       <h3 class="t rv">Three ways forward</h3>
+      <p class="ways-lead rv">Imagine your website was your house.</p>
       <div class="ways">
         <article class="card way rv">
           <svg viewBox="0 0 240 170" aria-hidden="true">
@@ -828,7 +838,8 @@ html.intro-on body{overflow:hidden}
             <path class="o fi" style="--d:2s" d="M221 124h8v-8"/>
           </svg>
           <h4>Leave it as is</h4>
-          <p>Like an aging house, it keeps losing value and quietly costs you work.</p>
+          <p>The house ages, gets harder to protect, and every year brings a new problem.</p>
+          <p class="online"><b>Your site:</b> outdated and less secure. Things break, and it quietly costs you work.</p>
         </article>
         <article class="card way best rv" style="--d:120ms">
                     <svg viewBox="0 0 240 170" aria-hidden="true">
@@ -842,7 +853,8 @@ html.intro-on body{overflow:hidden}
             <path class="o fi" style="--d:2.6s" d="M220 49l8-1 1 8"/>
           </svg>
           <h4>Renovate</h4>
-          <p>Upgrade the weak spots. You stand out and can charge what your work is worth.</p>
+          <p>Keep the good bones, put in new systems and a fresh finish, and the value rises.</p>
+          <p class="online"><b>Your site:</b> secure, fast and modern. You stand out and can charge what your work is worth.</p>
         </article>
         <article class="card way rv" style="--d:240ms">
           <svg viewBox="0 0 240 170" aria-hidden="true">
@@ -862,8 +874,9 @@ html.intro-on body{overflow:hidden}
             <path class="o glow dr" pathLength="1" style="--d:1.4s" d="M170 128H198V40H228"/>
             <path class="o fi" style="--d:2.8s" d="M221 34l7 6-7 6"/>
           </svg>
-          <h4>Rebuild from the ground up</h4>
-          <p>When the old site can't be saved, we clear the lot and build new.</p>
+          <h4>Rebuild</h4>
+          <p>Clear the lot and build a custom home exactly the way you want it.</p>
+          <p class="online"><b>Your site:</b> designed around your company, from the first sketch to launch.</p>
         </article>
       </div>
       <div class="ways-cta rv"><a class="btn" href="#contact">Find your path <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
@@ -882,15 +895,15 @@ html.intro-on body{overflow:hidden}
     <div class="arrows"><button data-rail="-1" aria-label="Previous"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 8H3M7 4L3 8l4 4"/></svg></button><button data-rail="1" aria-label="Next"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></div>
   </div>
   <div class="rail set" tabindex="0" aria-label="Concept websites, scroll sideways">
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="metadata" poster="assets/work/00-kestrel-ridge.jpg" aria-label="A clean, modern contractor site scrolling from hero to projects"><source src="assets/work/00-kestrel-ridge.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: commercial general contractor</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="metadata" poster="assets/work/17-xray-reveal.jpg" aria-label="Dragging across a finished building to reveal the framing behind it"><source src="assets/work/17-xray-reveal.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: multifamily builder</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/25-factory-line.jpg" aria-label="A wall panel moving down a production line"><source src="assets/work/25-factory-line.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: precast manufacturer</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/05-editorial.jpg" aria-label="An editorial project index with photos appearing on hover"><source src="assets/work/05-editorial.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: design-build firm</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/27-frame-up.jpg" aria-label="An apartment building framing up in 3D as the page scrolls"><source src="assets/work/27-frame-up.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: framing contractor</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/14-hand-drawn.jpg" aria-label="Hand-drawn sketches that draw themselves on scroll"><source src="assets/work/14-hand-drawn.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: masonry contractor</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/19-curtain-wall.jpg" aria-label="Full-screen chapters that wipe from one to the next"><source src="assets/work/19-curtain-wall.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: construction manager</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/21-concrete-pour.jpg" aria-label="Concrete poured into a slab with the cursor"><source src="assets/work/21-concrete-pour.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: concrete contractor</figcaption></figure>
-    <figure class="vc"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/01-scroll-story.jpg" aria-label="A night build story told as you scroll"><source src="assets/work/01-scroll-story.mp4" type="video/mp4"></video></div></div></div><figcaption>Concept: truss and roofing crew</figcaption></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a commercial general contractor"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="metadata" poster="assets/work/00-kestrel-ridge.jpg" aria-label="A clean, modern contractor site scrolling from hero to projects"><source src="assets/work/00-kestrel-ridge.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a multifamily builder"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="metadata" poster="assets/work/17-xray-reveal.jpg" aria-label="Dragging across a finished building to reveal the framing behind it"><source src="assets/work/17-xray-reveal.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a concrete contractor"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/21-concrete-pour.jpg" aria-label="Concrete poured into a slab with the cursor"><source src="assets/work/21-concrete-pour.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a precast manufacturer"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/25-factory-line.jpg" aria-label="A wall panel moving down a production line"><source src="assets/work/25-factory-line.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a design-build firm"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/05-editorial.jpg" aria-label="An editorial project index with photos appearing on hover"><source src="assets/work/05-editorial.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a framing contractor"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/27-frame-up.jpg" aria-label="An apartment building framing up in 3D as the page scrolls"><source src="assets/work/27-frame-up.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a masonry contractor"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/14-hand-drawn.jpg" aria-label="Hand-drawn sketches that draw themselves on scroll"><source src="assets/work/14-hand-drawn.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a bridge and civil contractor"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/23-night-shift.jpg" aria-label="A day and night switch that pulls a trailer-window shade"><source src="assets/work/23-night-shift.mp4" type="video/mp4"></video></div></div></div></figure>
+    <figure class="vc" role="group" aria-label="Concept website for a millwork manufacturer"><div class="tilt"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><video data-auto muted loop playsinline preload="none" poster="assets/work/26-exploded-view.jpg" aria-label="A cabinet coming apart into its parts as the page scrolls"><source src="assets/work/26-exploded-view.mp4" type="video/mp4"></video></div></div></div></figure>
   </div>
   </section>
 
@@ -1048,14 +1061,15 @@ html.intro-on body{overflow:hidden}
 </section>
 
 <section class="base floor" id="base" aria-label="Foundation">
-  <div class="mark"><svg class="fmark" aria-hidden="true"><use href="#n1"/></svg><span>Built on <b>Hallbridge</b></span></div>
-  <svg class="fnd" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
-    <path class="earth" d="M0 92H1440" stroke-dasharray="2 8"/>
-    <rect class="slab fd" x="120" y="92" width="1200" height="34" rx="4"/>
-    <path class="g1 fd" style="--d:.3s" d="M220 126V196h60V126M520 126V206h60V126M860 126V206h60V126M1160 126V196h60V126"/>
-    <path class="g2 fd" style="--d:.6s" d="M250 196V220M550 206V220M890 206V220M1190 196V220M120 109H1320"/>
-    <path class="g2 fd" style="--d:.9s" d="M160 126l30 30M300 126l30 30M440 126l30 30M620 126l30 30M760 126l30 30M960 126l30 30M1100 126l30 30M1250 126l30 30"/>
-  </svg>
+  <div class="fnd-wrap">
+    <svg class="fmark" aria-hidden="true"><use href="#n1"/></svg>
+    <p class="fnd-t">Built on <b>Hallbridge</b></p>
+    <svg class="fnd" viewBox="0 0 600 70" aria-hidden="true">
+      <path class="fl fd" d="M20 14H580"/>
+      <path class="ff fd" style="--d:.5s" d="M110 14V46M230 14V54M370 14V54M490 14V46"/>
+      <path class="fg fd" style="--d:.9s" d="M98 46H122M218 54H242M358 54H382M478 46H502"/>
+    </svg>
+  </div>
   <p class="hire">Need help hiring too? Hallbridge recruits project and field leaders for the companies we build for. <a href="/">Hallbridge recruiting</a></p>
 </section>
 </main>
