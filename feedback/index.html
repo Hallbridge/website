@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How did we do? | The Hallbridge Company</title>
+<meta name="description" content="Share feedback on your search with The Hallbridge Company.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/favicon-32.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --cream:#F9F6F1; --paper:#FFFFFF; --ink:#15100C; --charcoal:#3A322C; --muted:#7A6E64; --line:#E4DCD1; --copper:#B87333; --copper-dark:#9A5F28;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,-apple-system,sans-serif; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--cream); color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; }
+  .top { display:flex; justify-content:center; padding:34px 20px 0; }
+  .top img { width:46px; height:46px; }
+  main { max-width:640px; margin:0 auto; padding:28px 20px 80px; }
+  h1 { font-family:var(--serif); font-weight:400; font-size:clamp(40px,7vw,58px); line-height:1.02; text-align:center; letter-spacing:-.01em; }
+  h1 em { color:var(--copper); }
+  .lede { text-align:center; color:var(--muted); font-size:17px; line-height:1.6; margin:16px auto 36px; max-width:30em; }
+  form { background:var(--paper); border:1px solid var(--line); padding:clamp(24px,5vw,40px); }
+  .q { margin-bottom:28px; } .q:last-of-type { margin-bottom:0; }
+  .t { display:block; font-size:15px; font-weight:500; color:var(--ink); margin-bottom:10px; }
+  .t small { display:block; font-weight:400; color:var(--muted); font-size:13px; margin-top:3px; }
+  input[type=text], textarea { width:100%; font:16px/1.5 var(--sans); color:var(--ink); background:#fff; border:1px solid var(--line); padding:12px 14px; border-radius:0; transition:border-color .2s; }
+  textarea { min-height:104px; resize:vertical; }
+  input:focus, textarea:focus { outline:none; border-color:var(--copper); }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:520px) { .row { grid-template-columns:1fr; } }
+  .stars { display:flex; flex-direction:row-reverse; justify-content:flex-end; gap:6px; }
+  .stars input { position:absolute; opacity:0; width:1px; height:1px; }
+  .stars label { font-size:38px; line-height:1; color:#D9CFC3; cursor:pointer; transition:color .15s, transform .15s; }
+  .stars label:hover, .stars label:hover ~ label, .stars input:checked ~ label { color:var(--copper); }
+  .stars label:hover { transform:scale(1.08); }
+  .stars input:focus-visible + label { outline:2px solid var(--copper); outline-offset:3px; }
+  .check { display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--charcoal); line-height:1.5; margin-top:12px; }
+  .check input { margin-top:4px; accent-color:var(--copper); width:16px; height:16px; flex:none; }
+  button { margin-top:30px; width:100%; min-height:54px; background:var(--ink); color:var(--cream); border:0; font:600 13px/1 var(--sans); letter-spacing:2.4px; text-transform:uppercase; cursor:pointer; transition:background .25s; }
+  button:hover { background:var(--copper-dark); }
+  .hp { display:none; }
+  .thanks { display:none; text-align:center; background:var(--paper); border:1px solid var(--line); padding:44px 28px; }
+  .thanks h2 { font-family:var(--serif); font-weight:400; font-size:38px; line-height:1.1; }
+  .thanks p { color:var(--muted); line-height:1.6; margin:14px auto 0; max-width:28em; }
+  .greview { display:inline-flex; align-items:center; gap:10px; margin-top:26px; padding:15px 26px; border:1px solid var(--ink); color:var(--ink); text-decoration:none; font:600 13px/1 var(--sans); letter-spacing:2px; text-transform:uppercase; transition:background .25s,color .25s; }
+  .greview:hover { background:var(--ink); color:var(--cream); }
+  body.sent form { display:none; } body.sent .thanks { display:block; }
+  footer { text-align:center; color:var(--muted); font-size:13px; margin-top:34px; } footer a { color:var(--muted); }
+</style>
+</head>
+<body>
+  <div class="top"><a href="/" aria-label="The Hallbridge Company"><img src="/assets/sig-logo.png" alt=""></a></div>
+  <main>
+    <h1>How did <em>we do?</em></h1>
+    <p class="lede">Two minutes of honest feedback on your search helps us get better for the next builder. The good, the bad and anything in between.</p>
+    <form name="recruiting-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/feedback/?sent=1">
+      <input type="hidden" name="form-name" value="recruiting-feedback">
+      <p class="hp"><label>Leave this empty <input name="bot-field"></label></p>
+      <div class="q row">
+        <div><label class="t" for="name">Your name</label><input type="text" id="name" name="name" autocomplete="name" required></div>
+        <div><label class="t" for="company">Company</label><input type="text" id="company" name="company" autocomplete="organization" required></div>
+      </div>
+      <div class="q"><label class="t" for="role">Which role did we help you fill?</label><input type="text" id="role" name="role" placeholder="Project manager, superintendent, estimator..."></div>
+      <div class="q">
+        <span class="t" id="rate-l">Overall, how would you rate working with us?</span>
+        <div class="stars" role="radiogroup" aria-labelledby="rate-l">
+          <input type="radio" id="s5" name="rating" value="5" required><label for="s5" title="5 stars">&#9733;</label>
+          <input type="radio" id="s4" name="rating" value="4"><label for="s4" title="4 stars">&#9733;</label>
+          <input type="radio" id="s3" name="rating" value="3"><label for="s3" title="3 stars">&#9733;</label>
+          <input type="radio" id="s2" name="rating" value="2"><label for="s2" title="2 stars">&#9733;</label>
+          <input type="radio" id="s1" name="rating" value="1"><label for="s1" title="1 star">&#9733;</label>
+        </div>
+      </div>
+      <div class="q"><label class="t" for="liked">What did you like most about working with us?</label><textarea id="liked" name="liked_most"></textarea></div>
+      <div class="q"><label class="t" for="better">What could we have done better?<small>Be honest. This is the answer that helps us most.</small></label><textarea id="better" name="do_better"></textarea></div>
+      <div class="q"><label class="t" for="next">Any roles coming up we should know about?</label><textarea id="next" name="upcoming_roles"></textarea></div>
+      <div class="q">
+        <label class="t" for="review">In a sentence or two, how would you describe working with us to another contractor?</label>
+        <textarea id="review" name="review"></textarea>
+        <label class="check"><input type="checkbox" name="ok_to_share" value="yes"> It's OK to share this on Hallbridge's website with my name and company.</label>
+      </div>
+      <button type="submit">Send feedback</button>
+    </form>
+    <div class="thanks" aria-live="polite">
+      <h2>Thank you.</h2>
+      <p>We read every response. If you have a minute more, a Google review helps other builders find us.</p>
+      <a class="greview" id="greview" href="#" target="_blank" rel="noopener" hidden>Leave a Google review &rarr;</a>
+    </div>
+    <footer>The Hallbridge Company &nbsp;·&nbsp; <a href="/">hallbridge.co</a></footer>
+  </main>
+<script>
+  var GOOGLE_REVIEW_URL = "";  // set to the Hallbridge Google review link when we have it
+  if (GOOGLE_REVIEW_URL) { var g = document.getElementById('greview'); g.href = GOOGLE_REVIEW_URL; g.hidden = false; }
+  if (/[?&]sent=1/.test(location.search)) document.body.classList.add('sent');
+  var q = new URLSearchParams(location.search); if (q.get('c')) document.getElementById('company').value = q.get('c');
+</script>
+</body>
+</html>
