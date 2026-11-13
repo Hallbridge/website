@@ -534,29 +534,18 @@
     .cs .pillar.dark h3 em, .cs .pillar.dark .pillar-num, .cs .pillar.dark .pillar-link, .cs .pillar.dark .pillar-art { color: var(--copper-light); }
     .cs .pillar.dark p { color: rgba(242,236,226,0.72); }
     .cs .pillar.dark li { color: var(--taupe-light); border-bottom-color: rgba(242,236,226,0.1); }
+    .pillar-logo { display: flex; align-items: center; gap: 14px; flex: none; min-height: calc(clamp(78px, 8.4vw, 124px) * 100 / 120); }
+    .pillar-logo svg { width: clamp(56px, 5.6vw, 84px); height: auto; overflow: visible; }
+    .pl-word { display: flex; flex-direction: column; align-items: stretch; line-height: 1; }
+    .pl-word b { font: 400 13px/1 'Michroma', sans-serif; letter-spacing: .14em; color: var(--black); }
+    .pl-word span { display: flex; align-items: center; gap: 6px; margin-top: 7px; font: 400 8px/1 'Michroma', sans-serif; letter-spacing: .6em; padding-left: .6em; color: #e35d00; }
+    @media (max-width: 520px) { .pillar-logo { flex-direction: column; gap: 8px; } .pillar-logo svg { width: 52px; } .pl-word b { font-size: 10px; } .pl-word span { font-size: 6.5px; } }
+    .pl-word span i { flex: 1; height: 1px; background: #ff6a00; }
     .pillar-link svg { width: 15px; height: 15px; transition: transform .3s var(--ease); }
     .pillar-link:hover svg { transform: translateX(4px); }
 
     /* ── WEBSITES FOR BUILDERS ── */
 
-    /* HALLBRIDGE DIGITAL teaser (11/12/2026) */
-    .hdt { position: relative; overflow: hidden; background: #050506; color: #fff; padding: clamp(88px, 11vw, 150px) var(--gutter); text-align: center; isolation: isolate; }
-    .hdt::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(45% 55% at 50% 30%, rgba(255,90,0,.16), transparent 70%); }
-    .hdt::after { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .5; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(60% 70% at 50% 40%, #000, transparent); mask-image: radial-gradient(60% 70% at 50% 40%, #000, transparent); }
-    .hdt-logo { display: inline-flex; align-items: center; gap: 16px; margin-bottom: clamp(30px, 4vw, 44px); }
-    .hdt-logo svg { width: 58px; height: 58px; overflow: visible; }
-    .hdt-word { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
-    .hdt-word b { font: 400 21px/1 'Michroma', sans-serif; letter-spacing: .14em; background: linear-gradient(180deg, #fff7ec 0%, #ffb066 45%, #ff6a00 72%, #c44000 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 5px rgba(255,106,0,.5)); }
-    .hdt-word span { display: flex; align-items: center; gap: 8px; width: 100%; margin-top: 8px; font: 400 9.5px/1 'Michroma', sans-serif; letter-spacing: .62em; padding-left: .62em; color: #ff7a1a; text-shadow: 0 0 6px rgba(255,106,0,.7); }
-    .hdt-word span i { flex: 1; height: 1px; background: #ff6a00; box-shadow: 0 0 6px #ff6a00; }
-    .hdt h2 { font: 600 clamp(36px, 5.2vw, 68px)/1.06 'Sora', var(--sans); letter-spacing: -.03em; color: #fff; text-wrap: balance; }
-    .hdt h2 em { font-style: normal; display: block; background: linear-gradient(95deg, #ff9a3c, #ff6a00); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 16px rgba(255,106,0,.18)); }
-    .hdt p { max-width: 34em; margin: 22px auto 0; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.6; color: #b9bcc4; font-weight: 300; text-wrap: balance; }
-    .hdt-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 38px; min-height: 54px; padding: 0 30px; border-radius: 999px; background: #ff6a00; color: #050506; font: 600 16px/1 'Sora', var(--sans); text-decoration: none; box-shadow: 0 10px 40px -8px rgba(255,106,0,.55), 0 0 22px -6px rgba(255,106,0,.55); transition: box-shadow .35s var(--ease), transform .35s var(--ease); }
-    .hdt-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 56px -6px rgba(255,106,0,.6), 0 0 34px -4px rgba(255,106,0,.6); }
-    .hdt-btn svg { width: 17px; height: 17px; }
-    .rule-wrap + .hdt { padding-top: clamp(88px, 11vw, 150px); }
-    @media (max-width: 420px) { .hdt-logo svg { width: 46px; height: 46px; } .hdt-word b { font-size: 16px; } .hdt-word span { font-size: 8px; } }
     .web { padding: clamp(96px, 12vw, 160px) var(--gutter); background: var(--cream); overflow: hidden; }
     /* hairlines where two like backgrounds meet in the page order */
     .about + .cs { border-top: 1px solid var(--taupe-pale); }
@@ -1068,7 +1057,7 @@ setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();
         </div>
         <div class="pillar reveal" id="look-better">
           <div class="pillar-head"><div><div class="pillar-num">02</div>
-          <h3>Look <em>better</em></h3></div><svg class="pillar-art" viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="110" height="82" rx="4"/><path d="M5 26H115"/><circle cx="14" cy="17.5" r="1.6" fill="currentColor"/><circle cx="21" cy="17.5" r="1.6" fill="currentColor"/><circle cx="28" cy="17.5" r="1.6" fill="currentColor"/><rect x="14" y="35" width="92" height="26" fill="currentColor" fill-opacity=".22"/><path d="M22 44H62M22 52H48M14 70H50M14 79H42M64 70H106M64 79H94"/></svg></div>
+          <h3>Look <em>better</em></h3></div><span class="pillar-logo" role="img" aria-label="Hallbridge Digital"><svg viewBox="0 0 400 400" aria-hidden="true"><defs><linearGradient id="pl-vert" x1="0" y1="35" x2="0" y2="365" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffa04a"/><stop offset=".5" stop-color="#ff6a00"/><stop offset="1" stop-color="#b83a00"/></linearGradient></defs><g fill="none" stroke="url(#pl-vert)" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"><rect x="35" y="35" width="330" height="330"/><line x1="40" y1="242" x2="360" y2="242"/><line x1="138" y1="118" x2="93" y2="242"/><line x1="138" y1="118" x2="183" y2="242"/><line x1="138" y1="118" x2="54" y2="242"/><line x1="138" y1="118" x2="222" y2="242"/><line x1="262" y1="118" x2="217" y2="242"/><line x1="262" y1="118" x2="307" y2="242"/><line x1="262" y1="118" x2="178" y2="242"/><line x1="262" y1="118" x2="346" y2="242"/><rect x="127" y="114" width="22" height="246"/><rect x="251" y="114" width="22" height="246"/></g></svg><span class="pl-word"><b>HALLBRIDGE</b><span><i></i>DIGITAL<i></i></span></span></span></div>
           <p>Branding and websites that show what you have built, to owners, developers and the people you want to hire.</p>
           <ul><li>Branding and logo refreshes</li><li>Websites and redesigns</li><li>Project portfolios and careers pages</li><li>Search and Google profile</li></ul>
           <a class="pillar-link" href="/digital/">Hallbridge Digital <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
@@ -1215,25 +1204,6 @@ setTimeout(function(){if(!window.__hbBridge)r.classList.remove('bm')},5000)})();
   </section>
 
   <div class="rule-wrap rw-gap"><div class="bridge-rule" data-draw aria-hidden="true"><svg viewBox="0 0 1100 56" focusable="false"><path class="dk" d="M0 50H1100"/><path class="tk" d="M4 0V56M1096 0V56"/><path class="hg" d="M59 12V50M113.6 19.2V50M168.2 25.5V50M222.8 30.9V50M277.4 35.5V50M332 39.3V50M386.6 42.2V50M441.2 44.3V50M495.8 45.6V50M550.4 46V50M605 45.6V50M659.6 44.3V50M714.2 42.2V50M768.8 39.3V50M823.4 35.5V50M878 30.8V50M932.6 25.4V50M987.2 19.1V50"/><path class="cv" pathLength="1" d="M4 4Q550 88 1096 4"/></svg></div></div>
-
-  <!-- HALLBRIDGE DIGITAL -->
-  <section class="hdt" id="websites" aria-labelledby="hdt-h">
-    <div class="hdt-logo" aria-label="Hallbridge Digital">
-      <svg viewBox="0 0 400 400" aria-hidden="true">
-        <defs>
-          <filter id="hdt-bloom" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
-          <linearGradient id="hdt-vert" x1="0" y1="35" x2="0" y2="365" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffe2c2"/><stop offset=".35" stop-color="#ff8a2a"/><stop offset=".75" stop-color="#ff5a00"/><stop offset="1" stop-color="#9c2f00"/></linearGradient>
-          <g id="hdt-geo" fill="none" stroke-linejoin="round" stroke-linecap="round"><rect x="35" y="35" width="330" height="330"/><line x1="40" y1="242" x2="360" y2="242"/><line x1="138" y1="118" x2="93" y2="242"/><line x1="138" y1="118" x2="183" y2="242"/><line x1="138" y1="118" x2="54" y2="242"/><line x1="138" y1="118" x2="222" y2="242"/><line x1="262" y1="118" x2="217" y2="242"/><line x1="262" y1="118" x2="307" y2="242"/><line x1="262" y1="118" x2="178" y2="242"/><line x1="262" y1="118" x2="346" y2="242"/><rect x="127" y="114" width="22" height="246"/><rect x="251" y="114" width="22" height="246"/></g>
-        </defs>
-        <g filter="url(#hdt-bloom)" opacity=".7"><use href="#hdt-geo" stroke="#ff4d00" stroke-width="18"/></g>
-        <use href="#hdt-geo" stroke="url(#hdt-vert)" stroke-width="12"/><use href="#hdt-geo" stroke="#fff6ea" stroke-width="3.5" opacity=".9"/>
-      </svg>
-      <span class="hdt-word" aria-hidden="true"><b>HALLBRIDGE</b><span><i></i>DIGITAL<i></i></span></span>
-    </div>
-    <h2 class="reveal" id="hdt-h">Building your <em>company's future.</em></h2>
-    <p class="reveal">Websites, renovations, branding and search for builders, manufacturers and engineers.</p>
-    <a class="hdt-btn reveal" href="/digital/">Explore Hallbridge Digital <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-  </section>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials" id="testimonials">
